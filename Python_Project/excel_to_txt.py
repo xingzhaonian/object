@@ -63,6 +63,6 @@ def excel_transformation_txt(path1, path2):
         time.sleep(time_num)
         print('写入完毕', time_num + 1, '秒后退出')
 
-
+'''写入完毕'''
 excel_transformation_txt(excel_file_path, txt_dir_path)
                 
