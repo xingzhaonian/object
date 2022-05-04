@@ -2,15 +2,17 @@ from tkinter import Place
 import easygui
 import openpyxl
 import os
+import sys
+import time
 
 def get_excel_file_path():
     g = easygui
-    excel_file_path = g.fileopenbox()
+    excel_file_path = g.fileopenbox(msg='请选择要转换的表格', title='选择表格')
     return excel_file_path
 
 def get_txt_dir_path():
     g = easygui
-    txt_dir_path = g.diropenbox()
+    txt_dir_path = g.diropenbox(msg='选择要存放txt的目录', title='选择目录')
     return txt_dir_path
 
 excel_file_path = get_excel_file_path()
@@ -18,7 +20,13 @@ txt_dir_path = get_txt_dir_path()
 #print(excel_file_path, '===============', txt_dir_path)
 
 def excel_transformation_txt(path1, path2):
-    txt_file_name = path1.split('\\')[-1].split('.')[0]
+    time_num = 3
+    try:
+        txt_file_name = path1.split('\\')[-1].split('.')[0]
+    except AttributeError:
+        print('文件不存在')
+        sys.exit()
+
     txt_file_path_name = txt_dir_path + '\\' + txt_file_name + '.txt'
     print(path1)
     print(path2)
@@ -50,6 +58,11 @@ def excel_transformation_txt(path1, path2):
                     print(row_data_num, type(k.value), k.value)
                     f.write('[' + k.value+']'+' ')
             f.write('\n')
+    for i in range(time_num):
+        time_num -= 1
+        time.sleep(time_num)
+        print('写入完毕', time_num + 1, '秒后退出')
+
 
 excel_transformation_txt(excel_file_path, txt_dir_path)
                 
