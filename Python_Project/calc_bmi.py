@@ -52,6 +52,9 @@ def calc_bmi(param1,param2):
         return 3
     if 30 < bmi < 39:
         print('你太重了，快减肥吧！！！！')
+    else:
+        print('你不是地球人吧!')
+        return 4
 
 per_info = personal_information
 name = per_info.get_name()
