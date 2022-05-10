@@ -93,4 +93,4 @@ def excel_transformation_txt(path1, path2):
 
 '''写入完毕'''
 excel_transformation_txt(excel_file_path, txt_dir_path)
-#''''''           
+      
