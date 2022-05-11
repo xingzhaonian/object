@@ -46,7 +46,7 @@ def excel_transformation_txt(path1, path2):
         except KeyError:
             print('表单名输入错误, 请重新输入', load_sheet_name, sheet_name)
         finally:
-            if load_sheet_name == sheet_name[0]:
+            if load_sheet_name in sheet_name:
                 print('跳出循环')
                 break
     sheet_max_row_num = sheet.max_row
