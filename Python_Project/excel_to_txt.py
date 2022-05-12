@@ -73,7 +73,7 @@ def excel_transformation_txt(path1, path2):
     k = m[0] + '1'                            
     result_path = k + '.' + m[1]
     with open(txt_file_path_name, 'r', encoding = 'utf-8')as a,\
-     open(result_path, 'w', encoding = 'utf-8')as b: 
+     open(result_path, 'w', encoding = 'utf-8')as b:
      while True:
         old_txt_data = a.readline()
         print(old_txt_data[0:-2])
@@ -81,6 +81,8 @@ def excel_transformation_txt(path1, path2):
         b.write('\n')
         if not old_txt_data:
             break
+    a.close()
+    b.close()
     #删除并重命名文件 
     os.remove(txt_file_path_name)
     os.rename(result_path, txt_file_path_name)
