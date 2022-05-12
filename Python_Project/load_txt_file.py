@@ -11,6 +11,3 @@ with open('D:\\configs\\activity_main.txt', 'r', encoding = 'utf-8')as a,\
 
 os.remove('D:\\configs\\activity_main.txt')
 os.rename('D:\\configs\\activity_main1.txt', 'D:\\configs\\activity_main.txt')
-
-
-    
