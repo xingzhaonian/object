@@ -81,8 +81,8 @@ def excel_transformation_txt(path1, path2):
         b.write('\n')
         if not old_txt_data:
             break
-    a.close()
-    b.close()
+    a.close()   #关闭文件
+    b.close()   #关闭文件
     #删除并重命名文件 
     os.remove(txt_file_path_name)
     os.rename(result_path, txt_file_path_name)
