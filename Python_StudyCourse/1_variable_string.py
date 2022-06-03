@@ -13,15 +13,24 @@
 
 # 字符串 ---string 
 # python 使用字符串来表示文本序列
-# 三种形式  single quotes, double quotes, triple quotes
-# 第一种single quotes使用''包裹起来，表示单引号内的内容为字符串，比如 name = 'xingzhaonian'或print('xingzhaonian')
-# 第二种double quotes使用""包裹起来，表示双引号内的内容为字符串，比如 name = "xingzhaonian"或print("xingzhaonian")
-# 第三种triple quoter
+# 有三种形式  single quotes, double quotes, triple quotes
+# 第一种single quotes使用'' 单引号包裹起来，表示单引号内的内容为字符串，比如 name = 'xingzhaonian'或print('xingzhaonian')
+# 第二种double quotes使用"" 双引号包裹起来，表示双引号内的内容为字符串，比如 name = "xingzhaonian"或print("xingzhaonian")
+# 第三种triple quoter使用 """ """ 三引号包裹起来，表示引号内的内容为字符串， 但是此引号内的内容不会进行转义
 # 不管是单引号还是双引号，都需要按保证两边的引号都是成双成对的  
 # 双引号内可以包裹单引号，可以打出带单引号的内容，比如 print("Let's go !")
 # 单引号内可以包裹双引号，可以打出带双引号的内容，比如 print('"哈哈，你是谁"')
 # 如果字符串中既有单引号又有双引号，使用转义符来实现 (转义字符就是在字符前面加一个反斜杠 )
 # 转义符：\ (反斜杠)
 # 符号 ：\\ 反斜杠(\)
-# 符号：' 反斜杠('\'')
-# 符号：
+# 符号：' 反斜杠(\')
+# 符号：" 反斜杠(\")
+# 符号: 响铃符 (\a)
+# 符号: 退格符 (\b)
+# 符号: 换行符 (\n)
+# 符号: 水平制表符 (\t)
+# 符号: 垂直制表符 (\v)
+# 符号: 回车符 (/r)
+# 符号: 换页符(\f)
+# 符号 :八进制 (\ooo)
+# 符号 : 十六进制(\xhh)  
