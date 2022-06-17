@@ -55,7 +55,8 @@ else:
 =========================================================我是一条分割线=====================================================================================
 
 
-循环结构
+while循环 ---  语法结构
+
 while 后面的条件成立的情况下, 会一直重复执行while 下面的代码
 while condition:
     statement(s)
@@ -88,11 +89,14 @@ else:
     print('非常棒， 你已经连续7天了')
 
 
-while 循环搭配else使用时, 如果条件不满足不走循环体内的代码, 就会走else下的代码, 如果是跳出的循环则不会走else下的代码(相当于走了if条件,就不走else了)
+while 循环搭配else使用时, 如果条件不满足不走循环体内的代码, 就是走else下的代码, 如果是跳出的循环则不会走else下的代码(相当于走了if条件,就不走else了)
 
 
 循环的嵌套结构
 双层循环或者多层循环  例如九九乘法表
+二双层循环中的break每次只跳出一层循环体, 跳出对应循环的那一层循环
+
+
 
 '''
 class multiplication_table:                   
@@ -134,3 +138,20 @@ multiplication_table.for_loop_multiplication_table_1()
 multiplication_table.for_loop_multiplication_table_2()
 multiplication_table.for_loop_multiplication_table_3()
 multiplication_table.while_loop_multiplication_table()
+
+
+'''
+for循环 ---  语法结构
+for 变量 in 可迭代对象:
+    statement(s)
+
+可迭代对象：指那些元素能被单独提取出来的对象 例如字符串
+
+for 循环一样可以搭配continue和break使用
+
+'''
+a = 0
+for i in range(1,1000001):
+    a += i
+
+print(a)
