@@ -155,3 +155,10 @@ for i in range(1,1000001):
     a += i
 
 print(a)
+
+for i in range(2, 10):
+     for n in range(2, i):
+          if i % n == 0:
+               print(i, '-', n, '*', i // n)
+     else:
+          print(i, '是一个素数')
