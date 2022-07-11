@@ -62,7 +62,7 @@ list[x:y] -------查找列表中标为 x:y 中元素的值
 排序
 list.sort
 n = [3, 6, 4, 1, 0, 5, 7]  --------使用list.sort()方法将列表中的元素按照从小到大进行排序, 列表里面可以是数字, 也可以是字符串
-list.sort(reverse = True)  --------sort方法使用参数reverse = True, 相当于将执行list.sort()后 执行list.reverse(), 这样就可以实现列表中的元素按照从大到小进行排序
+list.sort(reverse = True)  --------sort方法使用参数reverse = True, 相当于将执行list.sort()后执行list.reverse(), 这样就可以实现列表中的元素按照从大到小进行排序
 
 list.reverse
 n = [3, 6, 4, 1, 0, 5, 7]  --------使用list.reverse()方法将列表中的元素原地进行反转, 相当于从右往左把下标顺序重新进行排列
