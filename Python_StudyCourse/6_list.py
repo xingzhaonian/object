@@ -88,10 +88,41 @@ x = [1]
 y = [1]
 此时 x is y, 结果就会返回False
 
-复制
-list.copy(); x = y[:]   这两种都为浅拷贝, 浅拷贝只是拷贝了外层对象, 如果该对象是嵌套, 那么拷贝的只是其引用
+浅拷贝
+list.copy();    x = y[:]   这两种都为浅拷贝, 浅拷贝只是拷贝了外层对象, 如果该对象是嵌套, 那么拷贝的只是其引用
+
+深拷贝
+import copy    导入copy模块, copy中有个copy()和deepcopy()方法, 用来接收被拷贝的对象
+其中copy()方法是浅拷贝, 而deepcopy()则是深拷贝
 
 
+
+列表推导式
+语法结构：  执行代码 for i in x
+比如传统for 循环
+x = [1 ,2 ,3 ,4 ,5 ,6]
+for i in x:
+    x [i -1] = x[i - 1] * 2
+
+此时我们可以用列表推导式
+x = [i * 2 for i in x]
+
+列表推导式还可以进行条件判断
+[i for i in range(100) if i %2 == 0]   等同于 
+x = []
+for i in range(100):
+    if i % 2 ==0:
+        x.append(i)
+  
+列表推导式还可以进行多个语句判断
+[[x, y] for x in range(100) if x % 2 == 0 for y in range(100) if y % 3 == 0]  等同于
+_ = []
+for x in range(100):
+    if x % 2 == 0:
+        for y in range(100):
+            if y % 3 == 0:
+                _.append([x, y])
+ 
 
 
 '''
