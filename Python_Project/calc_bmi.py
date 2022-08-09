@@ -1,5 +1,5 @@
 from turtle import window_height
-
+import time
 
 class personal_information:
     def get_name():
@@ -56,6 +56,12 @@ def calc_bmi(param1,param2):
         print('你不是地球人吧!')
         return 4
 
+def count_num():
+    num = 3
+    for i in range(num):
+        time.sleep(num)
+        print(num - i, '秒后退出程序')
+
 per_info = personal_information
 name = per_info.get_name()
 age = per_info.get_age()
@@ -63,4 +69,4 @@ height = per_info.get_height()
 weight = per_info.get_weight()
 
 calc_bmi(weight, height)
-    
+count_num()    
