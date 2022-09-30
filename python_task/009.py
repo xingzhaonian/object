@@ -28,10 +28,10 @@ i = 0
 num = 0
 while i <= 1000000:
     if i % 2 == 0:
-        #print(i, "是偶数！", num)
+        print(i, "是偶数！", num)
         num += i
     i = i + 1
-#print("1000000 以内所有偶数的和是", num)
+print("1000000 以内所有偶数的和是", num)
 
 r'''
 1. 舍罕王的失算
