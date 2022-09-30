@@ -26,7 +26,8 @@ r'''
 '''
 i = 0
 num = 0
-while i <= 1000000:
+# 修改为1000
+while i <= 1000:
     if i % 2 == 0:
         print(i, "是偶数！", num)
         num += i
