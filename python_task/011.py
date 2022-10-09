@@ -21,7 +21,7 @@ False or False or False
 
 4. 请问下面表达式的值是什么？
 1 == 2 < 3
-答: 返回True  1 == True
+答: 运算优先级, '<' 优先级大于 '==', 拆出来则是 1 == 2 and 2 < 3, 并不是 (1 == 2) < 3, 结果为 False
 
 5. 请将下面的链式比较转换为使用 and 的普通比较
 1 < 2 > 3 < 4 < 5
@@ -36,7 +36,8 @@ False or False or False
 '''
 step_num = 1
 find = False
-while True:
+sum_num = 1000
+for i in range(sum_num):
     if step_num % 2 == 1 and step_num % 3 == 2 and step_num % 5 == 4 and step_num % 6 == 5 and step_num % 7 == 0:
         find = True
         break
@@ -46,8 +47,7 @@ while True:
 if find == True:
     print('该阶梯的最总数量是{}个'.format(step_num))
 else:
-    print('程序未找到该阶梯数量')
-
+    print('{}范围以内程序未找到该阶梯数量'.format(sum_num))
 
 
 
