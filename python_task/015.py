@@ -86,9 +86,11 @@ r'''
 
 '''
 number = int(input('输入数字'))
-if number == 0:
-    print('输入的数字为', number, '无效')
-while True:        
+
+while True:
+    if number <= 0 :
+        print('输入的数字为', number, '无效')     
+        break
     if number % 2 == 1:
         number = number * 3 + 1
     if number % 2 == 0:
