@@ -92,10 +92,10 @@ while True:
         print('输入的数字为', number, '无效')     
         break
     if number % 2 == 1:
-        print('{:.0f}'.format(number),'*', 3 + 1, '=' ,'{:.0f}'.format(number * 3 + 1))
+        print('{:.0f}'.format(number),'*', '3', '+', '1', '=' ,'{:.0f}'.format(number * 3 + 1), sep = '')
         number = number * 3 + 1
     if number % 2 == 0:
-        print('{:.0f}'.format(number),'/', 2, '=', '{:.0f}'.format(number / 2 ))
+        print('{:.0f}'.format(number),'/', 2, '=', '{:.0f}'.format(number / 2 ), sep = '')
         number = number / 2
     if number == 1:
         print('最后得到的数字为{0:.0f}'.format(number))
