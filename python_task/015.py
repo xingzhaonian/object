@@ -77,7 +77,7 @@ def Drunkenness_test():
         print('酒后驾驶')
     elif alcohol_content > 80:
         print('醉酒驾驶')
-Drunkenness_test()
+
 r'''
 1. 验证角谷猜想
 角谷猜想的内容是：任意给定一个正整数,若它为偶数则除以 2,若它为奇数则乘以 3 再加 1,得到一个新的自然数,按照这样的方法计算下去,最终的结果必将是 1。
@@ -85,4 +85,14 @@ r'''
 现在要求大家编写一个验证角谷猜想的程序。
 
 '''
-
+number = int(input('输入数字'))
+if number == 0:
+    print('输入的数字为', number, '无效')
+while True:        
+    if number % 2 == 1:
+        number = number * 3 + 1
+    if number % 2 == 0:
+        number = number / 2
+    if number == 1:
+        print('最后得到的数字为{0:.0f}'.format(number))
+        break
