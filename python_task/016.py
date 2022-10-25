@@ -125,14 +125,9 @@ while count:
         last_status = 2
     count -= 1
 
-
+print('')
 print('一共模拟了', i, '次抛硬币实验, 结果如下: ')
 print('正面:', positive)
 print('反面:', the_other_side)
 print('最大正面连续次数:', max_Front_consecutive_times)
 print('最大反面连续次数:', max_Number_of_consecutive_negative_sides)
-
-
-
-
-
