@@ -89,7 +89,7 @@ else:
     print('非常棒， 你已经连续7天了')
 
 
-while 循环搭配else使用时, 如果条件不满足不走循环体内的代码, 就是走else下的代码, 如果是跳出的循环则不会走else下的代码(相当于走了if条件,就不走else了)
+while 循环搭配else使用时, 如果条件不满足不走循环体内的代码, 就是走else下的代码, 如果是break循环则不会走else下的代码(for ...else...基本一样)
 
 
 循环的嵌套结构
@@ -157,8 +157,10 @@ for i in range(1,1000001):
 print(a)
 
 for i in range(2, 10):
-     for n in range(2, i):
-          if i % n == 0:
-               print(i, '-', n, '*', i // n)
-     else:
-          print(i, '是一个素数')
+    for n in range(2, i):
+        if i % n == 0:
+            print(i, '=', n, '*', i // n)
+            break
+    else:
+        print(i, '是素数')
+
