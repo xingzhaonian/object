@@ -78,7 +78,7 @@ r'''
         print(i, '是素数')'''
             
 
-for i in range(2, 10):
+'''for i in range(2, 10):
     if i == 2:
         print(i,'是素数')
     for k in range(2, i):
@@ -87,4 +87,19 @@ for i in range(2, 10):
             break
         else:
             print(i,'是素数')
+            break'''
+
+
+s = 2
+while s < 10:
+    d = 2
+    while d < s:
+        if s % d == 0:
+            print(s, '=', d, 'x', s // d)
             break
+        d += 1
+    else:
+        print(s,'是素数')
+    s += 1
+
+
