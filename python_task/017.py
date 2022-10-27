@@ -101,5 +101,3 @@ while s < 10:
     else:
         print(s,'是素数')
     s += 1
-
-
