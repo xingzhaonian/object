@@ -69,11 +69,22 @@ r'''
 1. 找出 10 以内的所有素数，如果不是素数，请打印出该合数对应的乘积公式，要求代码实现效果如下图
 
 '''
-for i in range(2, 10):
+'''for i in range(2, 10):
     for k in range(2, i):
         if i % k == 0:
             print(i, '=', k, '*',  i // k)
             break 
     else:
-        print(i, '是素数')
+        print(i, '是素数')'''
             
+
+for i in range(2, 10):
+    if i == 2:
+        print(i,'是素数')
+    for k in range(2, i):
+        if i % k == 0:
+            print(i, '=', k ,'*', i // k)
+            break
+        else:
+            print(i,'是素数')
+            break
