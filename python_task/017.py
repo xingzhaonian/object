@@ -99,5 +99,9 @@ while s < 10:
             break
         d += 1
     else:
-        print(s,'是素数')
+        print(s,'是素數')
+
     s += 1
+
+
+
