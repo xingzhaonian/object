@@ -56,16 +56,14 @@ r'''
 
 '''
 n = int(input('请输入一个数字, 用来判断是否为回文数'))
+x = 0
 if n < 0 or (n != 0 and n % 10 == 0):
     print(n, '不是回文数')
-    
 else:
-    x = 0
     while n > x:
         x = x * 10 + n % 10
         n  = n // 10
-    else:
-        if x == n or n == x // 10:
-            print( '是回文数')
-        else:
-            print('不是回文数')
+if x == n or n == x // 10:
+    print( '是回文数')
+else:
+    print('不是回文数')
