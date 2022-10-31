@@ -89,19 +89,15 @@ r'''
             print(i,'是素数')
             break'''
 
-
-s = 2
-while s < 10:
-    d = 2
-    while d < s:
-        if s % d == 0:
-            print(s, '=', d, 'x', s // d)
+x = 9
+while x > 1:
+    y = 2
+    while y < x:
+        if x % y == 0:
+            print(x, '=', y, 'x', x // y)
             break
-        d += 1
+        y += 1
     else:
-        print(s,'是素數')
-
-    s += 1
-
-
+        print(x, '是素数')
+    x -= 1
 
