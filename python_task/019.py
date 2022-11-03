@@ -25,12 +25,33 @@ s = [1,2,3,4,5,6]
 [5, "上", 4, "山", 3, "打", 2, "老", 1, "虎"][-2::-2]
 答: 含义是反向取列表中 倒数第二个至第零个的所有元素, 步长为2, 每隔一个取一个
 
+7. 下面有两列表，请问如何将 list2 列表中的全部元素，添加到 list1 列表中第 2 和第 3 个元素的中间
+list1 = [1, 2, 8, 9]
+list2 = [3, 4, 5, 6, 7]
+答: 
+count = 2
+for i in list2:
+    list1.insert(count, i)
+    count += 1
 
-
-
-
-
-
-
+----动动手----
+0. 给定一个整数列表 nums 和一个目标值 target, 请在该数组中找出和为目标值的两个元素，并将它们的数组下标值打印出来
+比如给定的列表 nums = [2, 7, 11, 15]，目标值 target = 9，那么由于 nums[0] + nums[1] = 2 + 7 = 9，所以打印结果是：[0, 1]
 
 '''
+num = [2, 7, 11, 15]
+target = 17
+num_1 = [2, 7, 11, 15]
+find = False
+for i in num:
+    for k in num_1:
+        if i == k:
+            continue
+        if i + k == target:
+            find = True
+            print([num.index(i), num_1.index(k)])
+            break
+    if find:
+        break
+if not find:
+    print('未找到')
