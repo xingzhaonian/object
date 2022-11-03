@@ -59,7 +59,7 @@ def calc_bmi(param1,param2):
 def count_num():
     num = 3
     for i in range(num):
-        time.sleep(num - i)
+        time.sleep(1)
         print(num - i, '秒后退出程序')
 
 per_info = personal_information
