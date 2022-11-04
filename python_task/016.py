@@ -87,6 +87,7 @@ a. 如果抛硬币的次数小于 100，则打印每次的结果，否则不打�
 统计最终正面和反面的次数
 '''
 import random
+import time
 
 count = int(input('请输入抛硬币的次数'))
 print('开始抛硬币实验...')
@@ -124,6 +125,8 @@ while count:
             max_Number_of_consecutive_negative_sides = Number_of_consecutive_negative_sides
         last_status = 2
     count -= 1
+    time.sleep(0.2)
+
 
 print('')
 print('一共模拟了', i, '次抛硬币实验, 结果如下: ')

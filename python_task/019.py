@@ -39,9 +39,16 @@ for i in list2:
 比如给定的列表 nums = [2, 7, 11, 15]，目标值 target = 9，那么由于 nums[0] + nums[1] = 2 + 7 = 9，所以打印结果是：[0, 1]
 
 '''
-num = [2, 7, 11, 15]
-target = 17
-num_1 = [2, 7, 11, 15]
+num = []
+while True:
+    nums = input('请输入一个整数(输入stop结束)')
+    if nums == 'stop':
+        break
+    else:
+        nums = int(nums)
+        num.append(nums)
+target = int(input('请输入目标整数'))
+num_1 = num
 find = False
 for i in num:
     for k in num_1:
@@ -55,3 +62,10 @@ for i in num:
         break
 if not find:
     print('未找到')
+
+r'''
+2. 最后，回忆前面我们学习过的 random 模块，生成一个由 10000 个整数（范围是 1 ~ 65535）构成的随机列表，目标值 target 由用户输入
+
+'''
+import random
+
