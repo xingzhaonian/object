@@ -45,8 +45,6 @@ list_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 8, 5, 6, 3, 2, 1, 2]
 list_2 = list_1.copy() 
 list_2.reverse()
 index_max_num = len(list_2) - list_2.index(1) - 1
-print('下标为1的最大索引下标值为:', index_max_num)
-
 
 index_count = 0
 count = 0
@@ -69,21 +67,20 @@ ____动动手____
 根据主要元素的定义,对列表进行排序操作之后,主要元素必然会出现在列表长度一半之后的一个位置上。
 所以,我们只需要判断列表中是否有超过一半的元素与中间元素相同即可(如果有,中间元素为主要元素；否则,不存在主要元素)
 '''
-s = [2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 6, 6]
+s = [2, 2, 1, 2, 3, 2, 4, 2 ,7, 2, 9, 2, 0, 2, 1, 2, 2, 3, 2, 3, 2, 2, 5, 2]
 s.sort()
-mjor = s[0]
+print(s)
+list_length = len(s)
+Intermediate_element = s[list_length // 2]
 count = 0
 for i in s:
-    if mjor == i:
+    if i == Intermediate_element:
         count += 1
-    else:
-        count -= 1
-    if count < 0:
-        mjor = i
-if count > 0:
-    print(mjor, '为主要元素')
+if count > list_length / 2:
+    print('主要元素是', Intermediate_element)
 else:
     print('不存在主要元素')
+
 
 
 r'''
@@ -97,18 +94,18 @@ r'''
 
 
 '''
-
-nums = [2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 6, 6]
-   
+nums = [2, 2, 1, 2, 3, 2, 4, 2 ,7, 2, 9, 2, 0, 2, 1, 2, 2, 3, 2, 3, 2, 2, 5, 2]
 nums.sort()
-length = len(nums)
-half = nums[length // 2]
-count = 0
-   
-for each in nums:
-    if each == half:
-        count += 1
-if count > length / 2:
-    print("存在主要元素，是：", half)
+mjor = nums[0]
+count_1 = 0
+for i in nums:
+    if i == mjor:
+        count_1 += 1
+    else:
+        count_1 -= 1
+    if count_1 < 0:
+        mjor = i
+if count_1 > 0:
+    print('主要元素是{}'.format(mjor))
 else:
-    print("不存在主要元素！")
+    print('不存在主要元素')
