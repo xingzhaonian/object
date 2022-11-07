@@ -83,6 +83,7 @@ else:
         print("非法T_T")'''
 
 
+
 import copy
 
 string = input('请输入测试字符')
@@ -95,9 +96,15 @@ if list_1_light % 2 != 0 or list_1_light == 0:
 list_range = list_1_light / 2
 list_2 = copy.deepcopy(list_1)
 print(list_range)
-list_3 = []
 
 for i in range(int(list_range)):
+    if i ==0 and (list_1[i] == ')' or list_1[i] ==']' or list_1[i] =='}'):
+        print('非法')
+        break
+    if list_1[int(list_range) - 1] == ')' or list_1[int(list_range) - 1] ==']' or list_1[int(list_range) -1 ] == '}':
+        print('非法')
+        print('这是第',list_range,'个元素', '值为', list_1[int(list_range) - 1])
+        break
     if list_1[i] == '{':
         list_1[i] = '}'
     if list_1[i] =='(':
@@ -142,3 +149,6 @@ else:
         print('合法')
     else:
         print('非法')
+
+
+        
