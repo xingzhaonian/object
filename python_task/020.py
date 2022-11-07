@@ -113,3 +113,32 @@ for i in range(int(list_range)):
 else:
     print('合法')
     
+
+
+string = input('请输入测试字符')
+str_list = []
+_ = ''
+
+for i in string:
+    if i == '(' or i == '[' or i == '{':
+        str_list.append(i)
+    else:
+        if len(str_list) == 0:
+            print('非法')
+            break
+        if i == ')':
+            d = '('
+        if i == ']':
+            d = '['
+        if i == '}':
+            d = '{'
+        if d == str_list.pop():
+            continue
+        else:
+            print('非法')
+            break
+else:
+    if len(str_list) == 0:
+        print('合法')
+    else:
+        print('非法')
