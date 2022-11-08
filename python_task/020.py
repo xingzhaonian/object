@@ -124,8 +124,6 @@ else:
 
 string = input('请输入测试字符')
 str_list = []
-_ = ''
-
 for i in string:
     if i == '(' or i == '[' or i == '{':
         str_list.append(i)
