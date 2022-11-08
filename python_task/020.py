@@ -90,14 +90,14 @@ string = input('请输入测试字符')
 list_1 = []
 list_1.extend(string)
 list_1_light = len(list_1)
-if list_1_light % 2 != 0 or list_1_light == 0:
-    print('非法')
-    exit()
 list_range = list_1_light / 2
 list_2 = copy.deepcopy(list_1)
 print(list_range)
 
 for i in range(int(list_range)):
+    if (list_1_light % 2 != 0) or (list_1_light == 0):
+        print('非法')
+        break
     if i ==0 and (list_1[i] == ')' or list_1[i] ==']' or list_1[i] =='}'):
         print('非法')
         break
@@ -122,7 +122,7 @@ else:
     
 
 
-string = input('请输入测试字符')
+'''string = input('请输入测试字符')
 str_list = []
 for i in string:
     if i == '(' or i == '[' or i == '{':
@@ -146,7 +146,7 @@ else:
     if len(str_list) == 0:
         print('合法')
     else:
-        print('非法')
+        print('非法')'''
 
 
         
