@@ -103,7 +103,7 @@ for i in nums:
         count_1 += 1
     else:
         count_1 -= 1
-    if count_1 <= 0:
+    if count_1 < 0:
         mjor = i
 if count_1 > 0:
     print('主要元素是{}'.format(mjor))
