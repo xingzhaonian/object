@@ -41,7 +41,7 @@ class list_collection:
     def merge_2(param1, param2):
         '''调用写的 duplicat()方法，判断一下b列表中的元素是否存在于a列表中，如果没有直接塞进去 '''
         for i in param2:
-            if  not duplicat(i, param1):
+            if  not list_collection.duplicat(i, param1):
                 param1.append(i)
 
 import time
@@ -55,6 +55,6 @@ def loading_time(num):
         print('loading' + '.' * count, end='\r', flush = True)
         time.sleep(1)
         os.system("cls")
-        
 
-loading_time(10)
+list_collection.merge_2(a, b)
+print(a, b)
