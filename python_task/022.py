@@ -70,8 +70,33 @@ print(z)
 那么这一次我们修改一下要求，编写代码，利用“摩尔投票法”来找出占比数量最多的两个元素（注意：这两个元素的数量都需要超过总数的三分之一）。
 
 '''
-nums = [2, 2, 1, 2, 3, 2, 4, 2 ,7, 2, 9, 2, 0, 2, 1, 2, 2, 3, 2, 3, 2, 2, 5, 2]
-list_lenght = len(nums)
-count_nums = list_lenght * 1 / 3
+# 找出候选值
+nums = [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 2, 3, 1, 2, 2, 3]
+list_lenfgt = len(nums)
+one_third_list_lenght = list_lenfgt // 3
+major_1 = None
+major_2 = None
+count_1 = 0
+count_2 = 0
+for i in nums:     #  循环中找候选值 用 if---elif---else的结构, 找出两个候选值
+    if i == major_1:
+        count_1 += 1
+    elif i == major_2:
+        count_2 += 1
+    elif count_1 == 0:
+        major_1 = i
+        count_1 = 1
+    elif count_2 == 0:
+        major_2 = i
+        count_2 = 1
+    else:
+        count_1 -= 1
+        count_2 -= 1
 
-
+count_1 = 0
+count_2 = 0
+for i in nums:
+    if i == major_1:
+        count_1 += 1
+    elif i == major_2:
+        count_2 += 1
