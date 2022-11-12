@@ -75,7 +75,7 @@ print(z)
 
 '''
 # 找出候选值
-nums = [5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 2, 3, 1, 2, 2, 3]
+nums = [5, 4, 5]
 list_lenfgt = len(nums)
 one_third_list_lenght = list_lenfgt // 3
 major_1 = None
@@ -110,7 +110,7 @@ for i in nums:
 if count_1 > one_third_list_lenght and count_2 > one_third_list_lenght:
     print('占比数量最多的两个元素为{0}和{1}'.format(major_1, major_2), '数量分别为{0}和{1}'.format(count_1, count_2))
 else:
-    print('没有两个元素的数量超过总数的三分之一')
+    print('没有超过总数的三分之一的两个元素')
     if count_1 > one_third_list_lenght:
         print('元素{0}超过了元素总数量的三分之一'.format(major_1), '{0}个'.format(count_1))
     elif count_2 > one_third_list_lenght:

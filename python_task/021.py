@@ -44,13 +44,13 @@ heros = ['蜘蛛侠', '绿巨人', '神奇女侠', '鹰眼', '灭霸', '雷神']
 list_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 8, 5, 6, 3, 2, 1, 2]
 list_2 = list_1.copy() 
 list_2.reverse()
-index_max_num = len(list_2) - list_2.index(1) - 1
+index_max_num = len(list_2) - list_2.index(list_1[0]) - 1
 
 index_count = 0
 count = 0
 
 for i in list_1:
-    if i == 1:
+    if i == list_1[0]:
         print('位置处于处于列表中第{}'.format(count))
         index_count += 1
     count += 1
