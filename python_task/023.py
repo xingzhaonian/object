@@ -70,22 +70,18 @@ matrix = [[10, 36, 52],
           [66, 76, 99]]
     
 row = len(matrix)
-col = len(matrix[0])
-   
-min_row = [1024] * row
-max_col = [0] * col
-   
-# 遍历矩阵中的每一个元素
-# 找到每行中最小的元素，并将它们存放到列表min_row中
-# 找到每列中最大的元素，并将它们存放到列表max_col中
+clo = len(matrix[0])
+row_min = [1024] * row
+clo_max = [0] * clo
+print(row_min, clo_max)
+
 for i in range(row):
-    for j in range(col):
-        min_row[i] = min(matrix[i][j], min_row[i])
-        max_col[j] = max(matrix[i][j], max_col[j])
-   
-# 遍历矩阵中的每一个元素
-# 判断是否同时满足“同一行的所有元素中最小”和“同一列的所有元素中最大”
+    for k in range(clo):
+        row_min[i] = min(matrix[i][k], row_min[i])
+        clo_max[k] = max(matrix[i][k], clo_max[k])
+print(row_min, clo_max)
+
 for i in range(row):
-    for j in range(col):
-        if matrix[i][j] == min_row[i] and matrix[i][j] == max_col[j]:
-            print(matrix[i][j])
+    for k in range(clo):
+        if matrix[i][k] == row_min[i] and matrix[i][k] == clo_max[k]:
+            print(matrix[i][k])
