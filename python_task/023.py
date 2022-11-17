@@ -69,10 +69,12 @@ matrix = [[10, 36, 52],
           [33, 24, 88],
           [66, 76, 99]]
 row_min = []
-temp_list = [[], [], []]
+temp_list = []
 clo_max = []
 row_range = len(matrix)
 clo_range = len(matrix[0])
+for i in range(row_range):
+    temp_list.append([])
 
 for i in range(row_range):
     for k in range(clo_range):
