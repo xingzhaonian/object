@@ -68,20 +68,23 @@ r'''
 matrix = [[10, 36, 52],
           [33, 24, 88],
           [66, 76, 99]]
-    
-row = len(matrix)
-clo = len(matrix[0])
-row_min = [1024] * row
-clo_max = [0] * clo
+row_min = []
+temp_list = [[], [], []]
+clo_max = []
+row_range = len(matrix)
+clo_range = len(matrix[0])
+
+for i in range(row_range):
+    for k in range(clo_range):
+        if min(min(matrix[i]), 1024) not in row_min:
+            row_min.append(min(min(matrix[i]), 1024))
+        temp_list[i].append(matrix[k][i])
+
+for i in range(len(temp_list)):
+    clo_max.append(max(max(temp_list[i]), 0))
 print(row_min, clo_max)
 
-for i in range(row):
-    for k in range(clo):
-        row_min[i] = min(matrix[i][k], row_min[i])
-        clo_max[k] = max(matrix[i][k], clo_max[k])
-print(row_min, clo_max)
-
-for i in range(row):
-    for k in range(clo):
+for i in range(row_range):
+    for k in range(clo_range):
         if matrix[i][k] == row_min[i] and matrix[i][k] == clo_max[k]:
             print(matrix[i][k])
