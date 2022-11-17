@@ -86,5 +86,5 @@ print(row_min, clo_max)
 
 for i in range(row_range):
     for k in range(clo_range):
-        if matrix[i][k] == row_min[i] and matrix[i][k] == clo_max[k]:
-            print(matrix[i][k])
+        if row_min[i] == clo_max[k]:
+           print('位于列表中第', i+1, '行', '第', k+1, '个元素为幸运数字', matrix[i][k])
