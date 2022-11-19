@@ -68,6 +68,45 @@ r'''
 matrix = [[10, 36, 52],
           [33, 24, 88],
           [66, 76, 99]]
+
+# 初始化列表
+min_row = []
+tamp_list = []
+max_clo = []
+
+is_find = False
+
+# 获取矩阵长度 (列表总长度和每一行的长度 )
+matrix_range = len(matrix)
+each_range = len(matrix[0])
+
+# 获取矩阵中每一行中最小的元素, 添加到 min_row
+for i in range(each_range):
+    min_row.append(min(min(matrix[i]), 1024))
+
+# 添加空列表到tamp_list列表, 使得结构变为 matrix 的结构
+for i in range(each_range):
+    tamp_list.append([])
+
+# 将每一列的元素变为每一行放进 tamp_list 
+for i in range(matrix_range):
+    for k in range(each_range):
+        tamp_list[i].append(matrix[k][i])
+
+# 获取 tamp_list 中每一行最大的元素 添加到 max_clo
+for i in range(len(tamp_list)):
+    max_clo.append(max(max(tamp_list[i]), 0))
+
+# 找出幸运数字, 判断 min_row 和 max_clo 中是否有相同的元素存在
+for i in range(len(min_row)):
+    for k in range(len(max_clo)):
+        if min_row[i] == max_clo[k]:
+            is_find = True
+            print('幸运数字为', min_row[i], '位于第', i + 1, '行第', k + 1, '列')
+            
+
+
+# 或者這樣 
 row_min = []
 temp_list = []
 clo_max = []
