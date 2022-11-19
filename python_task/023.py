@@ -69,10 +69,6 @@ matrix = [[10, 36, 52],
           [33, 24, 88],
           [66, 76, 99]]
 
-# 初始化列表
-min_row = []
-tamp_list = []
-max_clo = []
 
 is_find = False
 
@@ -81,12 +77,10 @@ matrix_range = len(matrix)
 each_range = len(matrix[0])
 
 # 获取矩阵中每一行中最小的元素, 添加到 min_row
-for i in range(each_range):
-    min_row.append(min(min(matrix[i]), 1024))
+min_row = [min(min(matrix[i]), 1024) for i in range(len(matrix)) ]
 
-# 添加空列表到tamp_list列表, 使得结构变为 matrix 的结构
-for i in range(each_range):
-    tamp_list.append([])
+# 初始化tamp_list列表, 使得结构变为 matrix 的结构
+tamp_list = [ [] for i in range(each_range)]
 
 # 将每一列的元素变为每一行放进 tamp_list 
 for i in range(matrix_range):
@@ -94,8 +88,7 @@ for i in range(matrix_range):
         tamp_list[i].append(matrix[k][i])
 
 # 获取 tamp_list 中每一行最大的元素 添加到 max_clo
-for i in range(len(tamp_list)):
-    max_clo.append(max(max(tamp_list[i]), 0))
+max_clo = [max(max(tamp_list[i]), 0) for i in range(len(tamp_list))]
 
 # 找出幸运数字, 判断 min_row 和 max_clo 中是否有相同的元素存在
 for i in range(len(min_row)):
@@ -105,8 +98,8 @@ for i in range(len(min_row)):
             print('幸运数字为', min_row[i], '位于第', i + 1, '行第', k + 1, '列')
             
 
-
-# 或者這樣 
+'''
+# 或者這樣  传统for 循环写法
 row_min = []
 temp_list = []
 clo_max = []
@@ -128,4 +121,4 @@ print(row_min, clo_max)
 for i in range(row_range):
     for k in range(clo_range):
         if row_min[i] == clo_max[k]:
-           print('位于列表中第', i+1, '行', '第', k+1, '个元素为幸运数字', matrix[i][k])
+           print('位于列表中第', i+1, '行', '第', k+1, '个元素为幸运数字', matrix[i][k])'''
