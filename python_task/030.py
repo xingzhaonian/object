@@ -46,4 +46,7 @@ words_split_list_lenght = len(words_split_list)
 print(words_split_list)
 for i in range(words_split_list_lenght):
     for k in range(text_lenght):
-        
+            print(k, len(words_split_list[k]) + 1,text[k:len(words_split_list[k]) + 1], '=========', words_split_list[i])
+            if text[k:len(words_split_list[k]) + 1] == words_split_list[k]:
+                result_list.append(k, len(words_split_list[k]) + 1)
+print(result_list)
