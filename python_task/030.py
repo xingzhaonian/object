@@ -22,7 +22,7 @@ s.isalpha()
 
 5. 请问下面代码执行的结果是？
 >>> "一二三木头人".isidentifier()
-答: 返回True, isidentifier()方法用来判断是否是一个合法的python 表示符号, 而python中中文是可以用来作变量名的
+答: 返回True, isidentifier()方法用来判断是否是一个合法的python标识符号, 而在python中, 中文是可以用来作变量名的
 
 ===================================
 动动手:
@@ -43,10 +43,11 @@ result_list = []
 text_lenght = len(text)
 words_split_list = words.split(' ')
 words_split_list_lenght = len(words_split_list)
+
 print(words_split_list)
 for i in range(words_split_list_lenght):
     for k in range(text_lenght):
-            print(k, len(words_split_list[k]) + 1,text[k:len(words_split_list[k]) + 1], '=========', words_split_list[i])
-            if text[k:len(words_split_list[k]) + 1] == words_split_list[k]:
-                result_list.append(k, len(words_split_list[k]) + 1)
+            print(k, k + len(words_split_list[i]),'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
+            if words_split_list[i] == text[k: k + len(words_split_list[i])]:
+                result_list.append([k, k + len(words_split_list[i])])
 print(result_list)
