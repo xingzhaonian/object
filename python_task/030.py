@@ -47,7 +47,20 @@ words_split_list_lenght = len(words_split_list)
 print(words_split_list)
 for i in range(words_split_list_lenght):
     for k in range(text_lenght):
-            print(k, k + len(words_split_list[i]),'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
+            print(k, k + len(words_split_list[i]) - 1,'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
             if words_split_list[i] == text[k: k + len(words_split_list[i])]:
-                result_list.append([k, k + len(words_split_list[i])])
+                result_list.append([k, k + len(words_split_list[i]) - 1 ])
 print(result_list)
+
+
+r'''
+1. 编写一个程序，判断输入的字符串是否由多个子字符串重复多次构成
+举例：
+输入: "FCFC"
+输出: True
+
+输入: "FishCFish"
+输出: False
+
+
+'''
