@@ -62,5 +62,30 @@ r'''
 输入: "FishCFish"
 输出: False
 
-
 '''
+sum_str = input('请输入字符')
+sum_str_lenght = len(sum_str)
+if sum_str_lenght % 2 == 0:
+    if sum_str[0 : int(sum_str_lenght / 2)] == sum_str[int(sum_str_lenght / 2) : ]:
+        print('true')
+    else:
+        print('false')
+else:
+    print('false')
+
+
+
+
+
+text = input("请输入text的内容：")
+words = input("请输入words的内容：")
+words = words.split()
+   
+result = []
+for each in words:
+    temp = text.find(each)
+    while temp != -1:
+        result.append([temp,temp+len(each)-1])
+        temp = text.find(each, temp+1)
+   
+print(sorted(result))
