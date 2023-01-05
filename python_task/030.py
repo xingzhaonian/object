@@ -50,6 +50,7 @@ for i in range(words_split_list_lenght):
             print(k, k + len(words_split_list[i]) - 1,'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
             if words_split_list[i] == text[k: k + len(words_split_list[i])]:
                 result_list.append([k, k + len(words_split_list[i]) - 1 ])
+result_list = sorted(result_list)
 print(result_list)
 
 
@@ -80,12 +81,10 @@ else:
 text = input("请输入text的内容：")
 words = input("请输入words的内容：")
 words = words.split()
-   
 result = []
 for each in words:
     temp = text.find(each)
     while temp != -1:
         result.append([temp,temp+len(each)-1])
         temp = text.find(each, temp+1)
-   
 print(sorted(result))
