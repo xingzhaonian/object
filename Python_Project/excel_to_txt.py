@@ -90,7 +90,7 @@ def excel_transformation_txt(path1, path2):
 
     for i in range(time_num):
         time_num -= 1
-        time.sleep(time_num)
+        time.sleep(1)
         print('写入完毕', time_num + 1, '秒后退出')
 
 '''写入完毕'''
