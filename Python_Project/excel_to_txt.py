@@ -61,7 +61,7 @@ def excel_transformation_txt(path1, path2):
         for i in sheet_row_data:
             row_data_num += 1
             for k in i:
-                k.value = str(k.value)      #转换单元格值的数据类型                                
+                k.value = str(k.value)      #转换单元格内数据的类型                                
                 if k.value == 'None':
                     k.value = ''
                     print(row_data_num, type(k.value), k.value)
@@ -72,8 +72,7 @@ def excel_transformation_txt(path1, path2):
     m = txt_file_path_name.split('.')  #拆分路径
     k = m[0] + '1'                            
     result_path = k + '.' + m[1]
-    with open(txt_file_path_name, 'r', encoding = 'utf-8')as a,\
-     open(result_path, 'w', encoding = 'utf-8')as b:
+    with open(txt_file_path_name, 'r', encoding = 'utf-8')as a, open(result_path, 'w', encoding = 'utf-8')as b:
      while True:
         old_txt_data = a.readline()
         print(old_txt_data[0:-2])
