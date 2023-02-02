@@ -67,7 +67,7 @@ r'''
 sum_str = input('请输入字符')
 sum_str_lenght = len(sum_str)
 if sum_str_lenght % 2 == 0:
-    if sum_str[0 : int(sum_str_lenght / 2)] == sum_str[int(sum_str_lenght / 2) : ]:
+    if sum_str[0 : int(sum_str_lenght / 2)] == sum_str[int(sum_str_lenght / 2):]:
         print('true')
     else:
         print('false')
