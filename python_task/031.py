@@ -47,15 +47,49 @@ I love FishC
 那么程序加密后输出的密文便是:
 O rubk LoynI
 '''
+'''
 plaintext_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 need_cipher_text = input('请输入需要加密的明文')
 move_step = int(input('请输入需要移动的位数'))
+if move_step >= 26:
+    print('数字过大, 无效')
+    exit()
 result_cipher_text = ''
 print(need_cipher_text)
 for i in need_cipher_text:
+    if i == ' ':
+        result_cipher_text += i
     need_cipher_text_position = plaintext_table.find(i)
     for k in range(len(plaintext_table)):
+        if need_cipher_text_position + move_step + 1 > 52:
+            need_cipher_text_position = need_cipher_text_position - 26
         if int(need_cipher_text_position) == k:
             i = plaintext_table[k + move_step: k + move_step + 1]
             result_cipher_text += i
-print(result_cipher_text)
+print(result_cipher_text)'''
+
+'''1. 给定一个字符串数组 words, 只返回可以使用在美式键盘同一行的字母打印出来的单词, 键盘布局如下图所示.
+美式键盘中:
+第一行由字符 "qwertyuiop" 组成
+第二行由字符 "asdfghjkl" 组成
+第三行由字符 "zxcvbnm" 组成
+举例：
+输入: words = ["Twitter", "TOTO", "FishC", "Python", "ASL"]
+输出：['Twitter', 'TOTO', 'ASL']
+''' # Twitter, TOTO, FishC, Python, ASL
+line_1 = 'qwertyuiop'
+line_2 = 'asdfghjkl'
+line_3 = 'zxcvbnm'
+words_list = []
+words = input('请输入列表形式的单词')
+words_list.append(words)
+print(words_list)
+result_list = []
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_1:
+            break
+    else:
+        result_list.append(i)
+print(result_list)
