@@ -47,7 +47,7 @@ I love FishC
 那么程序加密后输出的密文便是:
 O rubk LoynI
 '''
-'''
+
 plaintext_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 need_cipher_text = input('请输入需要加密的明文')
 move_step = int(input('请输入需要移动的位数'))
@@ -66,7 +66,7 @@ for i in need_cipher_text:
         if int(need_cipher_text_position) == k:
             i = plaintext_table[k + move_step: k + move_step + 1]
             result_cipher_text += i
-print(result_cipher_text)'''
+print(result_cipher_text)
 
 '''1. 给定一个字符串数组 words, 只返回可以使用在美式键盘同一行的字母打印出来的单词, 键盘布局如下图所示.
 美式键盘中:
@@ -81,14 +81,34 @@ line_1 = 'qwertyuiop'
 line_2 = 'asdfghjkl'
 line_3 = 'zxcvbnm'
 words_list = []
-words = input('请输入列表形式的单词')
-words_list.append(words)
+while True:
+    words = input('请输入列表形式的单词, 输入stop停止输入')
+    if words == 'stop':
+        break
+    words_list.append(words)
+
 print(words_list)
 result_list = []
 for i in words_list:
     for k in i:
         k = k.casefold()
         if k not in line_1:
+            break
+    else:
+        result_list.append(i)
+
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_2:
+            break
+    else:
+        result_list.append(i)
+
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_3:
             break
     else:
         result_list.append(i)
