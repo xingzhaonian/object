@@ -11,7 +11,8 @@ r'''
 
 2. split() 方法常常被应用于对数据的解析处理，那么考考大家，如果要从字符串"https://ilovefishc.com/html5/index.html" 
 中提取出 "ilovefishc.com"，使用 split() 方法应该如何实现呢？
-答: "https://ilovefishc.com/html5/index.html".split()
+答: "https://ilovefishc.com/html5/index.html".split('//')[1].split('/')[0]
+
 
 3. 如果要求按换行符来分割字符串，小甲鱼推荐使用 splitlines() 方法，而非 split("\n")，你觉得小甲鱼的依据是什么？
 答: 因为换行符在不同的操作系统中表示不一样, 要想代码兼容所有操作系统或平台, 用splitlines()最合适
