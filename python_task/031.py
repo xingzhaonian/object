@@ -81,24 +81,21 @@ print(result_cipher_text)
 line_1 = 'qwertyuiop'
 line_2 = 'asdfghjkl'
 line_3 = 'zxcvbnm'
-words_list = []
-while True:
-    words = input('请输入列表形式的单词, 输入stop停止输入')
-    if words == 'stop':
-        break
-    words_list.append(words)
+words_list = ["Twitter", "TOTO", "FishC", "Python", "ASL"]
+#    words = input('请输入列表形式的单词, 输入stop停止输入')
+#    if words == 'stop':
+#        break
+#    words_list.append(words)
 
-print(words_list)
+
 result_list = []
 for i in words_list:
-    for k in i:
-        k = k.casefold()
-        if k not in line_1:
-            break
-    else:
+    j = i.lower()
+    if j.strip(line_1) == '' or j.strip(line_2) == '' or j.strip(line_2) == '':
         result_list.append(i)
+print(result_list)
 
-for i in words_list:
+'''for i in words_list:
     for k in i:
         k = k.casefold()
         if k not in line_2:
@@ -113,4 +110,4 @@ for i in words_list:
             break
     else:
         result_list.append(i)
-print(result_list)
+print(result_list)'''
