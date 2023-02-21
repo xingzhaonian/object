@@ -94,7 +94,16 @@ for i in words_list:
         result_list.append(i)
 print(result_list)
 
-'''for i in words_list:
+'''
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_1:
+            break
+    else:
+        result_list.append(i)
+
+for i in words_list:
     for k in i:
         k = k.casefold()
         if k not in line_2:
