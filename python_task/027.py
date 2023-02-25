@@ -1,61 +1,84 @@
+
 r'''
-问答题
-0. 既然元组和字符串都是不可改变的对象,那么两者有何区别？
-答: 元组的生成关键字是 ' , ', 字符串则不是; 元组可以容纳不同对象的元素, 而字符串不行
+0. casefold() 和 lower() 两个方法都是将所有的字母变成小写,那它们有什么区别呢？
+答: casefold() 更加强大, 它可以支持很多种不同种类的语言, 比如说 β , lower只能显示出原形而casefold则能显示他的小写'ss'
 
-1. 请写出仅有一个元素 5 的元组
-答: x = (5,) 或者 5,
+1. 请问下面代码执行的结果是？
+>>> "-520".zfill(10)
+答: -000000520
 
-2. 请问下面代码得到的结果是？
->>> t = (3, 1, 4, 9, 8)
->>> t.sort()
-答: 会报错, 因为t是一个元组, 而元组是不可变的, 不支持sort 排序
+2. 请问 "-520".zfill(10) 和 "-520".rjust(10, "0") 的执行结果一样吗？
+答:  "-520".zfill(10) 的结果为 '-000000520';  "-520".rjust(10, "0")的结果为 "000000-520"  结果不一样
 
-3. 请问下面代码得到的结果是？
->>> t = (3, 1, 4, 9, 8)
->>> t[2:4]
-答: 输出 (4, 9)
+3. 请问下面代码执行的结果是？
+>>> "-520".center(6, "0").zfill(10)
+答: '00000-5200'
 
-4. 请问我们可以修改的是 “元组中的列表” 还是 “列表中的元组” ?
-答: 修改的是元组中的列表, 而不是列表中的元组;  列表中的元组是不可变的
+4. 请问下面代码执行的结果是？
+>>> "I love FishC".swapcase()[::-1]
+答: 'cHSIf EVOL i'
 
-5. 用一个专业的名词描述以下代码的行为？
-script, first, second, third = argv
-答: 这是解包行为
+5. 请使用一行代码来检测列表中的每个元素是否为回文数,并返回一个结果为回文数构成的列表。
+提供的列表：["123", "33211", "12321", "13531", "112233"]
+返回的结果：['12321', '13531']
 
-6. 请问下面代码为什么会出错？如何解决呢？
->>> a, b, c = "FishC"
-Traceback (most recent call last):
-  File "<pyshell#3>", line 1, in <module>
-    a, b, c = "FishC"
-ValueError: too many values to unpack (expected 3)
-答: 报错误是因为参数 数量不一致导致, 我们可以这样   x, y , z = ('fishc',) * 3; 这样就把a, b, c 三个变量都赋值为 'fishc' 了 或者  a, b, c, d, e = "FishC"
-
-7. 如果我们非要修改一个元组,你觉得应该怎么做？
-答: 可以进行拼接,  但是进行拼接之后, 该变量已经不是之前那个变量了, 重复进行了赋值, 在内存中开辟了新的空间
-
-8. 有一天,居委会的大妈找上门,让你帮她用 Python 创建一个对象,用于登记接种新冠疫苗的情况。登记内容包含（姓名、生日、接种日期）,你应该怎么做？
-
-答: 使用列表中的元组, Vaccination_information = [(name, birthday, Inoculation_date), (name1, birthday2, Inoculation_date1)],  因为元组不可变
-但是可以继续进行添加, 信息一旦保存则无法进行变更
-
-
-动动手
-0,请编写代码,测试一下到底是创建列表的速度快,还是创建元组的速度快？为了得到更精准的数据,请重复测试100次,并分别计算出平均速度。
 '''
+Palindrome_number_list = [i for i in ["123", "33211", "12321", "13531", "112233"] if i == i[::-1]]
+print(Palindrome_number_list)
 
-import timeit
-list_time_consuming = timeit.repeat('init_list = []', number = 1000000, repeat = 100)
-list_sum_time = sum(list_time_consuming)
-list_Average_time_consumption = list_sum_time / 100
-print('调用了100次创建1000000列表的每次平均耗时, 每创建1000000次列表平均耗时{}'.format(list_Average_time_consumption))
+r'''
+动动手：
+0. 请按照以下规则整理一个给定的字符串 s
+一个整理好的字符串中,两个相邻字符 s[j] 和 s[j+1],其中 0 <= j <= s.length - 2,要满足如下条件：
+若 s[j] 是小写字符,则 s[j+1] 不可以是相同的大写字符
+若 s[j] 是大写字符,则 s[j+1] 不可以是相同的小写字符
+如果 s[j] 和 s[j+1] 满足以上两个条件,则将它们一并删除
+举例：
+整理前："FishCcCode"
+整理后："FishCcCode" -> "FishCode"
 
+整理前："AbBaACc"
+整理后："AbBaACc" -> "AaACc" -> "AaA" -> "A"
 
-list_time_consuming = timeit.repeat('init_tuple = ()', number = 1000000, repeat = 100)
-tuple_sum_time = sum(list_time_consuming)
-tuple_Average_time_consumption = tuple_sum_time / 100
-print('调用了100次创建1000000元组的每次平均耗时, 每创建1000000次元组平均耗时{}'.format(tuple_Average_time_consumption))
+整理前："AABaAbCc"
+整理后："AABaAbCc" -> "AABbCc" -> "AACc" -> "AA"
 
+请按要求整理好字符串,并将结果打印到屏幕上。
+提示(小甲鱼不想限制大家的思路,如果想看的话,请使用鼠标刮开叭~)：将字符串逐个读取,整理后放到一个列表中,最后将列表中的元素挨个打印即可。
 
+'''
+temp_list = []
+string = "FishCcCode"
+string_lenght = len(string)
+for i in range(string_lenght):
+    if not temp_list:
+        temp_list.append(string[i])
+        continue
+    if (temp_list[-1].upper() == string[i].upper()) and  (temp_list[-1].lower() == string[i].lower()) and (temp_list[-1] != string[i]):
+        temp_list.pop()
+    else:
+        temp_list.append(string[i])
+for i in temp_list:
+    print(i, end = '')
+print('')
 
+r'''
+1. 给定的字符串 s 是按照如下规则存放的：它的偶数下标为小写英文字母,奇数下标为正整数。
+题目要求：编写代码,将奇数下标的数字转换为相对于上一个字母偏移后的字母
+比如 s = "a1b2c3" 转换后的结果是 "abbdcf"(a1 -> ab,b2 -> bd,c3 -> cf);s = "x7y8z9" 转换后的结果是 "xeygzi"(遇到最后字母 z ,则从 a 继续计算偏移)
+提示(小甲鱼不想限制大家的思路,如果想看的话,请使用鼠标刮开叭~)：你可能会用到 chr() 和 ord() 这两个函数。
 
+'''
+s = input("请按规则输入一个字符串：")
+   
+length = len(s)
+res = []
+# 获取字母 a 的编码值
+base = ord('a')
+   
+# 从第一个元素开始，每次迭代跳过一个元素
+for i in range(0, length, 2):
+    # ord(s[i]) - base 操作得到一个字母的偏移值，比如 b 就是 1
+    # 跟 26 求余数的作用是防止溢出，循环计算偏移
+    shift = chr((ord(s[i]) - base + int(s[i+1])) % 26 + base)
+    print(s[i]+shift, end="")
