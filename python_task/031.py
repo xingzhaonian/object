@@ -39,10 +39,10 @@ r'''
 输出: 3
 
 '''
-text = input('请输入字符')
-text = text.split( )
-nums = len(text)
-print(nums)
+#text = input('请输入字符')
+#text = text.split( )
+#nums = len(text)
+#print(nums)
 
 r'''1. 请编写一个程序，将用户输入的字符串重新格式化，使得字母和数字相互分隔（即一个字母一个数字相互间隔）
 举例：
@@ -64,10 +64,34 @@ for i in text_1:
         str_num += 1
     else:
         Number += 1
-if (str_num - Number) ==  (1) or (-1) :
+print('str_num - Number', str_num - Number)
+if ((str_num - Number) ==  1) or ((str_num - Number) ==  -1) :
     print('可以进行格式化字符串')
-    
+    text_1_list = []
+    num_list = []
+    for i in text_1:
+        text_1_list.append(i)
+    print(text_1_list)
+    text_1_list_temp = text_1_list[:]
+    for i in text_1_list_temp:
+        if i.isdecimal():
+            num_list.append(i)
+            text_1_list.remove(i)
+    print(text_1_list, num_list)
 
+    result = []
+    if len(text_1_list) > len(num_list):
+        for i in range(len(num_list)):
+            result.append(text_1_list[i])
+            result.append(num_list[i])
+        result.append(text_1_list[-1])
+    else:
+        for i in range(len(text_1_list)):
+            result.append(num_list[i])
+            result.append(text_1_list[i])
+        result.append(num_list[-1])
+    result = ''.join(result)
+    print(result)
 else:
     print('字符串中数字和字母的数量不满足重新格式化的条件')
 
