@@ -39,10 +39,10 @@ r'''
 输出: 3
 
 '''
-#text = input('请输入字符')
-#text = text.split( )
-#nums = len(text)
-#print(nums)
+text = input('请输入字符')
+text = text.split( )
+nums = len(text)
+print(nums)
 
 r'''1. 请编写一个程序，将用户输入的字符串重新格式化，使得字母和数字相互分隔（即一个字母一个数字相互间隔）
 举例：
