@@ -90,7 +90,7 @@ words_list = ["Twitter", "TOTO", "FishC", "Python", "ASL"]
 
 result_list = []
 for i in words_list:
-    if i.casefold().strip(line_1) == '' or i.casefold().strip(line_2) == '' or i.casefold().strip(line_3) == '':
+    if i.casefold().strip(line_1) == '' or i.casefold().strip(line_2) == '' or i.casefold().strip(line_2) == '':
         result_list.append(i)
 print(result_list)
 
