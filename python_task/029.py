@@ -1,130 +1,90 @@
 r'''
-0. 请问下面代码打印的结果是什么？
->>> str1 = "xxxxx"
->>> str1.count("xx")
-答: 2, 因为str1中有两个xx, 不足第三个
+0. 请问下面代码执行的结果是？
+>>> x = "我爱Pyhon"
+>>> x.startwith(["你", "我", "她"])
+答: False, startwith() 方法接收一个参数, 这个参数可以是元组数据, 但不可以是列表数据
 
-1. 字符串的 find() 方法和 index() 方法同样是返回查找对象的下标值，那么它们之间的区别是？
-答: 使用find() 方法如果找不到字符串内容会返回-1, 而使用index()方法找不到字符串内容则抛出ValueError
+1. 请问下面代码执行的结果是？
+>>> "I love FishC\s".isprintable()
+答: 返回True, isprintable()判断参数是否是一个可打印的参数, 转义符不可打印, 其余都可以; 而'\s'不是转义符
 
-2. 请问下面代码返回的值是什么？
->>> x = "上海自来水来自海上"
->>> x.rindex("来水来")
-答: 返回值是3
+2. isdecimal()、isdigit() 和 isnumeric() 这 3 个方法都是判断数字的,那么请问这其中哪一个方法 “最严格”,哪一个又是 “最宽松” 的呢？
+答: isdecimal()和isdigit() 最严格, 而 isnumeric()则是最宽松的
 
-3. 请问下面代码执行的结果是 A 还是 B 抑或是 C 呢（为了你可以更容易地计数，下面使用 * 表示空格）？
-print(x)
-print(x.expandtabs(2))
-print(x.expandtabs(5))
-print(x.expandtabs(10))
-A:
-Hello****FishC
-Hello**ishC
-Hello*****FishC
-Hello**********FishC
-B:
-Hello***FishC
-Hello*FishC
-Hello*****FishC
-Hello*****FishC
-C:
-Hello***FishC
-Hello*FishC
-Hello*****FishC
-Hello**********FishC
+3. 请问下面代码执行的结果是？
+>>> "一二三四五上山打老虎".isalnum()
+答: 返回True;  isalnum()方法集大成者, 只要isalpa(), isdecimal(), isdigit(), isnumeric()中任意一个方法返回Ture, 这个方法就返回True
 
-答: B
+4. 请使用一行代码判断 s 字符串中,是否所有字符都是英文字母？
+答: 
+s = 'lovepython'
+s.isalpha()
 
-4. 请问下面代码打印的结果是什么？
->>> "I love FishC.com".translate(str.maketrans("ABCDEFG", "12345678"))
-答: 报错, str.maketrans 的两个参数长度不一致
-相当于
+5. 请问下面代码执行的结果是？
+>>> "一二三木头人".isidentifier()
+答: 返回True, isidentifier()方法用来判断是否是一个合法的python标识符号, 而在python中, 中文是可以用来作变量名的
+
+===================================
+动动手:
+0. 给定一个字符串 text 和字符串列表 words,返回 words 中每个单词在 text 中的位置（要求最终的位置从小到大进行排序）。
+举例:
+text: "I love FishC and FishC love me"
+words:"FishC"
+输出:[[7, 11], [17, 21]]
+
+text:"I love FishC and FishC love me"
+words:"FishC love"
+输出:[[2, 5], [7, 11], [17, 21], [23, 26]]
+
 '''
-table = str.maketrans('ABCDEFG', '1234567')
-str1 = 'I love Fishc.com'
-str1.translate(table)
-r'''
-5. 请问下面代码打印的结果是什么？
->>> "I love FishC.com".translate(str.maketrans("love", "1234", "love"))
-答: I  FishC.cm
+text = input('请输入text内容')
+words = input('请输入word内容')
+result_list = []
+text_lenght = len(text)
+words_split_list = words.split(' ')
+words_split_list_lenght = len(words_split_list)
 
+print(words_split_list)
+for i in range(words_split_list_lenght):
+    for k in range(text_lenght):
+            print(k, k + len(words_split_list[i]) - 1,'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
+            if words_split_list[i] == text[k: k + len(words_split_list[i])]:
+                result_list.append([k, k + len(words_split_list[i]) - 1 ])
+result_list = sorted(result_list)
+print(result_list)
 
-动动手
-0. 用户输入两个版本号 v1 和 v2, 请编写代码比较它们, 找出较新的版本
-科普：
-
-版本号是由一个或多个修订号组成，各个修订号之间由点号（.）连接，每个修订号由多位数字组成，例如 1.2.33 和 0.0.11 都是有效的版本号。
-
-从左到右的顺序依次比较它们的修订号，点号（.）左侧的值要比右侧的权重大，即 0.1 要比 0.0.99 大。
-'''
-version_1 = input('请输入第一个版本号, V1: ')
-version_2 = input('请输入第二个版本号, V2: ')
-division_version_1 = version_1.split('.')
-division_version_2 = version_2.split('.')
-version_1_lenght = len(division_version_1)
-version_2_lenght = len(division_version_2)
-if version_1_lenght >= version_2_lenght:
-    for i in range(version_1_lenght):
-        if i < version_2_lenght:
-            if int(division_version_1[i]) > int(division_version_2[i]):
-                print('V1')
-                break
-            if int(division_version_1[i]) < int(division_version_2[i]):
-                print('V2')
-                break
-            if int(division_version_1[i]) == int(division_version_2[i]):
-                continue
-        else:
-            if int(division_version_1[i]) > 0:
-                print('V1')
-                break
-            else:
-                if int(division_version_1[i]) == 0:
-                    continue
-    else:
-        print('V1 = V2')
-else:
-    for i in range(version_2_lenght):
-        if i < version_1_lenght:
-            if int(division_version_1[i]) > int(division_version_2[i]):
-                print('V1')
-                break
-            if int(division_version_1[i]) < int(division_version_2[i]):
-                print('V2')
-                break
-            if int(division_version_1[i]) == int(division_version_2[i]):
-                continue
-        else:
-            if int(division_version_2[i]) > 0:
-                print('V2')
-                break
-            else:
-                if int(division_version_2[i]) == 0:
-                    continue
-    else:
-        print('V1 = V2')
 
 r'''
-1. 编写一个加密程序，其实现原理是通过替换指定的字符进行加密，附加要求是实现密文逆向检测。
+1. 编写一个程序，判断输入的字符串是否由多个子字符串重复多次构成
+举例：
+输入: "FCFC"
+输出: True
+
+输入: "FishCFish"
+输出: False
+
 '''
-encrypt_txt = input('请输入要加密的文件')
-need_replace_txt = input('请输入需要替换的文本')
-will_releacr_txt = input('请输入将要替换的文本')
-need_replace_txt_lenght = len(need_replace_txt)
-will_releacr_txt_lenght = len(will_releacr_txt)
-Encrypted = None
-if need_replace_txt_lenght != will_releacr_txt_lenght:
-    print('需要替换的字符数量必须要跟将要替换的字符数量一致')
+sum_str = input('请输入字符')
+sum_str_lenght = len(sum_str)
+if sum_str_lenght % 2 == 0:
+    if sum_str[0 : int(sum_str_lenght / 2)] == sum_str[int(sum_str_lenght / 2):]:
+        print('true')
+    else:
+        print('false')
 else:
-    Encrypted = encrypt_txt.translate(str.maketrans(need_replace_txt, will_releacr_txt))
-    print('加密后的密文是', Encrypted)
-    for i in will_releacr_txt:
-        if will_releacr_txt.count(i) > 1:
-            print('由于将要替换的文本出现冲突, 该文件无法解密')
-            break
-    for i in need_replace_txt:
-        if need_replace_txt.count(i) > 1:
-            print('由于需要替换的文本出现冲突, 该文件无法解密')
-            break
-print('test')
-print('test push')
+    print('false')
+
+
+
+
+
+text = input("请输入text的内容：")
+words = input("请输入words的内容：")
+words = words.split()
+result = []
+for each in words:
+    temp = text.find(each)
+    while temp != -1:
+        result.append([temp,temp+len(each)-1])
+        temp = text.find(each, temp+1)
+print(sorted(result))

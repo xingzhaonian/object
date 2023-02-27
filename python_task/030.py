@@ -1,90 +1,121 @@
 r'''
-0. 请问下面代码执行的结果是？
->>> x = "我爱Pyhon"
->>> x.startwith(["你", "我", "她"])
-答: False, startwith() 方法接收一个参数, 这个参数可以是元组数据, 但不可以是列表数据
+0, 请问下面的代码执行结果分别是什么？
+'www.iloveshc.com'.lstrip('wcom')
+'www.iloveshc.com'.rstrip('wcom')
+'www.iloveshc.com'.strip('wcom')
+答: '.iloveshc.com', 'www.iloveshc.', '.iloveshc.'
 
-1. 请问下面代码执行的结果是？
->>> "I love FishC\s".isprintable()
-答: 返回True, isprintable()判断参数是否是一个可打印的参数, 转义符不可打印, 其余都可以; 而'\s'不是转义符
+1. 请问下面代码打印的内容是什么？
+"www.ilovefishc.com".removeprefix("w.")
+答: 'www.ilovefishc.com'
 
-2. isdecimal()、isdigit() 和 isnumeric() 这 3 个方法都是判断数字的,那么请问这其中哪一个方法 “最严格”,哪一个又是 “最宽松” 的呢？
-答: isdecimal()和isdigit() 最严格, 而 isnumeric()则是最宽松的
+2. split() 方法常常被应用于对数据的解析处理，那么考考大家，如果要从字符串"https://ilovefishc.com/html5/index.html" 
+中提取出 "ilovefishc.com"，使用 split() 方法应该如何实现呢？
+答: "https://ilovefishc.com/html5/index.html".split('//')[1].split('/')[0]
 
-3. 请问下面代码执行的结果是？
->>> "一二三四五上山打老虎".isalnum()
-答: 返回True;  isalnum()方法集大成者, 只要isalpa(), isdecimal(), isdigit(), isnumeric()中任意一个方法返回Ture, 这个方法就返回True
 
-4. 请使用一行代码判断 s 字符串中,是否所有字符都是英文字母？
+3. 如果要求按换行符来分割字符串，小甲鱼推荐使用 splitlines() 方法，而非 split("\n")，你觉得小甲鱼的依据是什么？
+答: 因为换行符在不同的操作系统中表示不一样, 要想代码兼容所有操作系统或平台, 用splitlines()最合适
+
+4. 下面代码使用加号运算符（+）进行字符串拼接，现在看起来有点太 low 了，请将它改为使用 join() 方法来拼接吧~
+s = "I" + " " + "love" + " " + "FishC"
+'I love FishC'
+答: s = ' '.join(['I', 'Love', 'FishC'])
+
+5. 请问下面代码打印的内容是什么？
+print(",\n".join("FishC"))
 答: 
-s = 'lovepython'
-s.isalpha()
-
-5. 请问下面代码执行的结果是？
->>> "一二三木头人".isidentifier()
-答: 返回True, isidentifier()方法用来判断是否是一个合法的python标识符号, 而在python中, 中文是可以用来作变量名的
-
-===================================
-动动手:
-0. 给定一个字符串 text 和字符串列表 words,返回 words 中每个单词在 text 中的位置（要求最终的位置从小到大进行排序）。
-举例:
-text: "I love FishC and FishC love me"
-words:"FishC"
-输出:[[7, 11], [17, 21]]
-
-text:"I love FishC and FishC love me"
-words:"FishC love"
-输出:[[2, 5], [7, 11], [17, 21], [23, 26]]
+F,
+i,
+s,
+h,
+C
 
 '''
-text = input('请输入text内容')
-words = input('请输入word内容')
-result_list = []
-text_lenght = len(text)
-words_split_list = words.split(' ')
-words_split_list_lenght = len(words_split_list)
-
-print(words_split_list)
-for i in range(words_split_list_lenght):
-    for k in range(text_lenght):
-            print(k, k + len(words_split_list[i]) - 1,'------------', text[k: k + len(words_split_list[i])], '=========', words_split_list[i])
-            if words_split_list[i] == text[k: k + len(words_split_list[i])]:
-                result_list.append([k, k + len(words_split_list[i]) - 1 ])
-result_list = sorted(result_list)
-print(result_list)
-
 
 r'''
-1. 编写一个程序，判断输入的字符串是否由多个子字符串重复多次构成
-举例：
-输入: "FCFC"
-输出: True
+动动手
+0, 编写一个生成凯撒密码的程序
+凯撒密码最早由古罗马军事统帅盖乌斯·尤利乌斯·凯撒在军队中用来传递加密信息，故称凯撒密码。
+原理：
+凯撒密码是一种通过位移加密的方法，对 26 个（大小写）字母进行位移加密，比如下方是正向位移 6 位的字母对比表：
+明文字母表如下
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+密文字母表如下
+GHIJKLMNOPQRSTUVWXYZABCDEFghijklmnopqrstuvwxyzabcdef
+所以，如果给定加密的明文是:
+I love FishC
+那么程序加密后输出的密文便是:
+O rubk LoynI
+'''
 
-输入: "FishCFish"
-输出: False
+plaintext_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+need_cipher_text = input('请输入需要加密的明文')
+move_step = int(input('请输入需要移动的位数'))
+if move_step >= 26:
+    print('数字过大, 无效')
+    exit()
+result_cipher_text = ''
+print(need_cipher_text)
+for i in need_cipher_text:
+    if i == ' ':
+        result_cipher_text += i
+    need_cipher_text_position = plaintext_table.find(i)
+    for k in range(len(plaintext_table)):
+        if need_cipher_text_position + move_step + 1 > 52:
+            need_cipher_text_position = need_cipher_text_position - 26
+        if int(need_cipher_text_position) == k:
+            i = plaintext_table[k + move_step: k + move_step + 1]
+            result_cipher_text += i
+print(result_cipher_text)
+
+'''1. 给定一个字符串数组 words, 只返回可以使用在美式键盘同一行的字母打印出来的单词, 键盘布局如下图所示.
+美式键盘中:
+第一行由字符 "qwertyuiop" 组成
+第二行由字符 "asdfghjkl" 组成
+第三行由字符 "zxcvbnm" 组成
+举例：
+输入: words = ["Twitter", "TOTO", "FishC", "Python", "ASL"]
+输出：['Twitter', 'TOTO', 'ASL']
+''' # Twitter, TOTO, FishC, Python, ASL
+line_1 = 'qwertyuiop'
+line_2 = 'asdfghjkl'
+line_3 = 'zxcvbnm'
+words_list = ["Twitter", "TOTO", "FishC", "Python", "ASL"]
+#    words = input('请输入列表形式的单词, 输入stop停止输入')
+#    if words == 'stop':
+#        break
+#    words_list.append(words)
+
+
+result_list = []
+for i in words_list:
+    if i.casefold().strip(line_1) == '' or i.casefold().strip(line_2) == '' or i.casefold().strip(line_2) == '':
+        result_list.append(i)
+print(result_list)
 
 '''
-sum_str = input('请输入字符')
-sum_str_lenght = len(sum_str)
-if sum_str_lenght % 2 == 0:
-    if sum_str[0 : int(sum_str_lenght / 2)] == sum_str[int(sum_str_lenght / 2):]:
-        print('true')
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_1:
+            break
     else:
-        print('false')
-else:
-    print('false')
+        result_list.append(i)
 
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_2:
+            break
+    else:
+        result_list.append(i)
 
-
-
-
-text = input("请输入text的内容：")
-words = input("请输入words的内容：")
-words = words.split()
-result = []
-for each in words:
-    temp = text.find(each)
-    while temp != -1:
-        result.append([temp,temp+len(each)-1])
-        temp = text.find(each, temp+1)
-print(sorted(result))
+for i in words_list:
+    for k in i:
+        k = k.casefold()
+        if k not in line_3:
+            break
+    else:
+        result_list.append(i)
+print(result_list)'''
