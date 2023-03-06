@@ -32,4 +32,4 @@ for i in decompression_text:
         decompression_result_list.append(i)
     index_count += 1
 decompression_result_text = ''.join(decompression_result_list)
-print(f'压缩后为{decompression_text} ,解压缩后为{decompression_result_text}')
+print(f'压缩后为{decompression_text}, 解压缩后为{decompression_result_text}')
