@@ -1,5 +1,5 @@
 r'''
-0. 列表的 sort() 方法和 sorted() 函数有哪些异同点（至少各举 3 个）？
+0. 列表的 sort() 方法和 sorted() 函数有哪些异同点(至少各举 3 个)？
 答: 共同点: ① 都可以对可迭代对象进行排序 ② 都可以使用key参数  ③ 都可以使用reverse参数;
     不同点: ① sort直接在对象本身进行排序, sorted则是返回一个全新的列表 ② sort 只能处理列表, 而sorted则可以处理任何可迭代对象  ③ 
 
@@ -30,6 +30,34 @@ r'''
 比如给定的整数列表是 [1, 8, 7, 3, 6, 5, 4, 2]，那么调整后的结果应该是 [1, 3, 5, 7, 2, 4, 6, 8]。
 '''
 
+initial_list = [1, 8, 7, 3, 6, 5, 4, 2]
+odd_number_list = []
+even_number_list = []
+for i in initial_list:
+    if i % 2 == 0:
+        even_number_list.append(i)
+    else:
+        odd_number_list.append(i)
 
+odd_number_list.sort()
+even_number_list.sort()
+result_list = odd_number_list +even_number_list
+print(result_list)
 
-
+r'''
+1. 翻转单词顺序。
+用户输入一个英文句子，请编程翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。
+例如输入字符串是 "I love FishC."，则输出 "FishC. love I"
+注意1:用户输入的字符串可能会在前面或者后面包含任意数量的空格，但是反转后的结果将会去除这些空格(例如输入字符串是 "   I love FishC.   ", 
+结果依然输出 "FishC. love I")
+注意2:用户输入的字符串中，单词之间可能不止一个空格，但是反转后的结果将统一使用一个空格作为单词之间的间隔(例如输入字符串是 "I   love        FishC."
+结果依然输出 "FishC. love I")
+'''
+init_string = 'I   love        FishC.'
+result_list = []
+split_string = init_string.split(' ')
+for i in split_string:
+    if i != '':
+        result_list.append(i)
+result_string = ' '.join(list(reversed(result_list)))        
+print(result_string)
