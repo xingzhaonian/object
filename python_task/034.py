@@ -41,7 +41,7 @@ for i in initial_list:
 
 odd_number_list.sort()
 even_number_list.sort()
-result_list = odd_number_list +even_number_list
+result_list = odd_number_list + even_number_list
 print(result_list)
 
 r'''
