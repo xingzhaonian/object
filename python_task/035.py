@@ -132,8 +132,11 @@ C 君是从时间戳为 3 的时候进入，从时间戳为 3.5 的时候出来�
 G 君是从时间戳为 10 的时候进入，从时间戳为 10.8 的时候出来，总共耗时为 0.8
 OK, 现在要求大家编写代码, 统计给定的数据, 打印耗时最长和最短的人员名称。
 '''
-times = [1, 3, 3.5, 6.5, 9.5, 10, 10.8]
+import random
+times = []
 names = ["A", "B", "C", "D", "E", "F", "G"]
+for i in range(len(names)):
+    times.append(random.randint(0,20))
 max_name = names[0]
 min_name = names[0]
 max_time = times[0]
@@ -161,10 +164,13 @@ for i in range(len(names)):
         max_time_list.append(max_time)
         max_name_list.append(max_name)
     elif each_time == max_time:
-        max_time = each_time
-        max_name = each_name
-        max_time_list.append(each_time)
-        max_name_list.append(max_name)
+        if each_name in max_name_list:
+            continue
+        else:
+            max_time = each_time
+            max_name = each_name
+            max_time_list.append(each_time)
+            max_name_list.append(max_name)
     elif each_time < min_time:
         min_time_list.clear()
         min_name_list.clear()
@@ -178,11 +184,10 @@ for i in range(len(names)):
         min_time_list.append(min_time)
         min_name_list.append(min_name)
 
-
 zipped_max_result = list(zip(max_name_list, max_time_list))
-zipped_min_result = list(zip(min_time_list, min_name_list))
-print('用时最长的人是:{}和{}, 他们分别用时{:.2f}秒和{:.2f}秒'.format\
-      (zipped_max_result[0][0], zipped_max_result[1][0], zipped_max_result[0][1], zipped_max_result[1][1]))
-print('用时最短的人是:{}和{}, 他们分别用时{:.2f}秒和{:.2f}秒'.format\
-      (zipped_min_result[0][1], zipped_min_result[1][1], zipped_min_result[0][0], zipped_min_result[1][0]))
-
+zipped_min_result = list(zip(min_name_list, min_time_list))
+print(zipped_max_result, zipped_min_result)
+for x, y in zipped_max_result:
+    print('用时最长的是{}, 花了{}秒'.format(x, y))
+for x, y in zipped_min_result:
+    print('用时最短的是{}, 花了{}秒'.format(x, y))
