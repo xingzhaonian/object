@@ -179,15 +179,18 @@ for i in range(len(names)):
         min_time_list.append(min_time)
         min_name_list.append(min_name)
     elif each_time == min_time:
-        min_time = each_time
-        min_name = each_name
-        min_time_list.append(min_time)
-        min_name_list.append(min_name)
+        if each_name in max_name_list:
+            continue
+        else:        
+            min_time = each_time
+            min_name = each_name
+            min_time_list.append(min_time)
+            min_name_list.append(min_name)
 
 zipped_max_result = list(zip(max_name_list, max_time_list))
 zipped_min_result = list(zip(min_name_list, min_time_list))
 print(zipped_max_result, zipped_min_result)
 for x, y in zipped_max_result:
-    print('用时最长的是{}, 花了{}秒'.format(x, y))
+    print('用时最长的是{}, 花了{:.1f}秒'.format(x, y))
 for x, y in zipped_min_result:
-    print('用时最短的是{}, 花了{}秒'.format(x, y))
+    print('用时最短的是{}, 花了{:.1f}秒'.format(x, y))
