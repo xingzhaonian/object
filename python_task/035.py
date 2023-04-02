@@ -145,11 +145,6 @@ max_time_list = []
 max_name_list = []
 min_time_list = []
 min_name_list = []
-max_time_list.append(max_time)
-max_name_list.append(max_name)
-min_time_list.append(min_time)
-min_name_list.append(min_name)
-
 for i in range(len(names)):
     each_name = names[i]
     if i == 0:
