@@ -52,3 +52,51 @@ for i in Morse_Code:
 主演（通常有多人）
 电影评分
 '''
+print('欢迎进入鱼C影评小程序')
+print('输入 1 进行数据录入')
+print('输入 2 进行数据查询')
+print('输入 3 退出程序')
+Movie_Name_List = []
+Release_Time_List = []
+Direct_Name_List = []
+Leading_Role_List = []
+Movie_Grade_List = []
+
+
+while True:
+    choice = int(input('请输入想要的功能(1 / 2 / 3):'))
+    if choice == 1:
+        while True:
+            movie_name = input('请输入电影名称:')
+            Movie_Name_List.append(movie_name)
+            Release_Time = input('请输入上映日期:')
+            Release_Time_List.append(Release_Time)
+            direct_name = input('请输入导演名字(多人请用" / "分隔):')
+            Direct_Name_List.append(direct_name)
+            lading_role_name = input('请输入主演名字(多人请用" / "分隔):')
+            Leading_Role_List.append(lading_role_name)
+            movie_grade = input('请输入电影评分:')
+            Movie_Grade_List.append(movie_grade)
+            is_continue = input('请问是否继续录入(Y/N):')
+            if is_continue == 'Y':
+                continue
+            elif is_continue == 'N':
+                break
+    elif choice == 2:
+        select_movie_name = input('请输入电影名称:')
+        if select_movie_name in Movie_Name_List:
+            movie_name_index = Movie_Name_List.index(select_movie_name)
+            print('电影名称:', select_movie_name)
+            print('上映时间:', Release_Time_List[movie_name_index])
+            print('导演名字:', Direct_Name_List[movie_name_index])
+            print('主演名字:', Leading_Role_List[movie_name_index])
+            print('电影评分:', Movie_Grade_List[movie_name_index])
+        else:
+            print('查无此片')
+    elif choice == 3:
+        break
+    
+
+
+
+
