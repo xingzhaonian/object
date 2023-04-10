@@ -64,9 +64,10 @@ Movie_Grade_List = []
 
 
 while True:
-    choice = int(input('请输入想要的功能(1 / 2 / 3):'))
+    choice = int(input('请输入想要的功能(1:进行数据录入 / 2:进行数据查询 / 3:退出程序):'))
     if choice == 1:
-        while True:
+        is_continue = True
+        while is_continue:
             movie_name = input('请输入电影名称:')
             Movie_Name_List.append(movie_name)
             Release_Time = input('请输入上映日期:')
@@ -79,9 +80,20 @@ while True:
             Movie_Grade_List.append(movie_grade)
             is_continue = input('请问是否继续录入(Y/N):')
             if is_continue == 'Y':
-                continue
+                is_continue = True
             elif is_continue == 'N':
-                break
+                is_continue = False
+            else:
+                while True:
+                    is_continue = input('请输入(Y/N)来判断是否进行继续录入:')
+                    if is_continue == 'Y':
+                        is_continue = True
+                        break
+                    elif is_continue == 'N':
+                        is_continue = False
+                        break
+                    else:
+                        continue
     elif choice == 2:
         select_movie_name = input('请输入电影名称:')
         if select_movie_name in Movie_Name_List:
