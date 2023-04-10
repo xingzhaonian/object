@@ -61,8 +61,8 @@ Release_Time_List = []
 Direct_Name_List = []
 Leading_Role_List = []
 Movie_Grade_List = []
-is_continue_inquire_about = True
 while True:
+    is_continue_inquire_about = True
     choice = input('请输入想要的功能(1:进行数据录入 / 2:进行数据查询 / 3:退出程序):')
     if choice.isspace():
         print('输入为空, 请再次输入')
