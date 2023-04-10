@@ -136,7 +136,7 @@ import random
 times = []
 names = ["A", "B", "C", "D", "E", "F", "G"]
 for i in range(len(names)):
-    times.append(random.randint(0,20))
+    times.append(random.randint(0,8))
 max_name = names[0]
 min_name = names[0]
 max_time = times[0]
@@ -149,8 +149,13 @@ for i in range(len(names)):
     each_name = names[i]
     if i == 0:
         each_time = times[i] - 0
+        if each_time < 0:
+            each_time = 0
     else:
         each_time = times[i] - times[i - 1]
+        each_time = times[i] - 0
+        if each_time < 0:
+            each_time = 0
     if each_time > max_time:
         max_time_list.clear()
         max_name_list.clear()
