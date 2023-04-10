@@ -61,53 +61,60 @@ Release_Time_List = []
 Direct_Name_List = []
 Leading_Role_List = []
 Movie_Grade_List = []
-
-
+is_continue_inquire_about = True
 while True:
-    choice = int(input('请输入想要的功能(1:进行数据录入 / 2:进行数据查询 / 3:退出程序):'))
-    if choice == 1:
-        is_continue = True
-        while is_continue:
-            movie_name = input('请输入电影名称:')
-            Movie_Name_List.append(movie_name)
-            Release_Time = input('请输入上映日期:')
-            Release_Time_List.append(Release_Time)
-            direct_name = input('请输入导演名字(多人请用" / "分隔):')
-            Direct_Name_List.append(direct_name)
-            lading_role_name = input('请输入主演名字(多人请用" / "分隔):')
-            Leading_Role_List.append(lading_role_name)
-            movie_grade = input('请输入电影评分:')
-            Movie_Grade_List.append(movie_grade)
-            is_continue = input('请问是否继续录入(Y/N):')
-            if is_continue == 'Y':
-                is_continue = True
-            elif is_continue == 'N':
-                is_continue = False
+    choice = input('请输入想要的功能(1:进行数据录入 / 2:进行数据查询 / 3:退出程序):')
+    if choice.isspace():
+        print('输入为空, 请再次输入')
+        continue
+    if choice.isdecimal():
+        if int(choice) == 1:
+            while is_continue_inquire_about:
+                print('进行录入选项')
+                movie_name = input('请输入电影名称:')
+                Movie_Name_List.append(movie_name)
+                Release_Time = input('请输入上映日期:')
+                Release_Time_List.append(Release_Time)
+                direct_name = input('请输入导演名字(多人请用" / "分隔):')
+                Direct_Name_List.append(direct_name)
+                lading_role_name = input('请输入主演名字(多人请用" / "分隔):')
+                Leading_Role_List.append(lading_role_name)
+                movie_grade = input('请输入电影评分:')
+                Movie_Grade_List.append(movie_grade)
+                is_continue_inquire_about = input('请问是否继续录入(Y/N):')
+                if is_continue_inquire_about == 'Y':
+                    is_continue_inquire_about = True
+                elif is_continue_inquire_about == 'N':
+                    is_continue_inquire_about = False
+                else:
+                    while True:
+                        is_continue_inquire_about = input('请输入(Y/N)来判断是否进行继续录入:')
+                        if is_continue_inquire_about == 'Y':
+                            is_continue_inquire_about = True
+                            break
+                        elif is_continue_inquire_about == 'N':
+                            is_continue_inquire_about = False
+                            break
+                        else:
+                            continue
+        elif int(choice) == 2:
+            print('进行查询选项')
+            select_movie_name = input('请输入电影名称:')
+            if select_movie_name in Movie_Name_List:
+                movie_name_index = Movie_Name_List.index(select_movie_name)
+                print('电影名称:', select_movie_name)
+                print('上映时间:', Release_Time_List[movie_name_index])
+                print('导演名字:', Direct_Name_List[movie_name_index])
+                print('主演名字:', Leading_Role_List[movie_name_index])
+                print('电影评分:', Movie_Grade_List[movie_name_index])
             else:
-                while True:
-                    is_continue = input('请输入(Y/N)来判断是否进行继续录入:')
-                    if is_continue == 'Y':
-                        is_continue = True
-                        break
-                    elif is_continue == 'N':
-                        is_continue = False
-                        break
-                    else:
-                        continue
-    elif choice == 2:
-        select_movie_name = input('请输入电影名称:')
-        if select_movie_name in Movie_Name_List:
-            movie_name_index = Movie_Name_List.index(select_movie_name)
-            print('电影名称:', select_movie_name)
-            print('上映时间:', Release_Time_List[movie_name_index])
-            print('导演名字:', Direct_Name_List[movie_name_index])
-            print('主演名字:', Leading_Role_List[movie_name_index])
-            print('电影评分:', Movie_Grade_List[movie_name_index])
-        else:
-            print('查无此片')
-    elif choice == 3:
-        break
-    
+                print('查无此片')
+        elif int(choice) == 3:
+            print('退出程序')
+            break
+    else:
+        print('请输入数字')
+
 
 
 
