@@ -104,8 +104,8 @@ while True:
                 movie_name_index = Movie_Name_List.index(select_movie_name)
                 print('电影名称:', select_movie_name)
                 print('上映时间:', Release_Time_List[movie_name_index])
-                print('导演名字:', Direct_Name_List[movie_name_index])
-                print('主演名字:', Leading_Role_List[movie_name_index])
+                print('导演名字:', ''.join(Direct_Name_List[movie_name_index].split('/')))
+                print('主演名字:', ''.join(Leading_Role_List[movie_name_index].split('/')))
                 print('电影评分:', Movie_Grade_List[movie_name_index])
             else:
                 print('查无此片')
