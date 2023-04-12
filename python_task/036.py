@@ -68,6 +68,9 @@ while True:
         print('输入为空, 请再次输入')
         continue
     if choice.isdecimal():
+        if int(choice) > 3 or int(choice) == 0:
+            print('输入选项无效, 请重新输入')
+            continue
         if int(choice) == 1:
             while is_continue_inquire_about:
                 print('进行录入选项')
@@ -114,8 +117,3 @@ while True:
             break
     else:
         print('请输入数字')
-
-
-
-
-
