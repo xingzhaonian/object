@@ -1,10 +1,10 @@
 r'''
 0. 请问下面变量 d 是一个字典吗？
 d = {}
-答: 是的, {}是创建字典的关键符号
+答: 是的, {}是一个空字典, {1, 2, 3, 4, 5}则是合集
 
 1. 字典中，同样一个值是否可以出现两次？
-答: 不可以, 如果有相同的, 最新的键对应的值对会覆盖前面的值
+答: 值可以, 但是键不可以, 如果键有相同的, 最新的键对应的值对会覆盖前面的键对应的值
 
 2. 请问下面代码创建的字典中，键和值分别是什么？
 d = {}.fromkeys("吕布", 999)
@@ -93,3 +93,133 @@ while True:
             break
     else:
         print('请输入数字')
+        
+
+'''电话簿'''
+print('欢迎进入鱼C电话簿')
+name = []
+phone_number = {}
+
+while True:
+    choice_mode = input('I:录入 / C:查询 / D:删除 / P:打印 / E:退出')
+    if choice_mode == 'I':
+        is_continue_input_phone_number = True
+        is_continue_input_phone_number_1 = True
+        while is_continue_input_phone_number:
+            print('--- 录入模式 ---')
+            input_name = input('请输入姓名')
+            if input_name in phone_number:
+                print(('名字已经存在, 手机号码是{}'.format(phone_number[input_name])))
+                is_modify = input('是否修改？(Y / N)')
+                if is_modify == 'Y':
+                    is_continue_input_phone_number_1 = True
+                    while is_continue_input_phone_number_1:
+                        input_phone_number = input('请输入新手机号')
+                        if not input_phone_number.isdecimal() or len(input_phone_number) != 11:
+                            print('请输入正确的电话号码')
+                            continue
+                        else:
+                            phone_number[input_name] = input_phone_number
+                            print(phone_number)
+                            is_continue_input_phone_number_1 = False
+                elif is_modify == 'N':
+                    print('不更新电话号码')
+                else:
+                    print('不更新电话号码')
+                continue_input_phone_number = input('是否继续录入 Y / N')
+                if continue_input_phone_number == 'Y':
+                    is_continue_input_phone_number = True
+                    continue
+                elif continue_input_phone_number == 'N':
+                    is_continue_input_phone_number = False
+                    break
+                else:
+                    while continue_input_phone_number != 'N' or continue_input_phone_number != 'Y':
+                        continue_input_phone_number = input('输入错误, 请重新输入( Y / N)')
+                        if continue_input_phone_number == 'N':
+                            is_continue_input_phone_number = False
+                            is_continue_input_phone_number_1 = False
+                            break
+                        elif continue_input_phone_number == 'Y':
+                            is_continue_input_phone_number = True
+                            is_continue_input_phone_number_1 = False
+                            break
+            else:
+                is_continue_input_phone_number_1 = True
+                while is_continue_input_phone_number_1:
+                    input_phone_number = input('请输入手机号')
+                    if not input_phone_number.isdecimal() or len(input_phone_number) != 11:
+                        print('请输入正确的电话号码')
+                        continue
+                    else:
+                        phone_number[input_name] = input_phone_number
+                        print(phone_number)
+                        continue_input_phone_number = input('是否继续输入 Y / N')
+                        if continue_input_phone_number == 'Y':
+                            is_continue_input_phone_number = True
+                            break
+                        elif continue_input_phone_number == 'N':
+                            is_continue_input_phone_number = False
+                            break
+                        else:
+                            while continue_input_phone_number != 'N' or continue_input_phone_number != 'Y':
+                                continue_input_phone_number = input('输入错误, 请重新输入( Y / N)')
+                                if continue_input_phone_number == 'N':
+                                    is_continue_input_phone_number = False
+                                    is_continue_input_phone_number_1 = False
+                                    break
+                                elif continue_input_phone_number == 'Y':
+                                    is_continue_input_phone_number = True
+                                    is_continue_input_phone_number_1 = False
+                                    break
+    elif choice_mode == 'C':
+        print('---查询模式---')
+        is_continue_select = True
+        while is_continue_select:
+            select_name = input('请输入姓名')
+            if select_name in phone_number:
+                print(select_name,':', phone_number[select_name])
+            else:
+                print('没有该联系人')
+            is_continue = input('是否继续查询(Y / N)')
+            if is_continue == 'Y':
+                continue
+            elif is_continue == 'N':
+                break
+            else:
+                while is_continue != 'Y' or is_continue != 'N':
+                    is_continue = input('输入错误, 请重新输入(Y / N)')
+                    if is_continue == 'Y':
+                        is_continue_select = True
+                        break
+                    elif  is_continue == 'N':
+                        is_continue_select = False
+                        break
+    elif choice_mode == 'D':
+        print('---删除模式---')
+        is_continue_del = True
+        while is_continue_del:
+            pop_name = input('请输入要删除的姓名')
+            print(phone_number.pop(pop_name, '没有该联系人'))
+            is_continue = input('是否继续删除(Y / N)')
+            if is_continue == 'Y':
+                continue
+            elif is_continue == 'N':
+                break
+            else:
+                while is_continue != 'Y' or is_continue != 'N':
+                    is_continue = input('输入错误, 请重新输入(Y / N)')
+                    if is_continue == 'Y':
+                        is_continue_select = True
+                        break
+                    elif  is_continue == 'N':
+                        is_continue_select = False
+                        break
+    elif choice_mode == 'P':
+        print('---打印模式---')
+        print(f'电话簿{phone_number}')
+    elif choice_mode == 'E':
+        print('---退出程序---')
+        break
+    else:
+        print('输入错误, 请重新输入')
