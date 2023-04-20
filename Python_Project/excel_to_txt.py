@@ -23,7 +23,6 @@ txt_dir_path = get_txt_dir_path()
 
 # 进行转换操作
 def excel_transformation_txt(path1, path2):
-    time_num = 3
     try:
         txt_file_name = path1.split('\\')[-1].split('.')[0]
     except AttributeError:
@@ -56,6 +55,8 @@ def excel_transformation_txt(path1, path2):
     row_data_num = 0
 
 
+    time_on = time.ctime()
+    start_time = time.time()
     #打开文件进行写入， 使用w+模式创建txt文本
     with open(txt_file_path_name, 'w+', encoding = 'utf-8') as f:
         for i in sheet_row_data:
@@ -85,13 +86,13 @@ def excel_transformation_txt(path1, path2):
     #删除并重命名文件 
     os.remove(txt_file_path_name)
     os.rename(result_path, txt_file_path_name)
-
-
-    for i in range(time_num):
-        time_num -= 1
+    end_time = time.time()
+    print(f'开始时间{time_on}', f'任务完成共使用{ end_time- start_time}秒')
+    count = 3
+    while count > 0:
         time.sleep(1)
-        print('写入完毕', time_num + 1, '秒后退出')
-
+        count -= 1
+        print(f'当前时间{time.ctime()}, 倒计时{count + 1}秒')
 '''写入完毕'''
 excel_transformation_txt(excel_file_path, txt_dir_path)
       
