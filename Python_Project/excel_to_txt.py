@@ -28,7 +28,6 @@ def excel_transformation_txt(path1, path2):
     except AttributeError:
         print('文件不存在')
         sys.exit()
-
     txt_file_path_name = txt_dir_path + '\\' + txt_file_name + '.txt'
     print(path1)
     print(path2)
@@ -53,8 +52,6 @@ def excel_transformation_txt(path1, path2):
     print('表单有', sheet_max_row_num,'行', sheet_max_column_num, '列')
     sheet_row_data = sheet.rows
     row_data_num = 0
-
-
     time_on = time.ctime()
     start_time = time.time()
     #打开文件进行写入， 使用w+模式创建txt文本
