@@ -50,7 +50,7 @@ r'''
 '''
 import hashlib
 
-dict_name = {}
+dict_name = {"小甲鱼":hashlib.md5(bytes("I_love_FishC", 'utf-8')), "不二如是":hashlib.md5(bytes("FishC5201314", 'utf-8'))}
 is_register = True
 while is_register:
     user_name = input('请输入用户名')
@@ -59,7 +59,7 @@ while is_register:
     password = input('请输入密码')
     bstr = bytes(password, 'utf-8')
     passwd = hashlib.md5(bstr)
-    dict_name[user_name] = passwd.hexdigest()
+    dict_name[user_name] = passwd
     is_continue_register = input('是否继续注册(Y / N)')
     if is_continue_register == 'Y':
         continue
@@ -77,4 +77,4 @@ while is_register:
     print('------------------')
 print('目前已经被注册的用户有:')
 for k, v in dict_name.items():
-    print(k, v)
+    print(k, v.hexdigest())

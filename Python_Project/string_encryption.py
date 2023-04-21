@@ -7,8 +7,8 @@ move_step = int(input('输入移动的步长'))
 result_text = []
 index_num = 0
 for i in input_text:
-    if int(move_step) > 52:
-        move_step = int(move_step) % 52
+    if int(move_step) > len(plaintext_table):
+        move_step = int(move_step) % len(plaintext_table)
     if i.isupper():
         if plaintext_table.find(i) + move_step >= len(plaintext_table):
             index_num = plaintext_table.find(i) + move_step - len(plaintext_table)
@@ -17,7 +17,7 @@ for i in input_text:
     else:
         _ = plaintext_table.find(i) + move_step 
         if _ >= len(plaintext_table):
-            index_num =  (plaintext_table.find(i) + move_step) % 52
+            index_num =  (plaintext_table.find(i) + move_step) % len(plaintext_table)
         else:
             index_num = plaintext_table.find(i) + move_step
     result_text.append(plaintext_table[index_num])
