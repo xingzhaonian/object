@@ -32,7 +32,7 @@ set("FishC.com.cn").issuperset('FishC')
 >>> s1 = set("fishc.com.cn")
 >>> s2 = set("ilovefishc.com")
 >>> s1 - s2
-答: 取 s1和s2 之间的差集, n;  也可以使用 s1.difference(s2)
+答: 取 s1和s2 之间的差集n;  也可以使用 s1.difference(s2)
 
 8. 请使用正确的运算符, 写出与下面代码执行结果相同的操作?
 >>> set("FishC").intersection("Php", "Python")
