@@ -23,6 +23,7 @@ True
 >>> set("FishC") in set("FishC.com.cn")
 False
 set("FishC").issubset("FishC.com.cn")
+set("FishC.com.cn").issuperset('FishC')
 
 6. 如果存在多个列表，需要筛出这些列表中相同的元素，可以使用什么方法？
 答: 先把列表转换为set(), 然后使用intersection()交集方法, 得出的结果便是它们之间共同拥有的元素  对应的运算符是 &
