@@ -52,6 +52,9 @@ def init_list():
     return needles, set(haystack)
 
 init_list_result = init_list()
+s = timeit.timeit("init_list()", setup="from __main__ import init_list", number=1)
+print(f"数据初始化完成, 初始化数据过程共{s}秒, 开始进行匹配 。")
+
 
 def find():
     found = 0
