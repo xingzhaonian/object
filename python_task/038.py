@@ -77,4 +77,4 @@ while is_register:
     print('------------------')
 print('目前已经被注册的用户有:')
 for k, v in dict_name.items():
-    print(k, v.hexdigest())
+    print('用户名:', k, '密码:', v.hexdigest(), end = '\n')
