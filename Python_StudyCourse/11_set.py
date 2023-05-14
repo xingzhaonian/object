@@ -31,4 +31,21 @@ s & {1, 2, 3} & set('php') 交集
 s - set('python') - set('php')  差集
 s ^ set('python') 对称差集
 
+(*other)表示支持多个参数, (other)表示支持一个参数
+可变集合 set()
+不可变集合 frozenset()
+s = set('fishc')
+s.update(*others) 更新对象s中的数据, 相当于s.union(), 只不过union不会更新对象s中的数据
+s.difference_update(*others) 运算s.difference()后的值覆盖更新到对象s中
+s.intersection_update(*others) 运算s.intersection后的值覆盖更新到对象s中
+s.symeetric_difference_update(others) 运算s.symeetric_difference后的值覆盖更新到对象s中
+s.add('45') 表示将'45' 作为参数添加到集合s中
+s.remove('lk') 表示从集合s中删除 'lk', 如果'lk'不存在则抛出异常
+s.discard('lk') 表示从集合s中删除 'lk', 如果'lk'不存在就啥也不干
+s.pop() 表示从集合s中随机弹出(删除)一个元素, 如果集合s中没有数据, 则 KeyError: 'pop from an empty set' 异常
+s.clear() 表示清空集合s
+
+
+可哈希
+大多数不可变对象是可哈希的, 否则不可
 '''
