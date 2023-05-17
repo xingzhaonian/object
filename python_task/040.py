@@ -17,7 +17,8 @@
 答: 对, frozenset() 对象是可哈希的
 
 4. 请问集合对象的 update(*others) 方法和 add(item) 方法有什么不同？
-答: set().update(*thoers) 支持多个参数, 而set().add(item)只支持单个参数
+答: set().update(*thoers) 支持多个参数, 且将other中的每个参数迭代添加到set中, 而set().add(item)只支持单个参数且将这个参数作为一个整体添加到set中 
+假设将字符串 "FishC" 作为参数，使用 update() 方法它是拆分成 5 个字符分别添加进去，而使用 add() 方法则是将整个字符串作为一个元素添加进去。
 
 5. 请问集合对象的 remove(elem) 方法和 discard(elem) 方法有什么不同？
 答: set.remove(elem) 删除集合对象中的某个元素, 如果这个元素不存在则会抛出异常, set.discard(elem) 删除集合对象中的某个元素, 如果这个元素不存在则啥也不干
