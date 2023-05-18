@@ -74,11 +74,13 @@ e10adc3949ba59abbe56e057f20f883e
 hashlib.md5() 的参数是需要一个 b 字符串(即 bytes 类型的对象), 这里可以使用 bytes("123", "utf-8") 的方式将 "123" 转换为 b"123"。
 '''
 import hashlib
+ciphertext = ['021bbc7ee20b71134d53e20206bd6feb', 'e10adc3949ba59abbe56e057f20f883e', '655d03ed12927aada3d5bd1f90f06eb7']
+
 hash_table = {}
 for i in range(0, 999999):
     hash_md5 = hashlib.md5(bytes(str(i), encoding = 'utf-8')).hexdigest()
     hash_table[hash_md5] = i
-ciphertext = ['021bbc7ee20b71134d53e20206bd6feb', 'e10adc3949ba59abbe56e057f20f883e', '655d03ed12927aada3d5bd1f90f06eb7']
+
 for i in ciphertext:
     if i in hash_table:
         print(f'{i}的明文是{hash_table[i]}')
