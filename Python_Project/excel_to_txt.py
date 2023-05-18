@@ -32,7 +32,7 @@ def excel_transformation_txt(path1, path2):
     print(path1)
     print(path2)
     print(txt_file_path_name)
-    wb = openpyxl.load_workbook(path1)
+    wb = openpyxl.load_workbook(path1, data_only = True)
     sheet_name = wb.sheetnames
     print('表单名:', sheet_name)
 
