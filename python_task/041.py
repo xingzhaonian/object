@@ -11,7 +11,14 @@ def 函数名 ():
     pass
 
 2. 请问下面代码中,实参是什么？形参是什么？
-答: 实参: 函数调用时实际传递的值; 形参: 定义函数的时候写的参数的名字
+>>> def myfunc(x, y):
+...     print(x + y)
+...
+>>> a = 3
+>>> b = 5
+>>> myfunc(a, b)
+8
+答: 实参: 函数调用时实际传递的值a和b; 形参: 定义函数的时候写的参数的名字 x和y
 
 3. 如果在函数的定义中没有出现 return 语句,是否说明该函数没有返回值？
 答: 错误, 如果在函数的定义中没有出现 return 语句, 会有默认返回值, None
@@ -28,12 +35,11 @@ def 函数名 ():
 ...
 >>> funA()
 # 这里是否会报错呢？
-答: 代码会报错, 因为执行funA代码体的时候, funB是未被定义的; 可以先定义然后再调用
-def funB():
-...     print("Hi~")
-def funA():
-...     funB()
-funA() 则会正常打印 'Hi~'
+答: 不会报错，可以成功调用
+解析：通常情况下，定义需要在调用之前，不然会引发 name 'XXX' is not defined 的异常。
+不过有一种例外情况, 那就是这个例子中演示的, 函数之间相互调用……
+当我们在定义 funA() 函数的时候，并没有对其进行调用，函数体中的代码并没有被挨个儿执行，所以此时 funB() 是否存在，并不重要，它就是个符号~!
+然后在调用 funA() 函数的时候，函数体中的代码才被真正的执行，此时 funB() 函数早就已经被悄悄定义过了，因此代码才不会报错，这就是其中的缘由！
 
 6. 我们说函数是一个相对封闭的个体,那么函数是如何与外部通信的呢？
 答: 通过参数和返回值
@@ -84,15 +90,21 @@ def login():
     print('恭喜, 登陆成功')
     
 def get_int():
+    print('欢迎来到鱼C论坛')
+    print('======================')
     print('1. 注册')
     print('2. 登陆')
     print('3. 退出')
     while True:
-        choice = int(input('请输入指令'))
-        if choice == 1:
+        choice = (input('请输入指令'))
+        while not (choice != '1' or choice != '2' or choice != '3'):
+            print('指令错误, 请重新输入')
+            choice = (input('请输入指令'))
+        print('======================')
+        if choice == '1':
             register()
-        elif choice == 2:
+        elif choice == '2':
             login()
-        elif choice == 3:
-            break
+        elif choice == '3':
+            break 
 get_int()
