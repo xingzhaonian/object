@@ -92,9 +92,9 @@ def fy_shuffle(raw_data, times):
     print(f'最终结果是{str_result}')
     return result_data_list
 
-#raw_data_list = input('请输入需要打乱的序列: ')
-#work_times = int(input('请输入需要打乱的次数: '))
-#fy_shuffle(raw_data_list, work_times)
+raw_data_list = input('请输入需要打乱的序列: ')
+work_times = int(input('请输入需要打乱的次数: '))
+fy_shuffle(raw_data_list, work_times)
 
 
 
