@@ -71,15 +71,17 @@ def romannum_to_arabnum(s):
     for i, k in enumerate(s):
         if k in romannum_arabnum:
             temp_result = romannum_arabnum[k]
-            if (i < str_lenght - 1) and (temp_result < romannum_arabnum[s[i + 1]]):
+            if (i != list(enumerate(s))[-1][0] ) and (temp_result < romannum_arabnum[list(enumerate(s))[i + 1][1]]):
                 result -= temp_result
             else:
-                result += temp_result
+                result += temp_result 
     return result
+
 
 s = input('请输入一个罗马数字：')
 v = romannum_to_arabnum(s)
 print(f"转换后的结果是：{v}")
+
 
 N2R = [
     (1000, "M"),
@@ -108,9 +110,9 @@ def num2roman(num):
     
     return "".join(r)
     
-n = input("请输入一个整数：")
-r = num2roman(int(n))
-print(f"转换后的结果是：{r}")
+#n = input("请输入一个整数：")
+#r = num2roman(int(n))
+#print(f"转换后的结果是：{r}")
 
 
         
