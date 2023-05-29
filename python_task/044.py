@@ -131,7 +131,7 @@ def doudizhu_poker(a, b, c, poker_data):
     print(f'玩家{landlord}是地主')
     print(f'玩家{a}的牌是{a_str_poker_date}, 共{len(all_gamer_poker[a])}张牌')
     print(f'玩家{b}的牌是{b_str_poker_date}, 共{len(all_gamer_poker[b])}张牌')
-    print(f'玩家{b}的牌是{c_str_poker_date}, 共{len(all_gamer_poker[c])}张牌')
+    print(f'玩家{c}的牌是{c_str_poker_date}, 共{len(all_gamer_poker[c])}张牌')
 
 gamer1 = input('请输入第一位玩家的名称: ')
 gamer2 = input('请输入第二位玩家的名称: ')
