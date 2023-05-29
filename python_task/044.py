@@ -14,7 +14,8 @@
 >>> set_x(520)
 >>> print(x)
 >>> # 请问这里会打印什么内容？
-答: 打印 520, 而非250; 因为通过参数传给函数的是520, 函数内部给x进行赋值操作, x就等于520
+答: 打印 520, 250, 因为通过参数传给函数的是520, 函数内部给x进行赋值操作, x就等于520, 然后调用函数
+输出520, 再打印x, 全局变量 x 没有变, x 为250
 
 3. 请问下面代码会打印什么呢？
 >>> x = 123
@@ -25,8 +26,7 @@
 >>> exchange(x, y)
 >>> print(x, y)
 >>> # 请问这里会打印什么内容？
-答: 打印 456 123, 因为在函数外部声明了全局变量x = 123, y = 456, 而在函数内部进行了赋值操作, x = y, y = x
-, 所以参数 x 为123, y 为 456 的时候传给函数 exchange(x , y)时, x y进行互换
+答: 打印 123, 456 函数内的变量无论如何改变, 都不会影响到外部函数的变量, 除非声明 global 关键字
 
 4. 请问下面代码会打印什么呢？
 >>> x = [1, 2, 3]
@@ -36,8 +36,8 @@
 >>> invert(x)
 >>> print(x)
 >>> # 请问这里会打印什么内容？
-答: 打印 [3, 2, 1], 因为全局变量 x = [1, 2, 3], 在函数内部声明了局部变量 x, 并将x[::-1]的结果赋值给局部变量
-x, 所以 x 就是[3, 2, 1]
+答: 打印 [1, 2, 3] 因为函数外部的变量 x 和 函数内部的 x 是两个不同的变量, 分别指向的内存地址都不一样
+
 
 5. 请问下面代码会打印什么呢？
 >>> x = [1, 2, 3]
@@ -77,118 +77,23 @@ x, 所以 x 就是[3, 2, 1]
 '''
 import random
 
-def fy_shuffle(raw_data, times):
-    s = raw_data
+def fy_shuffle(raw_data, times = 1):
     for i in range(times):
-        raw_data =  list(s)
+        raw_data_target =  list(raw_data)
         result_data_list = []
-        data_list_lenght = len(raw_data)
+        data_list_lenght = len(raw_data_target)
         for k in range(data_list_lenght):
             random_num = random.randint(1, data_list_lenght - k)
-            result_data_list.append(raw_data[random_num - 1])
-            raw_data.remove(raw_data[random_num - 1])
+            result_data_list.append(raw_data_target.pop(random_num - 1))
+            #raw_data_target.remove(raw_data_target[random_num - 1])
             str_result = ''.join(map(str, result_data_list))
         print(f'第{i + 1}次后打乱的结果是{str_result}')
     print(f'最终结果是{str_result}')
     return result_data_list
 
-raw_data_list = input('请输入需要打乱的序列: ')
-work_times = int(input('请输入需要打乱的次数: '))
-fy_shuffle(raw_data_list, work_times)
-
-
-
-def doudizhu_poker(a, b, c, poker_data):
-
-    landlord = random.randint(1, 3)
-    a_farmer = 1
-    b_farmer = 2
-    c_farmer = 3
-    a_poker_data = []
-    b_poker_data = []
-    c_poker_data = []
-    poker_data_lenght = len(poker_data)
-    for i in range(poker_data_lenght):
-        if poker_data_lenght == 3:
-            if a_farmer == landlord:
-                print(f'地主是: {a}')
-                a_poker_data.append(poker_data[-1])
-                a_poker_data.append(poker_data[-2])
-                a_poker_data.append(poker_data[-3])
-                break
-            elif b_farmer == landlord:
-                print(f'地主是: {b}')
-                b_poker_data.append(poker_data[-1])
-                b_poker_data.append(poker_data[-2])
-                b_poker_data.append(poker_data[-3])
-                break
-            elif c_farmer == landlord:
-                print(f'地主是: {c}')
-                c_poker_data.append(poker_data[-1])
-                c_poker_data.append(poker_data[-2])
-                c_poker_data.append(poker_data[-3])
-                break
-        each_poker_data_lenght = len(poker_data)
-        rand_num = random.randint(0, each_poker_data_lenght)
-        a_poker_data.append(poker_data[rand_num - 1])
-        poker_data.remove(poker_data[rand_num - 1])
-        poker_data_lenght -= 1
-
-        if poker_data_lenght == 3:
-            if a_farmer == landlord:
-                print(f'地主是: {a}')
-                a_poker_data.append(poker_data[-1])
-                a_poker_data.append(poker_data[-2])
-                a_poker_data.append(poker_data[-3])
-                break
-            elif b_farmer == landlord:
-                print(f'地主是: {b}')
-                b_poker_data.append(poker_data[-1])
-                b_poker_data.append(poker_data[-2])
-                b_poker_data.append(poker_data[-3])
-                break
-            elif c_farmer == landlord:
-                print(f'地主是: {c}')
-                c_poker_data.append(poker_data[-1])
-                c_poker_data.append(poker_data[-2])
-                c_poker_data.append(poker_data[-3])
-                break      
-        each_poker_data_lenght = len(poker_data)
-        rand_num = random.randint(0, each_poker_data_lenght)
-        b_poker_data.append(poker_data[rand_num - 1])
-        poker_data.remove(poker_data[rand_num - 1])
-        poker_data_lenght -= 1
-
-        if poker_data_lenght == 3:
-            if a_farmer == landlord:
-                print(f'地主是: {a}')
-                a_poker_data.append(poker_data[-1])
-                a_poker_data.append(poker_data[-2])
-                a_poker_data.append(poker_data[-3])
-                break
-            elif b_farmer == landlord:
-                print(f'地主是: {b}')
-                b_poker_data.append(poker_data[-1])
-                b_poker_data.append(poker_data[-2])
-                b_poker_data.append(poker_data[-3])
-                break
-            elif c_farmer == landlord:
-                print(f'地主是: {c}')
-                c_poker_data.append(poker_data[-1])
-                c_poker_data.append(poker_data[-2])
-                c_poker_data.append(poker_data[-3])
-                break
-        each_poker_data_lenght = len(poker_data)
-        rand_num = random.randint(0, each_poker_data_lenght)
-        c_poker_data.append(poker_data[rand_num - 1])
-        poker_data.remove(poker_data[rand_num - 1])
-        poker_data_lenght -= 1
-    a_str__poker_date = ' '.join(map(str, a_poker_data))
-    b_str__poker_date = ' '.join(map(str, b_poker_data))
-    c_str__poker_date = ' '.join(map(str, c_poker_data))
-    print(f'玩家[{a}]拿到的牌是: {a_str__poker_date}, 一共{len(a_poker_data)}张牌')  
-    print(f'玩家[{b}]拿到的牌是: {b_str__poker_date}, 一共{len(b_poker_data)}张牌') 
-    print(f'玩家[{c}]拿到的牌是: {c_str__poker_date}, 一共{len(c_poker_data)}张牌') 
+#raw_data_list = input('请输入需要打乱的序列: ')
+#work_times = int(input('请输入需要打乱的次数: '))
+#fy_shuffle(raw_data_list, work_times)
 
 poker_data = ['♣1', '♦1', '♥1', '♠1',\
               '♣2', '♦2', '♥2', '♠2',\
@@ -203,8 +108,30 @@ poker_data = ['♣1', '♦1', '♥1', '♠1',\
               '♣J', '♦J', '♥J', '♠J',\
               '♣Q', '♦Q', '♥Q', '♠Q',\
               '♣K', '♦K', '♥K', '♠K',\
-              'B_joker', 'L_joker'
+              '☀', '🌙'
               ]
+
+def doudizhu_poker(a, b, c, poker_data):
+    # 初始化数据
+    all_gamer_poker = {}
+    all_gamer_poker[a] = []
+    all_gamer_poker[b] = []
+    all_gamer_poker[c] = []
+    shuffle_times = int(input('开始洗牌, 请问要洗几次牌? '))
+    shuffle_result = fy_shuffle(poker_data, shuffle_times)
+    for i in range(17):
+        all_gamer_poker[a].append(shuffle_result.pop())
+        all_gamer_poker[b].append(shuffle_result.pop())
+        all_gamer_poker[c].append(shuffle_result.pop())
+    landlord = random.sample((a, b, c), 1)[-1]
+    all_gamer_poker[landlord].extend((shuffle_result[-1], shuffle_result[-2], shuffle_result[-3]))
+    a_str_poker_date = ' '.join(map(str, all_gamer_poker[a]))
+    b_str_poker_date = ' '.join(map(str, all_gamer_poker[b]))
+    c_str_poker_date = ' '.join(map(str, all_gamer_poker[c]))
+    print(f'玩家{landlord}是地主')
+    print(f'玩家{a}的牌是{a_str_poker_date}, 共{len(all_gamer_poker[a])}张牌')
+    print(f'玩家{b}的牌是{b_str_poker_date}, 共{len(all_gamer_poker[b])}张牌')
+    print(f'玩家{b}的牌是{c_str_poker_date}, 共{len(all_gamer_poker[c])}张牌')
 
 gamer1 = input('请输入第一位玩家的名称: ')
 gamer2 = input('请输入第二位玩家的名称: ')
