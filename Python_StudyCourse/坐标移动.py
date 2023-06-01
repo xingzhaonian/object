@@ -1,6 +1,6 @@
 origin = (0, 0)
-legal_x = [-5, 5]
-legal_y = [-5, 5]
+legal_x = [-100, 100]
+legal_y = [-100, 100]
 
 def create():
     pos_x=0
@@ -38,16 +38,11 @@ def create():
                 pos_y = legal_y[1] - (new_y - legal_y[1])
         else:
             pos_y = new_y
+            print(pos_x, pos_y)
         return pos_x, pos_y
     return moving
 
-
-move =  create()
-print(move((0, 1), 6))
-print(move((0, -1), 12))
-print(move((-1, 0), 5))
-print(move((1, 0), 37))
-print(move((-1, 1), 77))
-print(move((-1, -1), 38))
-print(move((1, 1), 12))
-print(move((1, -1), 56))
+move = create()
+move((1, 0), 20)
+move((1, 0), 20)
+move((1, 0), 20)
