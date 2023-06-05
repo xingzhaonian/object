@@ -38,11 +38,11 @@ def create():
                 pos_y = legal_y[1] - (new_y - legal_y[1])
         else:
             pos_y = new_y
-            print(pos_x, pos_y)
+        print(pos_x, pos_y)
         return pos_x, pos_y
     return moving
 
 move = create()
 move((1, 0), 20)
-move((1, 0), 20)
-move((1, 0), 20)
+move((0, 1), 120)
+move((1, -1), 88)
