@@ -113,13 +113,14 @@ poker_data = ['♣1', '♦1', '♥1', '♠1',\
 
 def doudizhu_poker(a, b, c, poker_data):
     # 初始化数据
+    each_gamer_poker_count = 17
     all_gamer_poker = {}
     all_gamer_poker[a] = []
     all_gamer_poker[b] = []
     all_gamer_poker[c] = []
     shuffle_times = int(input('开始洗牌, 请问要洗几次牌? '))
     shuffle_result = fy_shuffle(poker_data, shuffle_times)
-    for i in range(17):
+    for i in range(each_gamer_poker_count):
         all_gamer_poker[a].append(shuffle_result.pop())
         all_gamer_poker[b].append(shuffle_result.pop())
         all_gamer_poker[c].append(shuffle_result.pop())
