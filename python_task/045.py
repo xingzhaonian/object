@@ -133,17 +133,11 @@ avg(19)
 def Fibonacci():
     a = 0
     b = 1
-    count = 0
     def calc_Fibonacci():
-        nonlocal a, b, count
-        count += 1
-        if count == 1:
-            print(a)
-            return a
-        else:
-            a, b = b, a + b
-            print(a)
-            return a
+        nonlocal a, b
+        print(a)
+        a, b = b, a + b
+        return a
     return calc_Fibonacci
 
 
