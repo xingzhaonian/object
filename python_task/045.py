@@ -100,7 +100,7 @@ def make_avg(make_avg_param = 0):
         make_avg_param += inner_param
         count += 1
         print(f'{make_avg_param} / {count} = {make_avg_param / count}')
-        return make_avg_param, count
+        return count, make_avg_param / count
     return inner
 avg = make_avg()
 avg(5)
