@@ -151,3 +151,22 @@ f()
 f()
 f()
 f()
+def fibnac():
+    init_list_data = [0, 1]
+    count = 0
+    def calc_fibnac():
+        nonlocal init_list_data, count
+        if count == 0:
+            print(init_list_data[0])
+        result = init_list_data[-1] + init_list_data[-2]
+        init_list_data.append(result)
+        print(result)
+        count += 1
+        return result
+    return calc_fibnac
+
+f = fibnac()
+f()
+f()
+f()
+f()
