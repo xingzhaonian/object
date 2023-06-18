@@ -87,6 +87,114 @@ B 是 build-in (内置作用域)
 (在内层函数修改外层函数变量的情况下, 如果外层函数赋值给某个变量, 通过调用变量加' ()' , 那么每次调用后外层
 函数的变量会保存下来, 如果只是通过调用外层函数加 '()()' 的话, 外层变量则不会保存)
 闭包--- 
+闭包的结构是嵌套函数, 外层函数返回内层函数的函数名, 把外层函数通过变量进行赋值, 这个变量就会记住外层函数内的变量, 每次重复
+调用, 把外层函数通过变量进行赋值的变量值都会变(它会记住, 保存下来了)
+
+高阶函数
+把一个函数作为参数传递给另一个函数, 或者一个函数的返回值为另一个函数(若返回值为该函数本身，则为递归), 满足其中一种则为高阶函数
+例如: 
+def functionA():
+	print('调用函数A')
+def functionB(function):
+	print('开始调用函数')
+    function()
+    print('调用完毕')
+functionB(functionA)
+
+或者
+
+def bar():
+	print('in bar function')
+def foo():
+	print('in foo function')
+    return bar
+result = foo()
+result()
+
+
+装饰器
+装饰器的结构是 高阶函数 + 闭包
+例如:
+def time_master(function):
+	def calc_time():
+		print('开始运行程序')
+        start_time = time.time()
+        function()
+        end_time = time.time()
+        print(f'运行该函数共计{end_time - start_time}秒')
+    return calc_time
+@time_master
+def myfunction():
+	time.sleep(2)
+    print('hello fishc')
+
+myfunction()
+
+多个装饰器可以同时用在同一个函数上
+例如:
+def add(function):
+	def inner():
+		x = function
+        return x + 1
+    return inner
+    
+def cube(function):
+	def inner():
+		x = function
+        return x * x * x
+    return inner
+    
+def square(function):
+	def inner():
+		x = function
+        return x * x
+    return inner
+@add
+@cube
+@square
+def test():
+	return 2
+test()
+
+如何给装饰器传递参数?
+需要用到三层嵌套函数, 第一层函数需要一个参数, 这个参数不能是一个函数, 第二层函数需要一个参数, 这个参数必须是一个函数,
+第三层函数看需求, 如果需要就用传参(但参数不能是一个函数), 如果不用就不传
+例如:
+def logger(msg):
+	def time_master(function):
+		def calc_run_time():
+			start_time = time.time()
+            function()
+            end_time = time.time()
+            print(f'[{msg}]共运行了{end_time - start_time:.3f}秒')
+        return calc_run_time
+    return time_master
+
+@logger('A')
+def functionA():
+	print('正在调用函数A')
+	time.sleep(1)
+functionA()
+
+@logger(msg = 'B')
+def functionB():
+	print('正在调用函数B')
+    time.sleep(2)
+functionB()
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
