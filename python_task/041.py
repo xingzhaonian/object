@@ -90,21 +90,26 @@ def login():
     print('恭喜, 登陆成功')
     
 def get_int():
-    print('欢迎来到鱼C论坛')
-    print('======================')
-    print('1. 注册')
-    print('2. 登陆')
-    print('3. 退出')
-    while True:
-        choice = (input('请输入指令'))
-        while not (choice != '1' or choice != '2' or choice != '3'):
-            print('指令错误, 请重新输入')
-            choice = (input('请输入指令'))
+    is_continue_with_operation = True
+    while is_continue_with_operation:
+        print('欢迎来到鱼C论坛')
         print('======================')
-        if choice == '1':
-            register()
-        elif choice == '2':
-            login()
-        elif choice == '3':
-            break 
+        print('1. 注册')
+        print('2. 登陆')
+        print('3. 退出')
+        while True:
+            choice = (input('请输入指令'))
+            while (choice != '1') and (choice != '2') and (choice != '3'):
+                print('指令错误, 请重新输入')
+                choice = (input('请输入指令'))
+            print('======================')
+            if choice == '1':
+                register()
+                break
+            elif choice == '2':
+                login()
+                break
+            elif choice == '3':
+                is_continue_with_operation = False
+                break 
 get_int()
