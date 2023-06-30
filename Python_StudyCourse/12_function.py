@@ -182,9 +182,24 @@ def functionB():
     time.sleep(2)
 functionB()
 
-    
+==================================================================================================
+lambda表达式
+lambda arg1, arg2, arg3, ... argN : expression   lambda关键字后面跟着函数的参数, 冒号左边为lambda x, 右边为表达式
+x = lambda x : x * x
+x(3)  返回9
+lambda 还可以放进列表中
+relust = [lambda x : x * x, 3, 5]
+relust[0](relust[1])  解析: relust为一个列表, 该列表中的第一个参数为lambda表达式, 表达式需要一个参数x, 将relust的第二个参数
+也就是 3 传入lambda 表达式, 结果为9
 
+mapped = list(map(lambda x : ord(x) + 10, 'fishc')) 解析: map函数需要两个参数第一个参数是函数, 而lambda就是函数, 所以能作为
+map的第一个参数使用, 该lambda函数的表达式为将x作为参数传给lambda, 然后将取出x的对应的编码数值
+返回[112, 115, 125, 114, 109]
 
+boring = list(filter(lambda x : x % 2, range(10))) 解析: 返回10以内的奇数 filter计算出的结果为假不返回哦~~
+
+lambda 是一个表达式而非语句, 所以它能够出现在python不允许def语句出现的地方, 这是它最大的优势, 但由于所有的功能代码都局限
+在一个表达式中去实现, 因此 lambda表达式通常也只能实现一些功能比较简单的需求
 
 
 
