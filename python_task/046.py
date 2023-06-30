@@ -97,20 +97,28 @@ get_fib(n)
 # 1
 import time 
 #num = int(input('请输入需要获取的斐波那契数：'))
-def fib(function):
-    global num
+def delay(function):
+    def call_function():
+        time.sleep(1)
+        function()
+    return call_function
+
+def fib():
     a, b = 0, 1
-    def print_fib():
+   # @delay
+    def inner():
         nonlocal a, b
-        for i in range(num):
-            function()
-            print(a)
-            a, b = b, a + b
-        return a
-    return print_fib
-@fib
-def timer_execute():
-    time.sleep(1)
+        a, b = b, a + b
+        print(a, end = ', ')
+    return inner
+
+def get_fib(n):
+    f = fib()
+    for i in range(n):
+        f()
+
+num = int(input('请输入需要的斐波那契数列：'))
+get_fib(num)
 
 #timer_execute()
 
