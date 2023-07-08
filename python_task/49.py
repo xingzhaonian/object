@@ -1,73 +1,85 @@
 '''
-0. 给定一个整数 n，请编写一个递归函数，计算从 1 + 2 + 3 + ... + n 的结果（比如 n = 10，那么结果就是 55）
+0. 递归算法的实现原理什么？
+答: 递归实现的原理是在函数内部调用自身
+
+1. 实现同样的任务，说使用递归的执行效率通常要比迭代低，请问依据是什么？
+答: 因为每次调用递归函数它并不会立即返回, 而是要等到最底层的那个返回值返回之后, 它才会逐级向外返回
+
+2. 请问下面代码中，recsum() 函数被调用了多少次？
+>>> def recsum(x):
+...     if x < 0:
+...         return x
+...     else:
+...         return recsum(x-1) + recsum(x-2)
+...        
+>>> recsum(3)
+-11
+答: 15 次
+
+3. 下面代码利用递归实现将列表的各个元素进行相加，请补全红色方框中的代码，使其能够成功执行并获取结果。
 答:
-def get_sum(n):
-    if n == 1:
-        return n
-    else:
-        return n + get_sum(n - 1)
-print(get_sum(10))
-
-1. 给定一个整数 n，请编写一个递归函数，判断该整数是否为 2 的幂次方。如果是返回 True，否则返回 False。
-答:
-def isPowerOfTwo(n):
-    if n > 0:
-        if n == 1:
-            return True
-        if n % 2 == 1:
-            return False
-        return isPowerOfTwo(n / 2)
-    else:
-        return False
-
-
-
-2. 请实现一个递归函数，要求只使用加号运算符（+）来实现乘法运算的结果。
-答:
-def mul(x, y):
-    if x == 0 or y == 0:
+def recsum(x):
+    if not x:
         return 0
-    if x == 1:
-        return y
-    if y == 1:
-        return x
-    if x < y:
-        return mul(x-1, y) + y
     else:
-        return mul(x, y-1) + x
+        print(x[0], x[1:])
+        return x[0] + recsum(x[1:])
+print(recsum([1,2,3,4,5]))
 
-print(3, 5)
+4. 下面代码利用递归实现将嵌套列表的各个元素进行相加，请补全红色方框中的代码，使其能够成功执行并获取结果。
+答:
+def sumtree(x):
+    total = 0
+    for i in x:
+        if type(i) is not list:
+            total += i
+        else:
+            total += sumtree(i)
+    return total
 
-3. 给定一个列表 L，请编写一个递归函数，找到该列表中最大的元素
-def get_max(L):
-    if len(L) == 2:
-        return L[0] if L[0] > L[1] else L[1]
-    else:
-        sub = get_max(L[1:])
-        return L[0] if L[0] > sub else sub
+    
 
-4. 假设僧侣每秒钟都能正确地移动一枚金片，请问将 64 枚金片从一根银针移动到另外一根银针上，大概需要使用多少时间？
-def g(n):
-    if n == 1:
-        return 1
-    else:
-        return 2 * g(n-1) + 1
-
+动动手
+0. 题目：请动手优化课堂中递归实现斐波那契的代码。
 '''
 
-def get_max(l):
-    if len(l) == 1:
-        return l[0]
-    elif len(l) == 2:
-        if l[0] > l [1]:
-            return l[0]
-        else:
-            return l[1]
-    else:
-        sub = get_max(l[1:])
-        if l[0] > sub:
-            return l[0]
-        else:
-            return sub
+def fibRecur(n):
+   if n == 1 or n == 2:
+       return 1
+   else:
+      return fibRecur(n-1) + fibRecur(n-2)
 
-print(get_max([2,20,8,10]))
+print(fibRecur(12))
+
+import timeit
+
+def fibRecur(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibRecur(n-1) + fibRecur(n-2)
+
+def tailFibRecur(n, x, y):
+    if n == 1 or n == 2:
+        return y
+    else:
+        return tailFibRecur(n-1, y, x+y)
+
+def fibIter(n):
+    a, b, c = 1, 1, 1
+    while n > 2:
+        c = a + b
+        a = b
+        b = c
+        n -= 1
+    return c
+
+# 这个耗时会比较久（因为默认是重复测试 5 次），请大家耐心等待
+FR = timeit.timeit("fibRecur(12)", setup="from __main__ import fibRecur")
+print(f"普通递归耗时：{FR:.2f}秒。")
+
+TFR = timeit.timeit("tailFibRecur(12, 1, 1)", setup="from __main__ import tailFibRecur")
+print(f"优化尾递归耗时：{TFR:.2f}秒。")
+
+FI = timeit.timeit("fibIter(12)", setup="from __main__ import fibIter")
+print(f"普通迭代耗时：{FI:.2f}秒。")
