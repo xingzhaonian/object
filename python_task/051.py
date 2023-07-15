@@ -11,7 +11,7 @@
 ...
 >>> times(5, "FishC")
 # 请问这里会打印什么内容？
-答: FishCFishCFishCFishCFishC
+答: FishCFishCFishCFishCFishC, 类型注释仅是作为函数作者对程序员的提醒，并不会起到真正的限制作用。
 
 3. 请问下面代码会打印什么呢？
 >>> def foo(a: 'x', b: 5 + 6, c: list) -> max(2, 9):
@@ -117,4 +117,5 @@ def play_poker():
         else:
             print('不符合规则')
 print(play_poker.__doc__)
+play_poker()
     
