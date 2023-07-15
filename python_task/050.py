@@ -1,16 +1,16 @@
 count = 0
-def hannuo(n, x, y, z):
+def hannuo(n, a, b, c):
     global count
     count += 1
     if n == 1:
-        print(x, '--->',z)
+        print(a, '--->',c)
     else:
-        hannuo(n-1, x, z, y)
-        print(x, '--->', z)
-        hannuo(n-1, y, x, z)
+        hannuo(n-1, a, c, b)
+        print(a, '--->', c)
+        hannuo(n-1, b, a, c)
 
 
-hannuo(4, 'A', 'B', 'C')
+hannuo(3, 'x', 'y', 'z')
 print(count)
 '''
 0. 给定一个整数 n，请编写一个递归函数，计算从 1 + 2 + 3 + ... + n 的结果（比如 n = 10，那么结果就是 55）
@@ -69,7 +69,7 @@ def g(n):
 
 '''
 
-def get_max(l):
+'''def get_max(l):
     if len(l) == 1:
         return l[0]
     elif len(l) == 2:
@@ -84,4 +84,15 @@ def get_max(l):
         else:
             return sub
 
-print(get_max([2,20,8,10]))
+print(get_max([2,20,8,10]))'''
+
+
+def move(n, x, y, z):
+    if n == 1:
+        print(x, '--->', z)
+    else:
+        move(n-1, x, z, y)
+        print(x, '--->',z)
+        move(n-1, y, x, z)
+
+move(3, 'a', 'b', 'c')
