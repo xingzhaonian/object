@@ -30,13 +30,10 @@ def GetCurrentDirectoryAllSubDirectory():
     '''
     获取当前目录下的所有子文件夹
     '''
-    folder = []
     p = Path.cwd()
-    for i in p.iterdir():
-        if i.is_dir():
-            print(i)
-            folder.append(i)
-    return folder
+    l = [i for i in p.iterdir() if i.is_dir()]
+    print(l)
+    return l 
 GetCurrentDirectoryAllSubDirectory()
 
 def GetCurrentFileSize():
@@ -48,7 +45,7 @@ def GetCurrentFileSize():
     s = p.iterdir()
     for i in p.iterdir():
         count += 1
-        print(f'文件名: {i.stem + i.suffix}  文件尺寸:{i.stat().st_size} kb')
+        print(f'文件名：{i.name}  文件尺寸:{i.stat().st_size} kb')
 
 GetCurrentFileSize()
 
@@ -63,3 +60,26 @@ def GetCurrentFileTime():
         count += 1
         print(f'文件名: {i.stem + i.suffix}  修改时间:{time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(i.stat().st_mtime)))}')
 GetCurrentFileTime()
+
+
+def GetAllFileSize():
+    dic_file = {}
+    p = Path('D:\project\object\python_task')
+    for i in p.iterdir():
+        dic_file[i.name] = i.stat().st_size
+    new_dic = (sorted(dic_file.items(), key = lambda s:s[1]))
+    for i in new_dic:
+        print(f'{i[0]}  ({(i[1])})字节')
+GetAllFileSize()
+
+
+
+def GetLastModificationFile():
+    import time 
+    dic_file = {}
+    p = Path('D:\project\object\python_task')
+    for i in p.iterdir():
+        dic_file[i.name] = i.stat().st_atime
+    new_dic = (sorted(dic_file.items(), key = lambda s:s[1], reverse = True))
+    print(f'(修改时间 -> {time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(int(new_dic[0][1])))}, 文件名 -> {new_dic[0][0]})')
+GetLastModificationFile()
