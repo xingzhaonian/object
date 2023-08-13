@@ -31,7 +31,7 @@ f.writable()-----判断该文件对象是否支持写入(如果返回False, 则�
 f.writelines(lines, /)------将一系列字符串写入到文件对象中(不会自动添加换行符, 所以通常人为的加在每个字符串的末尾)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          d
 [处理路径]
-可以使用旧的os模块和新的pathlib模块
+可以使用旧的os模块和新的pathlib模块, 但是建议使用 pathlib 模块
 [pathlib]模块
 from pathlib import Path
 Path('路径名称') 生成 WindowsPath路径
@@ -66,12 +66,50 @@ Path.glob()------------------glob()可以查找Path目录下的文件, 例如Pat
 [绝对路径]
 绝对路径是文件真正存在的路径, 如果一个路径从根目录开始, 然后一级一级的指向最终的文件或文件夹, 那么这个路径就是绝对路径
 
+
 [相对路径]
 相对路径是以当前目录作为基准, 进行一级一级的目录推导的一个路径, '.' 表示当前所在的目录, '..'表示上一级路径
 对于相对路径, 有一个resolve()的方法, 可以将相对路径转为绝对路径 
 
 
+[with 语句和上下文管理器]
+打开文件的普通写法如下:
+f = open('D:\\config\\activity_main.txt', 'a')
+f.write('哈哈哈哈')
+f.close()
 
+而我们使用 with 语句(上下文管理器)是这样写的, 如下:
+with open('D:\\config\\activity_main.txt', 'a') as f:
+    f.write('哈哈哈哈')
+这样就可以了, 不要手动关闭文件
+使用上下文管理器(with语句)最大的优势是能够确保资源的释放
+
+
+[pickle] 
+python对象序列化的第一人
+pickle模块解决的就是永久存储对象的问题, 它允许你将字符串, 列表, 字典, 这些python对象给保存为文件的形式
+所谓序列化, 就是将python对象转换为二进制字节流的一个过程
+使用 pickle.dump() 可以将对象写入到文件中, 例如:
+import pickle
+a = 100
+b = '嘻嘻哈哈'
+c = [1, 2, 3, 'LOL', 'PUBG']
+d = {'one': 1, 'two': 2}
+
+with open('data.pkl', 'wb') as f:
+    pickle.dump(a, f)
+    pickle.dump(b, f)
+    pickle.dump(c, f)
+    pickle.dump(d, f)
+
+这样就把 a, b, c, d对象以二进制的格式写进了 data.pkl 文件, pickle模块同样有读取方法 load(), 例如:
+import pickle
+with open('data.pkl', 'rb') as f:
+    x = pickle.load(f)
+    y = pickle.load(f)
+    z = pickle.load(f)
+    n = pickle.load(f)
+print(x, y, z, n, sep = '\n')
 
 
 
