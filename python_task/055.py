@@ -41,18 +41,16 @@ def GetCurrenFile(path, file_type, target = [] ):
     p = Path(path)
     all_file = p.iterdir()
     for i in all_file:
-        sub_path = Path(i)  # 这里是重点, 每次循环生成一个子路径, 判断该路径是不是文件夹, 如果是文件夹, 那么就对这文件夹进行递归
-        print(sub_path)
+        sub_path = Path(i)   # 当前路径下生成子路径，判断子路径是不是文件夹，如果是，就对这个文件夹进行递归
         if i.is_dir():
             print(f'{i} 是一个文件夹')
             GetCurrenFile(sub_path, file_type, target)
         if i.is_file():
             print(f'{i} 是一个文件')
             if i.suffix == file_type:
-                print('找到了目标文件类型, 进行添加')
                 target.append(i)
     return target
 
 current_path = Path.cwd()
-result_file_type = '.pkl'
-GetCurrenFile(current_path, result_file_type)
+result_file_type = '.py'
+print(GetCurrenFile(current_path, result_file_type))
