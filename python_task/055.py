@@ -26,7 +26,7 @@ with open("data.pkl", "w") as f:
 答: pickle 模块是python对象序列化的第一人, 所谓序列化就是将python对象转换为二进制字节流的一个过程, 所以, 打开的模式要用'wb'
 
 3. 如果想要读取一个 pickle 文件，是否需要预先知道其中的对象类型和数量？
-答: 应该要知道吧, 读取到最后, 下面已经没有东西了, 再读就会报错
+答: 不需要, load() 函数会根据 dump() 函数保存的顺序，将对象逐个读取出来。
 
 4. 请问可以使用 with 语句管理两个文件的上下文吗？
 答: 可以, 比如说 with open(txt_file_path_name, 'r', encoding = 'utf-8')as a, open(result_path, 'w', encoding = 'utf-8')as b:
@@ -54,3 +54,40 @@ def GetCurrenFile(path, file_type, target = [] ):
 current_path = Path.cwd()
 result_file_type = '.py'
 print(GetCurrenFile(current_path, result_file_type))
+
+
+count = 0
+def get_file_all_line(file_path):
+    global count
+    p = Path(file_path)
+    all_file = p.iterdir()
+    for i in all_file:
+        sub_path = Path(i)
+        if i.is_dir():
+            get_file_all_line(sub_path)
+        if i.is_file():
+            print(f'{i}')
+            f = i.open('r', encoding = 'utf-8')
+            s = f.readlines()
+            for i in s:
+                if i != '\n':
+                    count += 1
+            f.close()
+    return count
+path = "D:\\project\\object\\python_task"
+print(get_file_all_line(path))
+
+
+def mkdir(path):
+    p = path
+    for i in range(10):
+        p = p / str(i + 1)
+        p.mkdir(exist_ok = True)
+        p = Path.cwd()
+    for i in p.iterdir():
+        if i.is_dir():
+            print(i)
+            for k in range(10):
+                with open (__file__, 'r', encoding = 'utf-8') as a, open(str(i) + '\\' + str(k) + '.py', 'w', encoding = 'utf-8') as b:
+                    b.write(a.read())
+mkdir(Path.cwd())
