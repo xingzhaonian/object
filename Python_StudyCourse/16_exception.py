@@ -58,7 +58,56 @@ except ValueError:
     print('值不正确')
 这里会直接输出'出错了, 是因为除数不能为0', 因为代码走到 1 / 0时直接跳到到了捕获异常的代码处理下,  后面的520 + 'fishc'不会被执行
 
+try-except-else
+try:
+    被检测的代码块
+except:
+    检测到异常后执行的代码块
+else:
+    没有异常发生, 执行的代码块
 
+try-except-else-finally
+try:
+    被检测的代码块
+except:
+    检测到异常后执行的代码块
+else:
+    没有异常发生, 执行的代码块
+finally:
+    无论有有没有异常, 都会执行的代码块
+
+
+try-except
+try:
+    检测范围
+except:
+    收尾工作执行的代码
+
+[raise]语句
+raise 可以生成一个异常, 但不能生成一个不存在的异常
+raise ValueError('值不正确')
+raise FishcError('出错了')  像这样就不行
+
+[assert]语句
+assert 也是引发一个异常, 但是assert只能引发一个叫做AssertionError的异常
+a = 'fishc'
+assert a == 'fishc'  不会出错
+assert a == 'aaaaaa'  这里就会抛出AssertionError
+
+利用异常来实现 goto
+try:
+    while True:
+        while True:
+            for i in range(10):
+                if i > 3:
+                    raise
+                print(i)
+            print('被跳过')
+        print('被跳过')
+    print('被跳过')
+except:
+    print('到这里来了')
+这里的原理是, 在try 语句下面的循环中, 达到条件的话引发一个异常, 直接就会执行except下面的语句, 不需要多层循环一层一层跳出了
 
 
 
