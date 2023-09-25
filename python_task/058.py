@@ -128,14 +128,18 @@ class Rectangle:
             self.set_length()
         if not self.width:
             self.set_width()
-        print(f'周长面积{2 * ((int(self.length)) + (int(self.width)))}')
+        perimeter = 2 * ((int(self.length)) + (int(self.width)))
+        print(f'周长面积{perimeter}')
+        return perimeter
 
     def get_area(self):
         if not self.length:
             self.set_length()
         if not self.width:
             self.set_width()
-        print(f'周长面积{(int(self.length) * int(self.width))}')
+        area = int(self.length) * int(self.width)
+        print(f'面积{area}')
+        return area
 
 r = Rectangle()
 print(f'初始长度:{r.length}, 初始宽度:{r.width}')
