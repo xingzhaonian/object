@@ -112,29 +112,28 @@ print(p.name)
 print(p.age)
 
 class Rectangle:
-    length  = 5
-    width = 3
+    length  = None
+    width = None
 
     def set_length(self):
         self.length = int(input('请设置长度'))
         print(self.length)
-
 
     def set_width(self):
         self.width = int(input('请设置宽度'))
         print(self.width)
 
     def get_perimeter(self):    
-        if self.length == Rectangle.length:
+        if not self.length:
             self.set_length()
-        if self.width == Rectangle.width:
+        if not self.width:
             self.set_width()
         print(f'周长面积{2 * ((int(self.length)) + (int(self.width)))}')
 
     def get_area(self):
-        if self.length == Rectangle.length:
+        if not self.length:
             self.set_length()
-        if self.width == Rectangle.width:
+        if not self.width:
             self.set_width()
         print(f'周长面积{(int(self.length) * int(self.width))}')
 
