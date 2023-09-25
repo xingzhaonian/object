@@ -118,10 +118,12 @@ class Rectangle:
     def set_length(self):
         self.length = int(input('请设置长度'))
         print(self.length)
+        return self.length
 
     def set_width(self):
         self.width = int(input('请设置宽度'))
         print(self.width)
+        return self.width
 
     def get_perimeter(self):    
         if not self.length:
