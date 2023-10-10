@@ -49,18 +49,19 @@ def AllSeach():
             result = g.ccbox(msg = target[-1], title='打开文件', choices =('打开', '取消'))
             if result:
                 try :
-                    subprocess.run(str(target[-1]), shell=True, timeout=1)
+                    subprocess.run(['powershell', '-Command', str(target[-1])], timeout=1)
                 except subprocess.TimeoutExpired:
                     target.clear()
                     continue
         result = g.choicebox(msg='选择打开文件并打开', title='打开文件', choices = target)
         try:
-            subprocess.run(str(result), shell=True, timeout=1)
+            subprocess.run(['powershell', '-Command', str(result)], timeout=1)
         except subprocess.TimeoutExpired:
             target.clear()
             continue
         target.clear()
 
-AllSeach()
+if __name__ == '__main__':
+    AllSeach()
 
 
