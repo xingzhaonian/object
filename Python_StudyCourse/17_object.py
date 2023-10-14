@@ -50,5 +50,84 @@ c.get_self()
 这里会打印 <__main__.C object at 0x000001CFE6A03A90>, 因为这就是实例化对象 c
 类中的每一个方法, 第一个参数默认都是self, 因为在使用类中的方法时, python需要知道是哪个实例化对象在调用, 所以self 就是实例化对象本身
 
+[继承]
+python的类是支持继承的, 它可以使用现有类的所有功能, 并在无需重新编写代码的情况下对这些功能进行扩展, 通过继承创建的新类我们称之为子类
+而被继承的类我们称之为父类, 基类, 或者超类
+class A:
+    x = 520
+    def hello(self):
+    print('你好, 我是A')
+
+class B(A):
+    pass
+
+这样, 类B就继承了类A, 通过类B实例化的对象可以访问和使用类A的属性或方法, 如果子类中包含与父类中有相同的属性或方法, 那么子类将覆盖父类的同名属性和方法, 例如
+
+class A:
+    x = 520
+    def hello(self):
+    print('你好, 我是A')
+
+class B(A):
+    x = 880
+    def hello(self):
+    print('你好, 我是B')
+b = B()
+b.x  这里x属性就是880, 因为它会覆盖继承的父类中同名的属性x的值
+b.hello() 这里hello() 方法会打印 你好, 我是B, 因为它会覆盖继承的父类中同名的方法
+
+判断一个对象是否属于某个类, 使用 isinstance(), 例如
+isinstance(b, B) 这里会返回True, 因为对象b是类B的实例化对象
+isinstance(b, A) 这里也会返回True, 类B继承自类A, 那么通过类B实例化的对象, 自然也就会继承类A的属性或方法
+
+判断一个类是为某个类的子类, 使用issubclass()
+issubclass(A, B) 这里返回False, 因为类A不继承于类B
+issubclass(B, A) 这里返回True, 因为类B继承自类A, B属于A的子类
+
+[多重继承]
+python的类是支持多重继承的, 也就是一个子类可以继承多个父类
+class A:
+    x = 520
+    def hello('你好, 我是A')
+
+class B:
+    x = 880
+    y = 666
+    def hello('你好, 我是B')
+
+class C(A, B):
+    pass
+    
+c = C()
+c.x 这里会打印520
+c.y 这里会打印666
+c.hello() 这里会打印 你好, 我是A, 因为它的查找顺序是: 自己 > 父类1 > 父类2 > 父类3···   也就是说先找自己身上是否有这个属性或方法,如果没有再找继承父类中的第一个, 如果
+第一个也没有那就找第二个, 以此类推
+
+[组合]
+class Turtle:
+    def say(self):
+        print('不积跬步无以至千里')
+
+class Cat:
+    def say(self):
+        print('喵喵喵')
+
+class Dog:
+    def say(self):
+        print('哟吼, 我是一只修狗')
+
+class Garden:
+    t = Turtle()
+    c = Cat()
+    d = Dog()
+    def say(self):
+        slef.t.say()
+        slef.c.say()
+        slef.d.say()
+这里会调用 t.say(), c.say(), d.say(), 分别打印 不积跬步无以至千里、喵喵喵、 哟吼, 我是一只修狗
+
+
+
 
 '''
