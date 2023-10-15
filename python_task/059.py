@@ -122,3 +122,54 @@ print(h.x == 250)
  4 头狮子(Lion)、5 头老虎(Tiger)、6 头豹子(Leopard),灵长类(Primate)如 7 只猴子(Monkey)、8 只猩猩(Chimpanzee)、9 只狒狒(Baboon),
  题目要求就这3类动物(当然你想继续发挥也可以),只需要定义类的构成框架就行,内部用 pass 语句填充即可
 '''
+class Brids:                       #鸟类
+    pass
+
+class Peacock(Brids):              #孔雀
+    pass
+
+class Swan(Brids):                 #天鹅
+    pass
+
+class Myna(Brids):                 #八哥
+    pass        
+
+class Felidae:                     #猫科动物类
+    pass
+
+class Lion(Felidae):               #狮子
+    pass
+
+class Tiger(Felidae):              #老虎
+    pass
+
+class Leopard(Felidae):            #豹子
+    pass
+
+class Primate:                     #灵长类
+    pass
+
+class Monkey(Primate):             #猴子
+    pass
+
+class Chimpanzee(Primate):         #猩猩
+    pass
+
+class Baboon(Primate):             #狒狒
+    pass
+
+
+class Zoo:
+    peacock = [Peacock()]
+    swan = [Swan(), Swan()]
+    myna = [Myna(), Myna(), Myna()]
+    lion = [Lion() for i in range(4)]
+    tiger = [Tiger() for i in range(5)]
+    leopard = [Leopard() for i in range(6)]
+    monkey = [Monkey for i in range(7)]
+    chimpanzee = [Chimpanzee() for i in range(8)]
+    baboon = [Baboon() for i in range(9)]
+    print(f'{len(peacock)}只孔雀: {peacock}\n, {len(swan)}只天鹅{swan}\n, {len(myna)}只八哥{myna}\n, {len(lion)}只狮子{lion}\n,\
+           {len(tiger)}只老虎{tiger}\n, {len(leopard)}只豹子{leopard}\n, {len(monkey)}只猴子{monkey}\n, {len(chimpanzee)}只猩猩{chimpanzee}\n, {len(baboon)}只狒狒{baboon}\n')
+
+z = Zoo()
