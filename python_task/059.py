@@ -169,7 +169,8 @@ class Zoo:
     monkey = [Monkey for i in range(7)]
     chimpanzee = [Chimpanzee() for i in range(8)]
     baboon = [Baboon() for i in range(9)]
-    print(f'{len(peacock)}只孔雀: {peacock}\n, {len(swan)}只天鹅{swan}\n, {len(myna)}只八哥{myna}\n, {len(lion)}只狮子{lion}\n,\
-           {len(tiger)}只老虎{tiger}\n, {len(leopard)}只豹子{leopard}\n, {len(monkey)}只猴子{monkey}\n, {len(chimpanzee)}只猩猩{chimpanzee}\n, {len(baboon)}只狒狒{baboon}\n')
 
 z = Zoo()
+print(f'{len(z.peacock)}只孔雀: {z.peacock}\n, {len(z.swan)}只天鹅{z.swan}\n, {len(z.myna)}只八哥{z.myna}\n, \
+      {len(z.lion)}只狮子{z.lion}\n, {len(z.tiger)}只老虎{z.tiger}\n, {len(z.leopard)}只豹子{z.leopard}\n, \
+    {len(z.monkey)}只猴子{z.monkey}\n, {len(z.chimpanzee)}只猩猩\{z.chimpanzee}\n, {len(z.baboon)}只狒狒{z.baboon}\n')
