@@ -43,7 +43,7 @@ f'{3.1415:{fill}{align}{width}.{prec}{ty}}'
 这种朴素的压缩算法并不总是理想的，比如 FFishCC 压缩后反而变长了 F2i1s1h1C2, 这可就不是我们想要的了, 所以对于重复次数小于 3 的字符，我们的程序应该选择不对其进行压缩
 """
 # 压缩
-compress_text = 'iiiiiilovefssshccccccdwdaaaaaaagFFhCCCCCCj'
+compress_text = input('请输入要进行压缩的内容')
 compress_result_list = []
 for i in compress_text:
     if compress_text.count(i) >= 3:
