@@ -99,8 +99,8 @@ while 循环搭配else使用时, 如果条件不满足不走循环体内的代�
 
 
 '''
-class multiplication_table:                   
-    def while_loop_multiplication_table():
+class Multiplication_table:                   
+    def while_loop_multiplication_table(self):
         a = 1
         while a <= 9:
             b = 1
@@ -110,7 +110,7 @@ class multiplication_table:
             a += 1
             print('\n')
 
-    def for_loop_multiplication_table_1():
+    def for_loop_multiplication_table_1(self):
         a = 1
         for i in range(9):
             b = 1
@@ -120,7 +120,7 @@ class multiplication_table:
             a += 1
             print('\n')
 
-    def for_loop_multiplication_table_2():
+    def for_loop_multiplication_table_2(self):
         a = 1
         for i in range(9):
             for k in range(a):
@@ -128,16 +128,17 @@ class multiplication_table:
             a += 1
             print('\n')
     
-    def for_loop_multiplication_table_3():
+    def for_loop_multiplication_table_3(self):
         for i in range(9):
             for k in range(i + 1):
                 print(k + 1, 'x', i + 1, '=', (k + 1) * (i + 1), end = ' ')
             print('\n')
 
-multiplication_table.for_loop_multiplication_table_1()
-multiplication_table.for_loop_multiplication_table_2()
-multiplication_table.for_loop_multiplication_table_3()
-multiplication_table.while_loop_multiplication_table()
+m = Multiplication_table()
+m.while_loop_multiplication_table()
+m.for_loop_multiplication_table_1()
+m.for_loop_multiplication_table_2()
+m.for_loop_multiplication_table_3()
 
 
 '''
