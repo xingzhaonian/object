@@ -5,13 +5,13 @@ import os
 import sys
 import time
 
-# 打开文件夹，获取表格绝对路径
+# 获取表格绝对路径
 def get_excel_file_path():
     g = easygui
     excel_file_path = g.fileopenbox(msg='请选择要转换的表格', title='选择表格')
     return excel_file_path
 
-#打开文件夹 获取txt存放的路径
+# 获取txt存放的路径
 def get_txt_dir_path():
     g = easygui
     txt_dir_path = g.diropenbox(msg='选择要存放txt的目录', title='选择目录')
@@ -21,7 +21,7 @@ excel_file_path = get_excel_file_path()
 txt_dir_path = get_txt_dir_path()
 #print(excel_file_path, '===============', txt_dir_path)
 
-# 进行转换操作
+
 def excel_transformation_txt(path1, path2):
     try:
         txt_file_name = path1.split('\\')[-1].split('.')[0]
@@ -54,20 +54,20 @@ def excel_transformation_txt(path1, path2):
     row_data_num = 0
     time_on = time.ctime()
     start_time = time.time()
-    #打开文件进行写入， 使用w+模式创建txt文本
+    
     with open(txt_file_path_name, 'w+', encoding = 'utf-8') as f:
         for i in sheet_row_data:
             row_data_num += 1
             for k in i:
-                k.value = str(k.value)      #转换单元格内数据的类型                                
+                k.value = str(k.value)                         
                 if k.value == 'None':
                     k.value = ''
                     print(row_data_num, type(k.value), k.value)
-                f.write('\"' + k.value+'\"'+',')       #写入间隔符号
-            f.write('\n')     #末尾进行换行
+                f.write('\"' + k.value+'\"'+',')       
+            f.write('\n')     
         f.close()
-    # 打开多个文件进行符号和换行处理， 重新进行写入 
-    m = txt_file_path_name.split('.')  #拆分路径
+    
+    m = txt_file_path_name.split('.')  
     k = m[0] + '1'                            
     result_path = k + '.' + m[1]
     with open(txt_file_path_name, 'r', encoding = 'utf-8')as a, open(result_path, 'w', encoding = 'utf-8')as b:
@@ -78,9 +78,9 @@ def excel_transformation_txt(path1, path2):
         b.write('\n')
         if not old_txt_data:
             break
-    a.close()   #关闭文件
-    b.close()   #关闭文件
-    #删除并重命名文件 
+    a.close()   
+    b.close()   
+   
     os.remove(txt_file_path_name)
     os.rename(result_path, txt_file_path_name)
     end_time = time.time()
@@ -90,6 +90,7 @@ def excel_transformation_txt(path1, path2):
         time.sleep(1)
         count -= 1
         print(f'当前时间{time.ctime()}, 倒计时{count + 1}秒')
-'''写入完毕'''
-excel_transformation_txt(excel_file_path, txt_dir_path)
+        
+if __name__ == '__main__':
+    excel_transformation_txt(excel_file_path, txt_dir_path)
       
