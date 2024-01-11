@@ -1,3 +1,4 @@
+# 排序
 def data_sort(data_list, positive_sequence = True):
     for i in range(len(data_list)):
         for k in range(i + 1, len(data_list)):
