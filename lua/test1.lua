@@ -1,3 +1,5 @@
+#!/usr/local/bin/lua
+
 local function sleep(n)
     if n > 0 then
        os.execute("ping -n " .. tonumber(n + 1) .. " localhost > NUL")
@@ -14,7 +16,10 @@ local function sleep(n)
         print('ddd'..i..'dd')
      end
  end
- 
- 
- count_down(5)
- 
+
+ print(type("Hello world"))
+ print(type(3.12))
+ print(type(type))
+ print(type(functio))
+ print(type(nil))
+ print(type(type(nil)))

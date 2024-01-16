@@ -1,4 +1,6 @@
 # 排序
+
+data = [0, 6, 1, 11, 4, 32, 5]
 def data_sort(data_list, positive_sequence = True):
     for i in range(len(data_list)):
         for k in range(i + 1, len(data_list)):
@@ -16,5 +18,5 @@ def data_sort(data_list, positive_sequence = True):
                     data_list[i], data_list[k] = data_list[k], data_list[i]
     print(data_list)
     return [data_list]
-data = [0, 6, 1, 2, 4, 5, 3]
-data_sort(data, positive_sequence = False)
+
+print((type(None)))
