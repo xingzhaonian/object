@@ -8,10 +8,7 @@ class Item(object):
 
     # 是否可使用
     def can_use(self):
-        if self.use_count >= 1:
-            return True
-        else:
-            return False
+        return self.use_count >= 1
         
     # 使用道具
     def use_item(self, player):

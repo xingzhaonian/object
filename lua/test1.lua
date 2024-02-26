@@ -10,16 +10,10 @@ local function sleep(n)
  
  
  local function count_down(n)
-     for i = n, 1, -1
-    do
+     for i in pairs(n)   do
         sleep(1)
-        print('ddd'..i..'dd')
+        print('wait...'..i)
      end
  end
 
- print(type("Hello world"))
- print(type(3.12))
- print(type(type))
- print(type(functio))
- print(type(nil))
- print(type(type(nil)))
+ count_down({1, 2, 3, 4, 5})
