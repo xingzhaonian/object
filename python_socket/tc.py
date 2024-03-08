@@ -1,8 +1,8 @@
-# ==== TCP客户端端程序 client.py ====
+# ==== TCP 客户端程序 client.py ====
 
 import socket
 # 初始化IP地址
-IP = '192.168.1.3'
+IP = '127.0.0.1'
 SERVER_PORT = 50000
 BUFLEN = 512
 print('我是客户端')

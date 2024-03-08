@@ -1,7 +1,8 @@
-# ==== TCP 服务端程序 server.py =====
-import socket
+# ==== TCP 服务器程序 server.py =====
 
-IP = '192.168.1.3'
+import socket
+# 初始化IP
+IP = '127.0.0.1'
 PORT = 50000
 BUFLEN = 512
 print('我是服务器')
