@@ -1,4 +1,4 @@
-# ==== TCP服务端程序 client.py ====
+# ==== TCP客户端端程序 client.py ====
 
 import socket
 # 初始化IP地址
