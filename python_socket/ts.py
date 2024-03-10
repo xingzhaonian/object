@@ -1,39 +1,52 @@
-# ===== 我是服务器 server.py =====
+# === 服务器程序 server.py ===
 
+# 导入 socket模块
 import socket
 
-ip = '192.168.1.3'
+# 初始化ip, 端口, 每次接收最大字节数
+ip = '127.0.0.1'
 port = 50000
-buflen = 1024
+serverBufLen = 1024
 
-socketObject = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-socketObject.bind((ip, port))
-socketObject.listen(5)
-print(f'服务器启动成功, 在{port}端口等待进行连接...')
-connetObject, addr = socketObject.accept()
-print(f'连接对象:{connetObject}, ip地址:{addr[0]}, 端口:{addr[1]}')
+# 指定协议, 创建连接对象
+server_sockObject = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# 绑定ip
+server_sockObject.bind((ip, port))
+
+# 设置监听, 服务器处理客户端用户数量
+server_sockObject.listen(5)
+print('服务器启动成功, 等待客户端进行连接...')
+
+# 等待客户端进行连接
+server_ConnectObject, addr = server_sockObject.accept()
+print(f'客户端连接成功, 客户端信息{server_ConnectObject}, ip:{addr[0]}, 端口:{addr[1]}')
 
 while True:
-    receive_data = connetObject.recv(buflen)
-    print(f'客户端发来了消息, 内容是{receive_data}')
-    if not receive_data:
+    # 服务器接收客户端发来的消息, 接收到的数据为空则视为客户端断开连接, 关闭服务器
+    try:
+        serverReviceData = server_ConnectObject.recv(serverBufLen)
+        print(f'接收到客户端发来的消息, 内容为{serverReviceData}')
+    except:
         break
-    receive_data = receive_data.decode('utf-8')
-    print(f'解码后为{receive_data}')
 
+    # 判空处理
+    if not serverReviceData:
+        break
 
-    receive_data = receive_data.upper()
-    print(f'向客户端返回消息, 内容为{receive_data}')
-    send_data = receive_data.encode('utf-8')
-    print(f'需要进行编码, 编码后内容为{send_data}')
-    connetObject.send(send_data)
-    print('返回消息完成, 等待再次接收消息中>>>')
+    # 解码接收到客户端发来的消息, 使用 utf-8 编码格式
+    serverReviceData = serverReviceData.decode('utf-8')
+    print(f"解码后为{serverReviceData}")
 
-connetObject.close()
-socketObject.close()
+    # 把客户端发来的字符串改为大写
+    serverReturnData = serverReviceData.upper()
 
+    # 将要返回的消息数据进行编码, 使用 utf-8 编码格式
+    after_serverReturnData = serverReturnData.encode('utf-8')
 
+    # 向客户端返回消息
+    server_ConnectObject.send(after_serverReturnData)
+    print(f'向客户端返回数据成功, 内容为{serverReturnData}, 等待客户端再次发送数据>>>')
 
-
-
-
+server_ConnectObject.close()
+server_sockObject.close()
