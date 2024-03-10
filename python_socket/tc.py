@@ -11,7 +11,7 @@ ClientBufLen = 1024
 # 指定协议, 创建连接对象
 client_ConnectObject = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# 向服务器发起连接请求
+# 向服务器发起连接请求进行连接
 client_ConnectObject.connect((ip, port))
 print('连接成功')
 
