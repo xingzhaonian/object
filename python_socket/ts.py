@@ -18,35 +18,40 @@ server_sockObject.bind((ip, port))
 server_sockObject.listen(5)
 print('服务器启动成功, 等待客户端进行连接...')
 
-# 等待客户端进行连接
-server_ConnectObject, addr = server_sockObject.accept()
-print(f'客户端连接成功, 客户端信息{server_ConnectObject}, ip:{addr[0]}, 端口:{addr[1]}')
-
 while True:
-    # 服务器接收客户端发来的消息, 接收到的数据为空则视为客户端断开连接, 关闭服务器
+    # 等待客户端进行连接
     try:
-        serverReviceData = server_ConnectObject.recv(serverBufLen)
-        print(f'接收到客户端发来的消息, 内容为{serverReviceData}')
+        server_ConnectObject, addr = server_sockObject.accept()
     except:
         break
+    print(f'客户端连接成功, 客户端信息{server_ConnectObject}, ip:{addr[0]}, 端口:{addr[1]}')
 
-    # 判空处理
-    if not serverReviceData:
-        break
+    while True:
+        # 服务器接收客户端发来的消息, 接收到的数据为空则视为客户端断开连接, 关闭服务器
+        try:
+            serverReviceData = server_ConnectObject.recv(serverBufLen)
+            print(f'接收到客户端发来的消息, 内容为{serverReviceData}')
+        except:
+            break
 
-    # 解码接收到客户端发来的消息, 使用 utf-8 编码格式
-    serverReviceData = serverReviceData.decode('utf-8')
-    print(f"解码后为{serverReviceData}")
+        # 判空处理
+        if not serverReviceData:
+            break
 
-    # 把客户端发来的字符串改为大写
-    serverReturnData = serverReviceData.upper()
+        # 解码接收到客户端发来的消息, 使用 utf-8 编码格式
+        serverReviceData = serverReviceData.decode('utf-8')
+        print(f"解码后为{serverReviceData}")
 
-    # 将要返回的消息数据进行编码, 使用 utf-8 编码格式
-    after_serverReturnData = serverReturnData.encode('utf-8')
+        # 把客户端发来的字符串改为大写
+        serverReturnData = serverReviceData.upper()
 
-    # 向客户端返回消息
-    server_ConnectObject.send(after_serverReturnData)
-    print(f'向客户端返回数据成功, 内容为{serverReturnData}, 等待客户端再次发送数据>>>')
+        # 将要返回的消息数据进行编码, 使用 utf-8 编码格式
+        after_serverReturnData = serverReturnData.encode('utf-8')
 
-server_ConnectObject.close()
+        # 向客户端返回消息
+        server_ConnectObject.send(after_serverReturnData)
+        print(f'向客户端返回数据成功, 内容为{serverReturnData}, 等待客户端再次发送数据>>>')
+
+    server_ConnectObject.close()
+    
 server_sockObject.close()
