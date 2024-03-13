@@ -10,6 +10,7 @@ class Client(object):
         self.ip = '127.0.0.1'
         self.port = 50000
         self.reconnectTimes = 10
+        self.buflen = 1024
         self.connectObject = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
             self.connectObject.connect((self.ip, self.port))
@@ -37,7 +38,7 @@ class Client(object):
 
     def reviceData(self):
         print('开始接收')
-        self.rawData = self.connectObject.recv(1024)
+        self.rawData = self.connectObject.recv(self.buflen)
         print('进行转码')
         self.resultData =  self.rawData.decode(encoding='utf-8')
         return self.resultData
