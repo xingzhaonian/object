@@ -22,6 +22,7 @@ while True:
     # 等待客户端进行连接
     try:
         server_ConnectObject, addr = server_sockObject.accept()
+        print('客户端断开了, 重新等待连接对象')
     except:
         break
     print(f'客户端连接成功, 客户端信息{server_ConnectObject}, ip:{addr[0]}, 端口:{addr[1]}')
