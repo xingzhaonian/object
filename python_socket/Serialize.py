@@ -53,12 +53,12 @@ class Assemble(object):
 
     # float类型, 4个字节
     def Putfloat(self, float):
-        self.float_bytes = struct.pack('<f', float)
+        self.float_bytes = struct.pack('<f', float)[::-1]
         self.bytes_data += self.float_bytes
 
     # int类型 8个字节
     def PutDouble(self, doublenum):
-        self.doublenum_bytes = doublenum.to_bytes(8, byteorder='little')[::-1]
+        self.doublenum_bytes = struct.pack('<f', doublenum)[::-1]
         self.bytes_data += self.doublenum_bytes
 
     # CG_verify数据

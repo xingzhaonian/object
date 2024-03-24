@@ -77,8 +77,8 @@ class Analysis(object):
     # 获取 8 个字节的int
     def GetDouble(self):
         self.Double = self.bytes_data[self.index:self.index+8]
-        self.Double = int.from_bytes(self.Double, byteorder='little')
+        self.Double = struct.unpack('f', self.Double)[0]
         self.index += 8
         print(f'指针位置{self.index}')
-        return self.Double
+        return round(self.Double, 4)
 
