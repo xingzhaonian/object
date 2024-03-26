@@ -19,40 +19,40 @@ class Analysis(object):
 
     # 获取 1 个字节的Int
     def GetBytes(self):
-        self.bytes = self.bytes_data[self.index:self.index+1]
-        self.bytes = int.from_bytes(self.bytes, byteorder='little')
+        self.bytes = self.bytes_data[self.index:self.index+1][::-1]
+        self.bytes = int.from_bytes(self.bytes, byteorder='little', signed=True)
         self.index += 1
         print(f'指针位置{self.index}')
         return self.bytes
 
     # 获取 1 个字节的bool, 0 or 1
     def GetBool(self):
-        self.bool_bytes = self.bytes_data[self.index:self.index+1]
-        self.bool_bytes = int.from_bytes(self.bool_bytes, byteorder='little')
+        self.bool_bytes = self.bytes_data[self.index:self.index+1][::-1]
+        self.bool_bytes = int.from_bytes(self.bool_bytes, byteorder='little', signed=True)
         self.index += 1
         print(f'指针位置{self.index}')
         return self.bool_bytes
     
     # 获取 2 个字节的int
     def GetShort(self):
-        self.short = self.bytes_data[self.index:self.index + 2]
-        self.short = int.from_bytes(self.short, byteorder='little')
+        self.short = self.bytes_data[self.index:self.index + 2][::-1]
+        self.short = int.from_bytes(self.short, byteorder='little', signed=True)
         self.index += 2
         print(f'指针位置{self.index}')
         return self.short
 
     # 获取 4 个字节的int
     def GetInt(self):
-        self.ints = self.bytes_data[self.index:self.index+4]
-        self.ints = int.from_bytes(self.ints, byteorder='little')
+        self.ints = self.bytes_data[self.index:self.index+4][::-1]
+        self.ints = int.from_bytes(self.ints, byteorder='little', signed=True)
         self.index += 4
         print(f'指针位置{self.index}')
         return self.ints
 
     # 获取 8 个字节的int
     def GetLong(self):
-        self.long = self.bytes_data[self.index:self.index+8]
-        self.long = int.from_bytes(self.long, byteorder='little')
+        self.long = self.bytes_data[self.index:self.index+8][::-1]
+        self.long = int.from_bytes(self.long, byteorder='little', signed=True)
         self.index += 8
         print(f'指针位置{self.index}')
         return self.long
@@ -60,7 +60,7 @@ class Analysis(object):
     # 获取字符串, 先取字符长度, 指针自动定位到字符串对应的bytes起始位置
     def GetString(self):
         self.String_length = self.GetInt()
-        self.String = self.bytes_data[self.index:self.index + self.String_length]
+        self.String = self.bytes_data[self.index:self.index + self.String_length][::-1]
         self.index += self.String_length
         print(f'指针位置{self.index}')
         self.String = self.String.decode(encoding='utf-8')
@@ -68,7 +68,7 @@ class Analysis(object):
     
     # 获取 4 个字节的 float
     def Getfloat(self):
-        self.floats = self.bytes_data[self.index:self.index+4]
+        self.floats = self.bytes_data[self.index:self.index+4][::-1]
         self.floats = struct.unpack('f', self.floats)[0]
         self.index += 4
         print(f'指针位置{self.index}')
@@ -76,7 +76,7 @@ class Analysis(object):
     
     # 获取 8 个字节的int
     def GetDouble(self):
-        self.Double = self.bytes_data[self.index:self.index+8]
+        self.Double = self.bytes_data[self.index:self.index+8][::-1]
         self.Double = struct.unpack('f', self.Double)[0]
         self.index += 8
         print(f'指针位置{self.index}')
