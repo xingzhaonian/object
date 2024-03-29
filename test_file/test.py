@@ -59,29 +59,28 @@ def demo3():
 
 
 import asyncio 
-def demo4():
-    start_time = time.time()
-    async def washing1():
-       await asyncio.sleep(3)
-       print('第一台洗衣机工作完成, 请取出衣物')
-    
-    async def washing2():
-        await asyncio.sleep(2)
-        print('第二台洗衣机工作完成, 请取出衣物')
 
-    async def washing3():
-        await asyncio.sleep(5)
-        print('第三台洗衣机工作完成, 请取出衣物')
+start_time = time.time()
+async def washing1():
+    await asyncio.sleep(3)
+    print('第一台洗衣机工作完成, 请取出衣物')
 
-    # 创建事件循环
-    event_loop_object = asyncio.get_event_loop()
+async def washing2():
+    await asyncio.sleep(2)
+    print('第二台洗衣机工作完成, 请取出衣物')
 
-    task = [washing1(), washing2(), washing3()]
+async def washing3():
+    await asyncio.sleep(5)
+    print('第三台洗衣机工作完成, 请取出衣物')
 
-    event_loop_object.run_until_complete(asyncio.wait(task))
+# 创建事件循环对象
+event_loop_object = asyncio.get_event_loop()
 
-    event_loop_object.close()
-    end_time = time.time() - start_time
-    print('用时', end_time)
+task = [washing1(), washing2(), washing3()]
 
-demo4()
+event_loop_object.run_until_complete(asyncio.wait(task))
+
+event_loop_object.close()
+end_time = time.time() - start_time
+print('用时', end_time)
+
