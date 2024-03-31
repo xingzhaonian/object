@@ -8,6 +8,8 @@ import time
 # 测试用例 默认使用 test_ 命名
 
 SendMain = sync_websocket_client.ClientMain()
+
+# 在主线程中启动子线程
 recv_data_thread = threading.Thread(target=SendMain.recv_data)
 recv_data_thread.start()
 
@@ -34,6 +36,8 @@ def test_account(msg):
     result = SendMain.AccountVerification(msg)
     return result
 
+
+# 测试
 masg1 = test_account(msg1)
 print(masg1)
 

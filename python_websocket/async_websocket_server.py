@@ -9,8 +9,6 @@ msg = {
     'password':123456
 }
 
-
-
 class WSserver(object):
 
     def creat_token(self):
