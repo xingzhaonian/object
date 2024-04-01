@@ -17,6 +17,7 @@ class ClientMain(object):
         msg = json.dumps(msg)
         self.WebSocket.send(msg)
         while self.recv_message == '':
+            time.sleep(0.1)
             continue
         recv_msg = self.recv_message
         self.recv_message = ''
