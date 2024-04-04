@@ -3,6 +3,7 @@ import sync_websocket_client
 import pytest
 import threading
 import time
+import load_test_case_data.yaml_load
 
 # Pytest 接口测试框架管理
 # 测试用例 默认使用 test_ 命名
@@ -13,36 +14,17 @@ SendMain = sync_websocket_client.ClientMain()
 recv_data_thread = threading.Thread(target=SendMain.recv_data)
 recv_data_thread.start()
 
+# Pytest环境下, 默认读取test开头的函数为测试用例
 
-msg1 = {
-    'MsgId':10001,
-    'Account':'admim',
-    'password':123456
-}
-msg2 = {
-    'MsgId':10001,
-    'Account':'admin',
-    'password':123446
-}
-msg3 = {
-    'MsgId':10001,
-    'Account':'admin',
-    'password':123456
-}
+# Pytest环境下, 对于参数化的处理, 用mark装饰器
 
+@pytest.mark.parametrize('data', load_test_case_data.yaml_load.load('D:\\project\\object\\test_InterfaceTest\\test_case_data\\user.yaml'))
+def test_account01(data):
+    result = SendMain.AccountVerification(data)
+    print(result)
+    #assert result[:4] == '验证通过'
 
-
-def test_account(msg):
-    result = SendMain.AccountVerification(msg)
-    return result
-
+if __name__ == '__main__':
+    pytest.main(['-v', '-s'])
 
 # 测试
-masg1 = test_account(msg1)
-print(masg1)
-
-masg2 = test_account(msg2)
-print(masg2)
-
-masg3 = test_account(msg3)
-print(masg3)
