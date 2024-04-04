@@ -10,7 +10,7 @@ import load_test_case_data.yaml_load
 
 SendMain = sync_websocket_client.ClientMain()
 
-# 在主线程中启动子线程
+# 主线程中启动子线程
 recv_data_thread = threading.Thread(target=SendMain.recv_data)
 recv_data_thread.start()
 

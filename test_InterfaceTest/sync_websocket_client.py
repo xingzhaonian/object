@@ -5,7 +5,7 @@ import threading
 
 class ClientMain(object):
     def __init__(self):
-        self.address =  'ws://192.168.1.12:9528/ws'
+        self.address =  'ws://127.0.0.1:9528/ws'
         self.WebSocket = websocket.create_connection(self.address)
         self.recv_message = ''
 
@@ -17,6 +17,7 @@ class ClientMain(object):
         msg = json.dumps(msg)
         self.WebSocket.send(msg)
         while self.recv_message == '':
+            time.sleep(0.1)
             continue
         recv_msg = self.recv_message
         self.recv_message = ''

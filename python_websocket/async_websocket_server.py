@@ -1,3 +1,5 @@
+# utf-8
+# pip install websocket;   pip install websocket-client
 import websockets
 import asyncio
 import secrets
@@ -33,7 +35,7 @@ class WSserver(object):
                 print('接收的数据有误, 可能是格式不对, 或者数据类型错误')
                 continue
     def run(self):
-        ser = websockets.serve(self.handle, '192.168.1.12', '9528', ping_interval=None)
+        ser = websockets.serve(self.handle, '127.0.0.1', '9528', ping_interval=None)
         asyncio.get_event_loop().run_until_complete(ser)
         asyncio.get_event_loop().run_forever()
 
