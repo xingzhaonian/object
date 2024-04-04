@@ -27,7 +27,7 @@ class WSserver(object):
                 if recv_msg['MsgId'] == 10001:
                     if recv_msg['Account'] == 'admin' and recv_msg['password'] == 123456:
                         token = self.creat_token()
-                        await websocket.send('验证通过' + str(token))
+                        await websocket.send('验证通过了' + str(token))
                     else:
                         await websocket.send('验证未通过')
             except:

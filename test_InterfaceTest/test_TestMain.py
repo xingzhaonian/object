@@ -20,9 +20,9 @@ recv_data_thread.start()
 
 @pytest.mark.parametrize('data', load_test_case_data.yaml_load.load('D:\\project\\object\\test_InterfaceTest\\test_case_data\\user.yaml'))
 def test_account01(data):
-    result = SendMain.AccountVerification(data)
-    print(result)
-    #assert result[:4] == '验证通过'
+    result = SendMain.AccountVerification(data['user'])
+    msg = result[:5]
+    assert msg == data['msg']
 
 if __name__ == '__main__':
     pytest.main(['-v', '-s'])

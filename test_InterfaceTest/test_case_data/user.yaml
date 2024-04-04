@@ -1,16 +1,25 @@
 -
-  MsgId: 10001
-  Account: 'admin'
-  password: 123456
--   
-  MsgId: 10001
-  Account: 'admin1'
-  password: 123456
+  user:
+    MsgId: 10001
+    Account: 'admin'
+    password: 123456
+  msg: 验证通过了
 -
-  MsgId: 10001
-  Account: 'admin2'
-  password: 123456
+  user:
+    MsgId: 10001
+    Account: 'admin1'
+    password: 123456
+  msg: 验证未通过
+
 -
-  MsgId: 10001
-  Account: 'admin3'
-  password: 123456
+  user:
+    MsgId: 10001
+    Account: 'admin2'
+    password: 123456
+  msg: 验证未通过
+-
+  user:
+    MsgId: 10001
+    Account: 'admin3'
+    password: 123456
+  msg: 验证未通过
