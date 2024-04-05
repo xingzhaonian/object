@@ -7,4 +7,4 @@ def load(path):
         print(type(data), data)
         return data
 
-load('D:\\project\\object\\test_InterfaceTest\\test_case_data\\user.yaml')
+load('D:\\PythonProject\\InterfaceTest\\test_case_data\\user.yaml')

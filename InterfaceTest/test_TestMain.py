@@ -18,7 +18,7 @@ recv_data_thread.start()
 
 # Pytest环境下, 对于参数化的处理, 用mark装饰器
 
-@pytest.mark.parametrize('data', load_test_case_data.yaml_load.load('D:\\project\\object\\test_InterfaceTest\\test_case_data\\user.yaml'))
+@pytest.mark.parametrize('data', load_test_case_data.yaml_load.load('D:\\PythonProject\\InterfaceTest\\test_case_data\\user.yaml'))
 def test_account01(data):
     result = SendMain.AccountVerification(data['user'])
     msg = result[:5]
