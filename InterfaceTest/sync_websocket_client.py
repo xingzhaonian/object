@@ -13,7 +13,7 @@ class ClientMain(object):
         while True:
             self.recv_message = self.WebSocket.recv()
 
-    def AccountVerification(self, msg):
+    def SendMessage(self, msg):
         msg = json.dumps(msg)
         self.WebSocket.send(msg)
         while self.recv_message == '':
