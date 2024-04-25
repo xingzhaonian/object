@@ -8,17 +8,21 @@ class ClientMain(object):
         self.address =  'ws://192.168.1.12:9528/ws'
         self.WebSocket = websocket.create_connection(self.address)
         self.action = None
-        self.recv_total = None
+        self.recv_total = ''
 
     def recv_data(self):
         while True:
             self.recv_total = self.WebSocket.recv()
-            print(self.recv_total)
+            time.sleep(0.1)
     
     def AccountVerification(self, msg):
         msg = json.dumps(msg)
         self.WebSocket.send(msg)
+        while self.recv_total == '':
+            time.sleep(0.1)
+            continue
         recv_msg = self.recv_total
+        self.recv_total = ''
         return recv_msg
     
     def quit(self):

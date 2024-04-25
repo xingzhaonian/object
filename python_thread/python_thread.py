@@ -11,3 +11,10 @@ def demo1():
 
 thread = threading.Thread(target=demo1)
 
+thread.start()
+
+def demo2():
+    for i in range(1000):
+        time.sleep(3)
+        print(f'主线程: {threading.get_ident()}')
+demo2()
