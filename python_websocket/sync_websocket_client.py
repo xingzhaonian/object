@@ -28,6 +28,8 @@ class ClientMain(object):
     def quit(self):
         self.WebSocket.close()
 
+
+
 c = ClientMain()
 recv_data_thread = threading.Thread(target=c.recv_data)
 recv_data_thread.start()
