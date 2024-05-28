@@ -43,36 +43,6 @@ def AllSeach():
             Search(TargetSeachScope, SeachName)
             end_time = time.time()
             result_time = end_time - start_time
-            result = g.choicebox(msg='选择打开文件并打开', title='打开文件', choices = target)
-            print(f'搜索完成, 共找到{len(target)}个文件, 耗时{result_time}秒')
-            if '&' in result:
-                result = list(result)
-                result.insert(0, "&")
-                result.insert(1, '"')
-                result.insert(len(result), '"')
-                result = ''.join(result)
-            subprocess.run(['powershell', '-Command', str(result)], timeout=1)
-            target.clear()
-            SeachScope_list.clear()
-            SeachScope_list.append('overall_situation')
-            continue
-        else:
-            if SeachName == None:
-                break
-            if SeachName == '':
-                g.msgbox(msg='输入为空, 请重新输入')
-                continue
-            start_time = time.time()
-            for i in AllSpace:
-                print(i[0])
-                subprocess.run(' echo "搜索中, 请稍后···"', shell=True)
-                Search(i[0], file_name = SeachName)
-            end_time = time.time()
-            result_time = end_time - start_time
-            print(f'搜索完成, 共找到{len(target)}个文件, 耗时{result_time}秒')
-            print(len(target))
-            if len(target) == 0:
-                continue
             if len(target) == 1:
                 result = g.ccbox(msg = target[-1], title='打开文件', choices =('打开', '取消'))
                 if result:
@@ -81,13 +51,20 @@ def AllSeach():
                     except subprocess.TimeoutExpired:
                         target.clear()
                         continue
-            result = g.choicebox(msg='选择打开文件并打开', title='打开文件', choices = target)
-            try:
-                subprocess.run(['powershell', '-Command', str(result)], timeout=1)
-            except subprocess.TimeoutExpired:
-                target.clear()
+            else:
+                result = g.choicebox(msg = '搜索结果', title='选择以下文件并打开', choices = target)
+                if result:
+                    try :
+                        subprocess.run(['powershell', '-Command', str(target[-1])], timeout=1)
+                    except subprocess.TimeoutExpired:
+                        target.clear()
+                        continue
+        else:
+            if not SeachName:
+                break
+            if SeachName == '':
+                g.msgbox(msg='输入为空, 请重新输入')
                 continue
-            target.clear()
 
 if __name__ == '__main__':
     AllSeach()
