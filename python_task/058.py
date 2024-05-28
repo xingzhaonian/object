@@ -74,8 +74,7 @@ Traceback (most recent call last):
     return x
 NameError: name 'x' is not defined
 这里抛出了一个 NameError 异常，表示这个 x 变量未曾定义, 这是为何？
-答: 我猜是因为类中的属性是私有的, 无法被类中的方法进行引用
-
+答: 遵循LEGB原则, local中没有定义x,  enclosed中也没定义x, global中仍然没有定义x, bulit-in中也没有x, 虽然类中x = 250, 但是类中的空间是一个不属于LEGB中的任意一个, 所以x是一个没有被定义的变量
 
 '''
 class Person:

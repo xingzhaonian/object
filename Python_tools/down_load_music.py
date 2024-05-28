@@ -38,9 +38,23 @@ def down_load_music():
                 except:
                     continue
 
-down_load_music()
+#down_load_music()
 
 
 
 
 
+def SingleDownLoad(urllist):
+
+    header = {
+        'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 Edg/124.0.0.0'
+    }
+    for i in urllist:
+        respones = requests.get(url=i, headers=header)
+        result = respones.content
+
+
+music_list = ['https://m801.music.126.net/20240527125130/f9c74b085f59639f298afa1122f18b68/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/36188875075/ae2b/61d1/2279/e86378e83a258bfc7341287e0bf24836.m4a']
+
+
+SingleDownLoad(music_list)
