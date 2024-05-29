@@ -14,7 +14,8 @@ def load_json(file):
 
 def load_excel(file):
     sheet_data = pandas.read_excel(file, engine='openpyxl', sheet_name=None)
-    for i in sheet_data:
-        data = pandas.read_excel(file, engine='openpyxl', sheet_name=i)
+    for sheet_name, df in sheet_data.items():
+        print(f'表单名:{[sheet_name]}')
+        print(df)
+        print()
 
-load_excel('D:\\project\\config\\table\\activity_main.xlsm')
