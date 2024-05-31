@@ -9,9 +9,9 @@ window.title('测试窗口')  # 添加title
 window.geometry('500x300+700+350')  # 设置窗口大小
 
 tag_var = tkinter.StringVar()
-tag_var.set('点击按钮，进行模式切换')
+tag_var.set('当前为x模式')
 label = tkinter.Label(window, textvariable=tag_var, bg='red', font=('SimHei', 20))  # 创建标签
-label.pack()  # 放置标签
+label.place(x=170, y=20)  # 放置标签
 
 
 
@@ -31,7 +31,7 @@ def on_clieck():
 
 
 but = tkinter.Button(window, textvariable=but_var,  font=('SimHei', 15), width=15, height=1, command=on_clieck)
-but.pack()
+but.place(x=170, y=120)
 
 
 
