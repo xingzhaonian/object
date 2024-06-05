@@ -21,9 +21,9 @@ class MY_GUI():
         #self.init_window_name["bg"] = "pink"                                    #窗口背景色，其他背景色见：blog.csdn.net/chl0000/article/details/7657887
         #self.init_window_name.attributes("-alpha",0.9)                          #虚化，值越小虚化程度越高
         #标签
-        self.init_data_label = Label(self.init_window_name, text="待处理数据")
+        self.init_data_label = Label(self.init_window_name, text="要转换的数据")
         self.init_data_label.grid(row=0, column=0)
-        self.result_data_label = Label(self.init_window_name, text="输出结果")
+        self.result_data_label = Label(self.init_window_name, text="MD5结果")
         self.result_data_label.grid(row=0, column=12)
         self.log_label = Label(self.init_window_name, text="日志")
         self.log_label.grid(row=12, column=0)
