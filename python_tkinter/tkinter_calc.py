@@ -83,7 +83,7 @@ class Calc():
 
         self.but_text_plus_minus = tkinter.StringVar()
         self.but_text_plus_minus.set('±')
-        self.but_square = tkinter.Button(self.window, textvariable=self.but_text_plus_minus, font=('SimHei', 15), width=8, height=2)
+        self.but_square = tkinter.Button(self.window, textvariable=self.but_text_plus_minus, font=('SimHei', 15), width=8, height=2, command=self.but_positive_and_negative)
         self.but_square.place(x=5, y=440)
 
 
@@ -96,31 +96,31 @@ class Calc():
 
         self.but_text_plus = tkinter.StringVar()
         self.but_text_plus.set('+')
-        self.but_plus = tkinter.Button(self.window, textvariable=self.but_text_plus, font=('SimHei', 15), width=8, height=2)
+        self.but_plus = tkinter.Button(self.window, textvariable=self.but_text_plus, font=('SimHei', 15), width=8, height=2, command=self.but_plus)
         self.but_plus.place(x=320, y=381)
 
 
         self.but_text_reduce = tkinter.StringVar()
         self.but_text_reduce.set('-')
-        self.but_reduce = tkinter.Button(self.window, textvariable=self.but_text_reduce, font=('SimHei', 15), width=8, height=2)
+        self.but_reduce = tkinter.Button(self.window, textvariable=self.but_text_reduce, font=('SimHei', 15), width=8, height=2,command=self.but_reduce)
         self.but_reduce.place(x=320, y=322)
 
 
         self.but_text_multiply = tkinter.StringVar()
         self.but_text_multiply.set('x')
-        self.but_multiply = tkinter.Button(self.window, textvariable=self.but_text_multiply, font=('SimHei', 15), width=8, height=2)
+        self.but_multiply = tkinter.Button(self.window, textvariable=self.but_text_multiply, font=('SimHei', 15), width=8, height=2, command=self.but_multiply)
         self.but_multiply.place(x=320, y=263)
 
 
         self.but_text_divide = tkinter.StringVar()
         self.but_text_divide.set('÷')
-        self.but_divide = tkinter.Button(self.window, textvariable=self.but_text_divide, font=('SimHei', 15), width=8, height=2)
+        self.but_divide = tkinter.Button(self.window, textvariable=self.but_text_divide, font=('SimHei', 15), width=8, height=2, command=self.but_divide)
         self.but_divide.place(x=320, y=204)
         
 
         self.but_text_equal = tkinter.StringVar()
         self.but_text_equal.set('=')
-        self.but_equal = tkinter.Button(self.window, textvariable=self.but_text_equal, font=('SimHei', 15), width=8, height=2)
+        self.but_equal = tkinter.Button(self.window, textvariable=self.but_text_equal, font=('SimHei', 15), width=8, height=2, command=self.but_equal)
         self.but_equal.place(x=320, y=440)
 
 
@@ -296,10 +296,19 @@ class Calc():
 
     def but_equal(self):
         self.result = simpleeval.simple_eval(self.show_text)
+        self.history_text.config(state=tkinter.NORMAL)  # 历史记录启用编辑模式
+        self.history_text.insert(tkinter.END, '\n' + self.show_text + '=' + str(self.result) + '\n')
+        self.history_text.config(state=tkinter.DISABLED)  # 历史记录启用禁用模式
+
+
+
+
         self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
         self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + self.result, 'right')
+        self.show_region.insert(tkinter.END, '\n' + str(self.result), 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        
+
 
 
     def but_plus(self):
@@ -312,8 +321,8 @@ class Calc():
 
 
     def but_reduce(self):
-        self.but_plus_text = '-'
-        self.show_text += self.but_plus_text
+        self.but_reduce_text = '-'
+        self.show_text += self.but_reduce_text
         self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
@@ -321,8 +330,8 @@ class Calc():
 
 
     def but_multiply(self):
-        self.but_plus_text = '*'
-        self.show_text += self.but_plus_text
+        self.but_multiply_text = '*'
+        self.show_text += self.but_multiply_text
         self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
@@ -331,13 +340,27 @@ class Calc():
 
 
     def but_divide(self):
-        self.but_plus_text = '-'
-        self.show_text += self.but_plus_text
+        self.but_divide_text = '/'
+        self.show_text += self.but_divide_text
         self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
 
+    def but_positive_and_negative(self):
+        self.but_positive_and_negative_text = '-'
+        if self.show_text[0] == '-':
+            self.show_region.config(state=tkinter.NORMAL)    # 启用编辑模式
+            self.show_text = self.show_text[1:]
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)# 禁用编辑模式
+        else:
+            self.show_text = self.but_positive_and_negative_text + self.show_text
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
         
 
 
