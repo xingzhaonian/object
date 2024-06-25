@@ -4,6 +4,8 @@
 import tkinter
 import tkinter.font
 import math
+import tkinter.scrolledtext
+import simpleeval
 
 
 class Calc():
@@ -88,7 +90,7 @@ class Calc():
 
         self.but_text_spot = tkinter.StringVar()
         self.but_text_spot.set('.')
-        self.but_spot = tkinter.Button(self.window, textvariable=self.but_text_spot, font=('SimHei', 15), width=8, height=2)
+        self.but_spot = tkinter.Button(self.window, textvariable=self.but_text_spot, font=('SimHei', 15), width=8, height=2, command=self.but_spot)
         self.but_spot.place(x=215, y=440)
 
 
@@ -176,6 +178,13 @@ class Calc():
         self.show_region.config(state=tkinter.DISABLED)
         self.show_region.tag_configure('right', justify='right')
         self.show_region.place(x=5, y=70)
+
+
+        # 历史记录
+        self.history_text = tkinter.scrolledtext.ScrolledText(self.window, wrap=tkinter.WORD,  width=22, height=17, font=('SimHei', 15))
+        self.history_text.place(x=430, y=140)
+        self.history_label = tkinter.Label(self.window, text='历史记录',  font=('SimHei', 15), width=30, height=3)
+        self.history_label.place(x=410, y=80)
 
 
     def update_text(self):
@@ -271,6 +280,66 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+
+
+    def but_spot(self):
+        self.but_spot_text = '.'
+        if '.' in self.show_text:
+            pass
+        else:
+            self.show_text += self.but_spot_text
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+    def but_equal(self):
+        self.result = simpleeval.simple_eval(self.show_text)
+        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n' + self.result, 'right')
+        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+
+    def but_plus(self):
+        self.but_plus_text = '+'
+        self.show_text += self.but_plus_text
+        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+
+    def but_reduce(self):
+        self.but_plus_text = '-'
+        self.show_text += self.but_plus_text
+        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+
+    def but_multiply(self):
+        self.but_plus_text = '*'
+        self.show_text += self.but_plus_text
+        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+
+
+    def but_divide(self):
+        self.but_plus_text = '-'
+        self.show_text += self.but_plus_text
+        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+
+        
+
 
 
 
