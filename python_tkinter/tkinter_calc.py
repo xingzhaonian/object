@@ -13,6 +13,7 @@ class Calc():
         self.window = window
         self.show_text = ''
         self.result = None
+        self.spot_isclick = True
 
 
     def set_init_but(self) -> None:
@@ -285,14 +286,14 @@ class Calc():
 
     def but_spot(self):
         self.but_spot_text = '.'
-        if '.' in self.show_text:
-            pass
-        else:
+        if self.spot_isclick:
             self.show_text += self.but_spot_text
             self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
             self.show_region.delete(1.0, tkinter.END)
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.spot_isclick = False
+        
 
     def but_equal(self):
         try:
@@ -325,6 +326,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.spot_isclick = True
 
 
     def but_reduce(self):
@@ -334,6 +336,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.spot_isclick = True
 
 
     def but_multiply(self):
@@ -343,6 +346,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.spot_isclick = True
 
 
 
@@ -353,6 +357,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.spot_isclick = True
 
     def but_positive_and_negative(self):
         self.but_positive_and_negative_text = '-'
