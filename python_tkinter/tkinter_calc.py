@@ -14,6 +14,13 @@ class Calc():
         self.show_text = ''
         self.result = None
         self.spot_isclick = True
+        self.plus_minusisclick = True
+        self.plus_isclick = True
+        self.reduce_isclick = True
+        self.multiply_isclick = True
+        self.divide_click = True
+
+
 
 
     def set_init_but(self) -> None:
@@ -84,7 +91,7 @@ class Calc():
 
         self.but_text_plus_minus = tkinter.StringVar()
         self.but_text_plus_minus.set('±')
-        self.but_square = tkinter.Button(self.window, textvariable=self.but_text_plus_minus, font=('SimHei', 15), width=8, height=2, command=self.but_positive_and_negative)
+        self.but_square = tkinter.Button(self.window, textvariable=self.but_text_plus_minus, font=('SimHei', 15), width=8, height=2, command=self.but_plus_minus)
         self.but_square.place(x=5, y=440)
 
 
@@ -188,9 +195,24 @@ class Calc():
         self.history_label.place(x=410, y=80)
 
 
-    def update_text(self):
-        self.show_region.config(state=tkinter.NORMAL)
-        self.show_region.delete(1.0, tkinter.END)
+    def can_click(self):
+        self.spot_isclick = True
+        self.plus_minusisclick = True
+        self.plus_isclick = True
+        self.reduce_isclick = True
+        self.multiply_isclick = True
+        self.divide_click = True
+
+
+    def nocan_click(self):
+        self.spot_isclick = False
+        self.plus_minusisclick = False
+        self.plus_isclick = False
+        self.reduce_isclick = False
+        self.multiply_isclick = False
+        self.divide_click = False    
+
+
 
 
 
@@ -201,6 +223,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
     def but_2(self):
         self.but_2_text = '2'
@@ -209,6 +232,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_3(self):
@@ -218,6 +242,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
     def but_4(self):
         self.but_4_text = '4'
@@ -226,6 +251,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_5(self):
@@ -235,6 +261,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_6(self):
@@ -244,6 +271,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_7(self):
@@ -253,6 +281,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_8(self):
@@ -262,6 +291,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
 
@@ -272,6 +302,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
     def but_0(self):
@@ -281,6 +312,7 @@ class Calc():
         self.show_region.delete(1.0, tkinter.END)
         self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
         self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+        self.can_click()
 
 
 
@@ -293,6 +325,12 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.spot_isclick = False
+            self.plus_minusisclick = True
+            self.plus_isclick = True
+            self.reduce_isclick = True
+            self.multiply_isclick = True
+            self.divide_click = True
+                
         
 
     def but_equal(self):
@@ -320,59 +358,51 @@ class Calc():
 
 
     def but_plus(self):
-        self.but_plus_text = '+'
-        self.show_text += self.but_plus_text
-        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
-        self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
-        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
-        self.spot_isclick = True
-
-
-    def but_reduce(self):
-        self.but_reduce_text = '-'
-        self.show_text += self.but_reduce_text
-        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
-        self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
-        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
-        self.spot_isclick = True
-
-
-    def but_multiply(self):
-        self.but_multiply_text = '*'
-        self.show_text += self.but_multiply_text
-        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
-        self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
-        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
-        self.spot_isclick = True
-
-
-
-    def but_divide(self):
-        self.but_divide_text = '/'
-        self.show_text += self.but_divide_text
-        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
-        self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
-        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
-        self.spot_isclick = True
-
-    def but_positive_and_negative(self):
-        self.but_positive_and_negative_text = '-'
-        if self.show_text[0] == '-':
-            self.show_region.config(state=tkinter.NORMAL)    # 启用编辑模式
-            self.show_text = self.show_text[1:]
-            self.show_region.delete(1.0, tkinter.END)
-            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
-            self.show_region.config(state=tkinter.DISABLED)# 禁用编辑模式
-        else:
-            self.show_text = self.but_positive_and_negative_text + self.show_text
+        if self.plus_isclick:
+            self.but_plus_text = '+'
+            self.show_text += self.but_plus_text
             self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
             self.show_region.delete(1.0, tkinter.END)
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.nocan_click()
+
+
+
+    def but_reduce(self):
+        if self.reduce_isclick:
+            self.but_reduce_text = '-'
+            self.show_text += self.but_reduce_text
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.nocan_click()
+
+
+
+    def but_multiply(self):
+        if self.multiply_isclick:
+            self.but_multiply_text = '*'
+            self.show_text += self.but_multiply_text
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.nocan_click()
+
+
+    def but_divide(self):
+        if self.divide_click:
+            self.but_divide_text = '/'
+            self.show_text += self.but_divide_text
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.nocan_click()
+
+
         
     def but_clearShow_text(self):
         self.show_text = ''
@@ -382,8 +412,10 @@ class Calc():
         self.show_region.insert(tkinter.END, '\n'+'0', 'right')
 
         self.show_region.config(state=tkinter.DISABLED)# 禁用编辑模式
+        self.can_click()
 
     def but_delSingle_num(self):
+        self.can_click()
         if self.show_text:
             self.show_text = self.show_text[:-1]
             self.show_region.config(state=tkinter.NORMAL)# 启用编辑模式
@@ -396,8 +428,23 @@ class Calc():
                 self.show_region.insert(tkinter.END, '\n' + '0', 'right')
                 self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式    
 
-               
 
+    def but_plus_minus(self):
+        self.plus_minus = '-'
+        if self.plus_minusisclick:
+            if self.show_text:
+                if '+' not in self.show_text and '-' not in self.show_text and '*' not in self.show_text and '/' not in self.show_text:
+                    self.show_text = self.plus_minus + self.show_text
+                    self.show_region.config(state=tkinter.NORMAL)# 启用编辑模式
+                    self.show_region.delete(1.0, tkinter.END)
+                    self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+                    self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式  
+                else: 
+                    self.show_text = self.show_text + self.plus_minus
+                    self.show_region.config(state=tkinter.NORMAL)# 启用编辑模式
+                    self.show_region.delete(1.0, tkinter.END)
+                    self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+                    self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式   
 
 def start_calc():
     window = tkinter.Tk()
