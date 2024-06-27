@@ -12,7 +12,7 @@ class Calc():
     def __init__(self, window) -> None:
         self.window = window
         self.show_text = ''
-
+        self.result = None
 
 
     def set_init_but(self) -> None:
@@ -161,20 +161,20 @@ class Calc():
 
         self.but_text_clear = tkinter.StringVar()
         self.but_text_clear.set('C')
-        self.but_clear = tkinter.Button(self.window, textvariable=self.but_text_clear, font=('SimHei', 15), width=8, height=2)
+        self.but_clear = tkinter.Button(self.window, textvariable=self.but_text_clear, font=('SimHei', 15), width=8, height=2, command=self.but_clearShow_text)
         self.but_clear.place(x=215, y=145)
 
 
 
         self.but_text_delSingle = tkinter.StringVar()
         self.but_text_delSingle.set('✘')
-        self.but_delSingle = tkinter.Button(self.window, textvariable=self.but_text_delSingle, font=('SimHei', 15), width=8, height=2)
+        self.but_delSingle = tkinter.Button(self.window, textvariable=self.but_text_delSingle, font=('SimHei', 15), width=8, height=2, command=self.but_delSingle_num)
         self.but_delSingle.place(x=320, y=145)
 
 
         self.show_region_text = tkinter.StringVar()
         self.show_region = tkinter.Text(self.window, wrap=tkinter.WORD, width=40, height=3, font=('SimHei', 15))
-        self.show_region.insert(tkinter.END, '\n'+self.show_text, 'right')
+        self.show_region.insert(tkinter.END, '\n'+'0', 'right')
         self.show_region.config(state=tkinter.DISABLED)
         self.show_region.tag_configure('right', justify='right')
         self.show_region.place(x=5, y=70)
@@ -295,20 +295,27 @@ class Calc():
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
 
     def but_equal(self):
-        self.result = simpleeval.simple_eval(self.show_text)
-        self.history_text.config(state=tkinter.NORMAL)  # 历史记录启用编辑模式
-        self.history_text.insert(tkinter.END, '\n' + self.show_text + '=' + str(self.result) + '\n')
-        self.history_text.config(state=tkinter.DISABLED)  # 历史记录启用禁用模式
+        try:
+            self.result = eval(self.show_text)
+        except ZeroDivisionError:
+            self.history_text.config(state=tkinter.NORMAL)  # 历史记录启用编辑模式
+            self.history_text.insert(tkinter.END, '\n' + self.show_text + '=' + str(self.result) + '除数不能为0' + '\n')
+            self.history_text.config(state=tkinter.DISABLED)   # 历史记录启用禁用模式
 
-
-
-
-        self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
-        self.show_region.delete(1.0, tkinter.END)
-        self.show_region.insert(tkinter.END, '\n' + str(self.result), 'right')
-        self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
-        
-
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' +'除数不能为0', 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
+            self.show_text = ''
+        else:
+            self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + str(self.result), 'right')
+            self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式       
+            self.history_text.config(state=tkinter.NORMAL)  # 历史记录启用编辑模式
+            self.history_text.insert(tkinter.END, '\n' + self.show_text + '=' + str(self.result) + '\n')
+            self.history_text.config(state=tkinter.DISABLED)   # 历史记录启用禁用模式
+            self.show_text = str(self.result)
 
 
     def but_plus(self):
@@ -362,14 +369,29 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
         
+    def but_clearShow_text(self):
+        self.show_text = ''
+        self.show_region.config(state=tkinter.NORMAL)    # 启用编辑模式
 
+        self.show_region.delete(1.0, tkinter.END)
+        self.show_region.insert(tkinter.END, '\n'+'0', 'right')
 
+        self.show_region.config(state=tkinter.DISABLED)# 禁用编辑模式
 
+    def but_delSingle_num(self):
+        if self.show_text:
+            self.show_text = self.show_text[:-1]
+            self.show_region.config(state=tkinter.NORMAL)# 启用编辑模式
+            self.show_region.delete(1.0, tkinter.END)
+            self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+            self.show_region.config(state=tkinter.DISABLED)# 禁用编辑模式
+            if not self.show_text:
+                self.show_region.config(state=tkinter.NORMAL) # 启用编辑模式
+                self.show_region.delete(1.0, tkinter.END)
+                self.show_region.insert(tkinter.END, '\n' + '0', 'right')
+                self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式    
 
-
-
-
-
+               
 
 
 def start_calc():
