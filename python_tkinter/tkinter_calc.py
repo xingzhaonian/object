@@ -196,7 +196,6 @@ class Calc():
 
 
     def can_click(self):
-        self.spot_isclick = True
         self.plus_minusisclick = True
         self.plus_isclick = True
         self.reduce_isclick = True
@@ -205,7 +204,6 @@ class Calc():
 
 
     def nocan_click(self):
-        self.spot_isclick = False
         self.plus_minusisclick = False
         self.plus_isclick = False
         self.reduce_isclick = False
@@ -325,11 +323,7 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.spot_isclick = False
-            self.plus_minusisclick = True
-            self.plus_isclick = True
-            self.reduce_isclick = True
-            self.multiply_isclick = True
-            self.divide_click = True
+
                 
         
 
@@ -366,6 +360,7 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
+            self.spot_isclick = True
 
 
 
@@ -378,6 +373,7 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
+            self.spot_isclick = True
 
 
 
@@ -390,6 +386,7 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
+            self.spot_isclick = True
 
 
     def but_divide(self):
@@ -401,7 +398,7 @@ class Calc():
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
-
+            self.spot_isclick = True
 
         
     def but_clearShow_text(self):
