@@ -19,6 +19,7 @@ class Calc():
         self.reduce_isclick = True
         self.multiply_isclick = True
         self.divide_click = True
+        self.percentage_click = True
 
 
 
@@ -155,7 +156,7 @@ class Calc():
 
         self.but_text_percentage = tkinter.StringVar()
         self.but_text_percentage.set('%')
-        self.but_percentage = tkinter.Button(self.window, textvariable=self.but_text_percentage, font=('SimHei', 15), width=8, height=2)
+        self.but_percentage = tkinter.Button(self.window, textvariable=self.but_text_percentage, font=('SimHei', 15), width=8, height=2, command=self.but_percentage)
         self.but_percentage.place(x=5, y=145)
 
 
@@ -201,6 +202,7 @@ class Calc():
         self.reduce_isclick = True
         self.multiply_isclick = True
         self.divide_click = True
+        self.percentage_click = True
 
 
     def nocan_click(self):
@@ -317,12 +319,16 @@ class Calc():
     def but_spot(self):
         self.but_spot_text = '.'
         if self.spot_isclick:
+            #if '+' not in self.show_text and '-' not in self.show_text and '*' not in self.show_text and '/' not in self.show_text:
+             #   pass
+            #else:
             self.show_text += self.but_spot_text
             self.show_region.config(state=tkinter.NORMAL)   # 启用编辑模式
             self.show_region.delete(1.0, tkinter.END)
             self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.spot_isclick = False
+            self.percentage_click = True
 
                 
         
@@ -361,6 +367,7 @@ class Calc():
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
             self.spot_isclick = True
+            self.percentage_click = True
 
 
 
@@ -374,6 +381,7 @@ class Calc():
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
             self.spot_isclick = True
+            self.percentage_click = True
 
 
 
@@ -387,6 +395,7 @@ class Calc():
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
             self.spot_isclick = True
+            self.percentage_click = True
 
 
     def but_divide(self):
@@ -399,7 +408,7 @@ class Calc():
             self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式
             self.nocan_click()
             self.spot_isclick = True
-
+            self.percentage_click = True
         
     def but_clearShow_text(self):
         self.show_text = ''
@@ -442,6 +451,24 @@ class Calc():
                     self.show_region.delete(1.0, tkinter.END)
                     self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
                     self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式   
+
+
+
+    def but_percentage(self):   # 百分比
+        self.percentage_text = '%'
+        if self.percentage_click:
+            if self.show_text:
+                self.show_text += self.percentage_text
+                self.show_region.config(state=tkinter.NORMAL)# 启用编辑模式
+                self.show_region.delete(1.0, tkinter.END)
+                self.show_region.insert(tkinter.END, '\n' + self.show_text, 'right')
+                self.show_region.config(state=tkinter.DISABLED)    # 禁用编辑模式   
+                self.percentage_click = False
+
+
+
+
+
 
 def start_calc():
     window = tkinter.Tk()
