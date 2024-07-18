@@ -118,6 +118,7 @@ class MusicPlayer(object):
                 print(f'歌曲时长: {self.music_length_m}分{self.music_length_s}秒, 共{self.music_length}秒')
             else:
                 print(f'歌曲时长: {int(self.music_length)}秒')
+            self.progress.set(0)
             pygame.mixer.music.load(self.music_list[self.Play_tracks])
             pygame.mixer.music.play()
             print('当前歌曲播放完毕, 开始检测下一曲是否能播放')
@@ -137,11 +138,6 @@ class MusicPlayer(object):
         self.update_progress()
         
 
-
-
-
-
-
     def on_progress_release(self, event):
 
         # 获取滑动条的当前值
@@ -149,23 +145,22 @@ class MusicPlayer(object):
         # 跳转到新的播放位置
         pygame.mixer.music.rewind()
         self.current_music_index = int(self.new_position) * self.music_length / 100
-        pygame.mixer.music.set_pos(self.current_music_index)  # 转换毫秒到秒
-        print(f'当前位置{int(self.new_position) * self.music_length / 100} / {self.music_length}')
+        pygame.mixer.music.set_pos(self.current_music_index)
+        print(f'当前歌曲位置{int(self.new_position) * self.music_length / 100} / {self.music_length}-秒')
+        print(f'进度条位置{self.new_position}')
+        self.progress.set(self.new_position)
+
         
 
     def update_progress(self):
         # 获取当前进度条的值
         current_value = self.progress.get()
-
         if current_value < self.music_length:
-            self.progress.set(current_value + 0.1)
-
+            self.progress.set(current_value + 0.01)
         else:
-            self.progress.set(0)  # 或者停止更新，或者重置为0重新开始
+            self.progress.set(0)  
+        self.window.after(100, self.update_progress)
 
-        # 每1000毫秒（1秒）调用一次自身，更新进度条
-        self.window.after(100, self.update_progress)  
-        
 
 
     def check_music(self):    # 检查音乐是否播放完毕, 播放完毕后继续下一首
@@ -182,14 +177,13 @@ class MusicPlayer(object):
             #print('开始检测')  # 每1000毫秒检测一次
         self.task_id = self.window.after(1000, self.check_music)
 
-            #print('检测完毕')
-
 
         
     def stop_chick(self):
         if self.task_id:
             self.window.after_cancel(self.task_id)
             self.task_id = None
+
 
 
     def PauseOrUnpause(self):
@@ -210,6 +204,7 @@ class MusicPlayer(object):
 
 
     def next_song(self):
+        self.progress.set(0)
         self.play_status.set('⏸')
         self.selection = list(self.selection)
         if self.Play_tracks >= len(self.music_list) - 1:
@@ -219,8 +214,10 @@ class MusicPlayer(object):
         pygame.mixer.music.load(self.music_list[self.Play_tracks])
         pygame.mixer.music.play()
 
+
     
     def revious_song(self):
+        self.progress.set(0)
         self.play_status.set('⏸')
         self.selection = list(self.selection)
         if self.Play_tracks <= 0:
