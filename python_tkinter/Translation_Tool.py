@@ -1,7 +1,8 @@
 import tkinter
 import tkinter.ttk
 import requests
-
+import time
+import random
 
 class Translation(object):
 
@@ -14,38 +15,70 @@ class Translation(object):
         self.combobox.current(0)
         self.combobox.pack(pady=10)
         self.combobox.bind("<<ComboboxSelected>>", self.choice_language)
-        self.label = 
-
-
-
-
+        self.start_btn = tkinter.Button(self.window, command=self.Translate, width=6, height=1, text='开始翻译')
+        self.start_btn.pack()
 
     def choice_language(self, event):
         self.selected_result = self.combobox.get()
         print(self.selected_result)
-
+        return self.selected_result
+    
+    def Generateid(self, n):
+        return random.randint(10**(n -1), 10**n -1)
 
     def Translate(self):
-        self.post_url = 'https://fanyi.baidu.com/sug'
-        # 设置请求头, 模拟浏览器身份访问
-        self.request_headers = {
+        self.post_url = 'https://www2.deepl.com/jsonrpc?method=LMT_handle_jobs'
+        self.post_headers ={
             'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
             "Content-Type":"application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
-        self.words = input('输入要翻译的内容>>>')
 
-        #表单数据
-        self.form_data = {'kw': self.words}
+        self.tamptime = int(time.time() * 1000)
 
-        #网页请求
-        self.resp = requests.post(url=self.post_url, data=self.form_data, headers=self.request_headers)
+        self.payload = {
+            "jsonrpc": "2.0",
+            "method": "LMT_handle_jobs",
+            "params": {
+                "jobs": [
+                    {
+                        "kind": "default",
+                        "sentences": [
+                            {
+                                "text": "你好",  # 要翻译的文本
+                                "id": 1,
+                                "prefix": ""
+                            }
+                        ],
+                        "raw_en_context_before": [],
+                        "raw_en_context_after": [],
+                        "preferred_num_beams": 4
+                    }
+                ],
+                "lang": {
+                    "target_lang": "EN",  # 目标语言：英语
+                    "preference": {
+                        "weight": {},
+                        "default": "default"
+                    },
+                    "source_lang_computed": "ZH"  # 源语言：中文
+                },
+                "priority": -1,
+                "commonJobParams": {
+                    "quality": "fast",
+                    "regionalVariant": "en-US",
+                    "mode": "translate",
+                    "browserType": 1,
+                    "textType": "plaintext"
+                },
+                "timestamp": self.tamptime  # 使用当前时间戳
+            },
+            "id": int(random.randint())
+        }
 
-        # 获取翻译结果
-        print(self.resp.json())
-        return self.resp.json()
+        self.response = requests.post(url=self.post_url, headers=self.post_headers, json=self.payload)
 
-    
+
     def click_translate(self):
         self.Translate()
 
