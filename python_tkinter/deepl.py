@@ -2,14 +2,19 @@ import requests
 import time
 import random
 
-post_url = 'https://www2.deepl.com/jsonrpc?method=LMT_handle_jobs'
-post_headers = {
+deepl_url = 'https://www2.deepl.com/jsonrpc?method=LMT_handle_jobs'
+deepl_headers = {
     'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
     "Content-Type":"application/json",
     "Content-Type": "application/json",
         }
 
 tamptime = int(time.time() * 1000)
+
+
+words = input('请输入要翻译的内容>>>')
+
+
 
 payload = {
     "jsonrpc": "2.0",
@@ -20,7 +25,7 @@ payload = {
                 "kind": "default",
                 "sentences": [
                     {
-                        "text": "你好",  # 要翻译的文本
+                        "text": words,  # 要翻译的文本
                         "id": 1,
                         "prefix": ""
                     }
@@ -48,11 +53,11 @@ payload = {
         },
         "timestamp": tamptime  # 使用当前时间戳
     },
-    "id": 32300041
+    "id": int(random.randint(10**(8-1), 10**8 - 1))
 }
 
 
-response = requests.post(url=post_url, headers=post_headers, json=payload)
+response = requests.post(url=deepl_url, headers=deepl_headers, json=payload)
 
 print(response)
 print(response.headers)
