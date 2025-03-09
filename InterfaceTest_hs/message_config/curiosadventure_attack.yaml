@@ -1,0 +1,12 @@
+-
+  Messagedata:
+    cmd: 'curiosadventure.attack'
+    params:
+      curiosArr: [["3006"],["3001"],["3002"],["3003"]]
+    ts: 2040503829
+    logints: 1416604224
+    rnum: 18
+    zoneid: 67
+    access_token: 'DQwNTAzODI5WVROaFppdGVtLnVzZUl5TkdJellqa3hZemRqWXp'
+    clientts: 2040503829
+  ret: 0

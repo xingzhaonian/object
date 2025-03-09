@@ -12,9 +12,24 @@ class Client(object):
         self.pid = pid
         self.server = server
         self.recv_message = ''
+        self.address = None
 
         # 访问GameServer
-        self.address =  'ws://192.168.8.196:15002/'
+        self.address_83 = 'ws://192.168.8.83:15002/'
+        self.address_51 = 'ws://192.168.8.51:15002/'
+        self.address_196 = 'ws://192.168.8.196:15002/'
+        self.address_66 = 'ws://192.168.8.66:15002/'
+        self.address_87 = 'ws://192.168.8.87:15002/'
+        if self.server in range(1, 31):
+            self.address = self.address_83
+        elif self.server in range(31, 61):
+            self.address = self.address_51
+        elif self.server in range(61, 91):
+            self.address = self.address_196
+        elif self.server in range(91, 121):
+            self.address = self.address_66
+        elif self.server in range(121, 151):
+            self.address = self.address_87
         self.WebSocket = websocket.create_connection(self.address)
 
 
@@ -79,7 +94,6 @@ class Client(object):
 
     def SendMsg(self, msg):
         msg = json.dumps(msg)
-        print(type(msg), msg)
         self.WebSocket.send(msg)
         while self.recv_message == '':
             time.sleep(0.1)
@@ -87,4 +101,3 @@ class Client(object):
         recv_msg = self.recv_message
         self.recv_message = ''
         return recv_msg
-

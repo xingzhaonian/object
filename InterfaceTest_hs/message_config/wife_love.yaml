@@ -1,0 +1,28 @@
+-
+  Messagedata:
+    cmd: 'wife.love'
+    params:
+      wifeId: '101'
+      sceneid: '10101'
+    uid: 67000351
+    ts: 2040503829
+    logints: 1416604224
+    rnum: 16
+    zoneid: 67
+    access_token: 'DQwNTAzODI5WVROaFppdGVtLnVzZUl5TkdJellqa3hZemRqWXp'
+    clientts: 2040503829
+  ret: 0
+-
+  Messagedata:
+    cmd: 'wife.love'
+    params:
+      wifeId: '101'
+      sceneid: '10101'
+    uid: 67000351
+    ts: 2040503829
+    logints: 1416604224
+    rnum: 16
+    zoneid: 67
+    access_token: 'DQwNTAzODI5WVROaFppdGVtLnVzZUl5TkdJellqa3hZemRqWXp'
+    clientts: 2040503829
+  ret: 0

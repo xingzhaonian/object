@@ -118,7 +118,6 @@ class MusicPlayer(object):
                 print(f'歌曲时长: {self.music_length_m}分{self.music_length_s}秒, 共{self.music_length}秒')
             else:
                 print(f'歌曲时长: {int(self.music_length)}秒')
-            self.progress.set(0)
             pygame.mixer.music.load(self.music_list[self.Play_tracks])
             pygame.mixer.music.play()
             print('当前歌曲播放完毕, 开始检测下一曲是否能播放')
@@ -126,14 +125,14 @@ class MusicPlayer(object):
             
                     # 显示当前播放/歌曲总时长
         self.end_time_text = tkinter.StringVar()
-        self.end_time_text.set(self.music_length)
+        self.end_time_text.set(str(self.music_length_m) + ':' + str(self.music_length_s))
         self.end_time_label = tkinter.Label(self.window, textvariable=self.end_time_text)
         self.end_time_label.place(x=645, y=445)
 
 
         self.temp_time_text = tkinter.StringVar()
-        self.temp_time_text.set(self.music_length)
-        self.temp_time_label = tkinter.Label(self.window, textvariable=self.end_time_text)
+        self.temp_time_text.set('0')
+        self.temp_time_label = tkinter.Label(self.window, textvariable=self.temp_time_text)
         self.temp_time_label.place(x=15, y=440)
         self.update_progress()
         
@@ -149,16 +148,20 @@ class MusicPlayer(object):
         print(f'当前歌曲位置{int(self.new_position) * self.music_length / 100} / {self.music_length}-秒')
         print(f'进度条位置{self.new_position}')
         self.progress.set(self.new_position)
+        self.temp_time_text.set(str(int(self.current_music_index)))
+        self.temp_time_label = tkinter.Label(self.window, textvariable=self.temp_time_text)
 
-        
+
 
     def update_progress(self):
         # 获取当前进度条的值
         current_value = self.progress.get()
         if current_value < self.music_length:
             self.progress.set(current_value + 0.01)
+            self.temp_time_text.set(current_value + 0.01)
+            self.temp_time_label = tkinter.Label(self.window, textvariable=self.temp_time_text)
         else:
-            self.progress.set(0)  
+            self.progress.set(0)
         self.window.after(100, self.update_progress)
 
 
@@ -173,12 +176,13 @@ class MusicPlayer(object):
             print(f'当前歌曲{self.Play_tracks},{self.music_list[self.Play_tracks]}, 歌单共有{len(self.music_list)}')        
             pygame.mixer.music.load(self.music_list[self.Play_tracks])
             pygame.mixer.music.play()
+            self.progress.set(0)
             self.play_status.set('⏸')
             #print('开始检测')  # 每1000毫秒检测一次
         self.task_id = self.window.after(1000, self.check_music)
 
 
-        
+
     def stop_chick(self):
         if self.task_id:
             self.window.after_cancel(self.task_id)
