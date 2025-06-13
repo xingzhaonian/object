@@ -1,6 +1,69 @@
 
 
-d = {'s':5, 'd':7, 'ss':{'d':44, 't':3445, 'fsd':{'flm':99, 'lpl':{'lck':1991}}}, '张飞':900}
+d = {'s':5, 'd':7, 'ss':{'d':44, 't':3445, 'fsd':{'flm':99, 'lpl':{'lck':1991}}}, '张飞':909}
+
+def arrange_dict(data):
+    stack = [[data, '']]
+    sep ='.'
+    result = {}
+    while stack:
+        total_data = stack.pop()
+        dict_data = total_data[0]
+        key_name = total_data[1]
+
+        for key, value in dict_data.items():
+            if key_name:
+                new_key_name = key_name + sep + key
+            else:
+                new_key_name = key
+            if isinstance(value, dict):
+                stack.append([value, new_key_name])
+            else:
+                result[new_key_name] = value
+    return result
+
+
+
+
+
+
+
+def recursion_dict_data(data, key_name =''):
+    result = {}
+    for key, value in data.items():
+        if key_name:
+            new_key_name = key_name + '.' + key
+        else:
+            new_key_name = key
+        if isinstance(value, dict):
+            each_result = recursion_dict_data(value, new_key_name)
+            result.update(each_result)
+        else:
+            result[new_key_name] = value
+    return result
+
+
+#recursion_dict_data(d)
+#print(result)
+#print(recursion_dict_data(d))
+
+
+def fanil(num):
+    if num == 1:
+        return num
+    else:
+        result = num * fanil(num-1)
+        print(result)
+    return result
+
+
+
+
+
+
+        
+
+
 
 
 
@@ -151,6 +214,10 @@ def dict_sort(dict_items, index = 0, reverse=False):
                     result.append((k[pos_value], i))
 
     return dict(result)
+
+
+
+
 
 
 
