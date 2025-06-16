@@ -25,4 +25,22 @@ def set_daily_timer(hour=9, minute=30):
     timer.start()
 
 
-set_daily_timer(9, 30)  # 每天9:30执行
+# set_daily_timer(9, 30)  # 每天9:30执行
+
+def test_do():
+    now_time = datetime.now()
+    active_threads = threading.enumerate()
+    print(f"当前线程数量: {len(active_threads)}")
+    print(f'函数执行了, 执行时间       {now_time}')
+    every_minute()
+
+
+def every_minute(min = 1):
+    now_time = datetime.now()
+    print('当前时间',                  now_time)
+    next_time = now_time + timedelta(seconds=3)
+    delay = (next_time - now_time).total_seconds()
+    timer = threading.Timer(delay, test_do)
+    timer.start()
+    
+every_minute()
