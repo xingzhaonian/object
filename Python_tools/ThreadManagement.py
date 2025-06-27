@@ -19,7 +19,7 @@ class StoppableThread(threading.Thread):
 
 def test(should_stop):
     while not should_stop():
-        print('我在工作', should_stop())
+        print('i am play football happly at school everyday', should_stop())
         time.sleep(0.1) 
 
 
