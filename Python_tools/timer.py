@@ -38,7 +38,7 @@ def test_do():
 def every_minute(min = 1):
     now_time = datetime.now()
     print('当前时间',                  now_time)
-    next_time = now_time + timedelta(seconds=3)
+    next_time = now_time + timedelta(seconds=10)
     delay = (next_time - now_time).total_seconds()
     timer = threading.Timer(delay, test_do)
     timer.start()
