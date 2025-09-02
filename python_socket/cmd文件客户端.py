@@ -49,8 +49,7 @@ class ClientSocket(object):
             with open(path, 'w', encoding='utf-8') as f:
                 while self.recv_data_h < self.data_h:
                     res_data = self.client.recv(1024)
-                    self.data += res_data
-                    f.write(self.data.decode('utf-8'))
+                    f.write(res_data.decode('utf-8'))
                     self.recv_data_h += len(res_data)
                         
             #print(f"服务器返回的数据总体内容为{data.decode(encoding='utf-8')}")
