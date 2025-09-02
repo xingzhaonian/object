@@ -42,18 +42,17 @@ class ClientSocket(object):
             self.data_h = int(self.client.recv(8).decode('utf-8'))
 
 
-            # 收取数据内容
+            # 收取数据内容并下载服务器传输的数据
             self.data = bytes()
             self.recv_data_h = 0
-            while self.recv_data_h < self.data_h:
-                res_data = self.client.recv(1024)
-                self.data += res_data
-                self.recv_data_h += len(res_data)
-            
-            # 下载服务器传输的数据
             path = pathlib.Path('D:/project/object/test_file/download.txt')
             with open(path, 'w', encoding='utf-8') as f:
-                f.write(self.data.decode('utf-8'))                
+                while self.recv_data_h < self.data_h:
+                    res_data = self.client.recv(1024)
+                    self.data += res_data
+                    f.write(self.data.decode('utf-8'))
+                    self.recv_data_h += len(res_data)
+                        
             #print(f"服务器返回的数据总体内容为{data.decode(encoding='utf-8')}")
                 
     # 上传
