@@ -6,35 +6,28 @@
 #   4：黑盒思维法（最实用）
 #   把递归调用当作一个已经写好的、绝对正确的函数来用。
 #   不需要想：递归怎么展开、有多少层、每层怎么返回
+#   每一次递归掉用自身, 传进去的参数一定是比源数据更小规模的参数(具体数值变小, 结构变小, 规模变小等等)
 
 
-def flatten_dict(d, parent_key=''):
+def flatten_dict(d, parent_key='', sep='.'):
     items = []
     
     for k, v in d.items():
-
-
-        if parent_key:
-            new_key = f"{parent_key}.{k}"
-        else:
+        if not parent_key:
             new_key = k
+        else:
+            new_key = parent_key + sep + k
         if isinstance(v, dict):
             # ✅ 关键思维：这里不要想 flatten_dict 内部怎么实现！
             # ✅ 就当它是别人写好的、功能正确的函数
             # ✅ 你只需要知道：给它一个字典和前缀，它返回扁平化字典
             
-            sub_result = flatten_dict(v, new_key)  # 魔法黑盒
+            sub_result = flatten_dict(v, new_key, sep='.')  # 魔法黑盒
             items.extend(sub_result.items())  # 黑盒返回字典，我取键值对
         else:
             items.append((new_key, v))  # 简单情况自己处理
     
     return dict(items)
-
-
-
-
-
-
 
 
 
