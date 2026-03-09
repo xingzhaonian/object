@@ -1,8 +1,9 @@
 -
   Messagedata:
-    cmd: 'wife.love'
+    cmd: 'warhorse.upssaura'
     params:
-      wifeId: '303'
+      huid: '4051'
+      ssId: '5'
     uid: 67000351
     ts: 2040503829
     logints: 1416604224

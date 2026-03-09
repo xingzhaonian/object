@@ -5,21 +5,45 @@ import threading
 import requests
 import hashlib
 import base64
+import server_info
 
+class StoppableThread(threading.Thread):
 
+    # 初始化线程的目标方法和基类相关数据
+    def __init__(self, target_func):
+        super().__init__()
+        self._stop_event = threading.Event() 
+        self.target_func = target_func
+
+    # 设置线程状态, 准备停止子线程的工作
+    def stop(self):
+        self._stop_event.set()
+
+    # 返回停止标识, bool
+    def stopped(self):
+        return self._stop_event.is_set()
+    
+    # 重写run方法, 用来停止线程的工作
+    def run(self):
+        while not self.stopped():
+            self.target_func(self.stopped)
+            time.sleep(0.2)
+            
+            
 class Client(object):
     def __init__(self, pid, server):
         self.pid = pid
         self.server = server
         self.recv_message = ''
         self.address = None
-
+        self.port = str(server_info.GetServerPort(self.server, server_info.server_info)) + '/'
         # 访问GameServer
-        self.address_83 = 'ws://192.168.8.83:15002/'
-        self.address_51 = 'ws://192.168.8.51:15002/'
-        self.address_196 = 'ws://192.168.8.196:15002/'
-        self.address_66 = 'ws://192.168.8.66:15002/'
-        self.address_87 = 'ws://192.168.8.87:15002/'
+        self.address_83 = 'ws://192.168.8.83:' + self.port
+        self.address_51 = 'ws://192.168.8.51:' + self.port
+        self.address_196 = 'ws://192.168.8.196:' + self.port
+        self.address_66 = 'ws://192.168.8.66:' + self.port
+        self.address_87 = 'ws://192.168.8.87:' + self.port
+        self.address_197 = 'ws://192.168.8.197:' + self.port
         if self.server in range(1, 31):
             self.address = self.address_83
         elif self.server in range(31, 61):
@@ -30,6 +54,8 @@ class Client(object):
             self.address = self.address_66
         elif self.server in range(121, 151):
             self.address = self.address_87
+        elif self.server in range(151, 160):
+            self.address = self.address_197
         self.WebSocket = websocket.create_connection(self.address)
 
 
@@ -54,6 +80,7 @@ class Client(object):
         self.login_after_url = 'http://gd-local-83.leishenhuyu.com/tank-global/index.php/?t=getserverinfobyzid&zid=' + str(self.server)
         self.GetServerInfo = requests.get(self.login_after_url)
         self.GetServerInfo = json.loads(self.GetServerInfo.text)
+        return self.GetServerInfo
 
     
     def GetAccessToken(self):
@@ -87,13 +114,17 @@ class Client(object):
         return self.access_token, self.player_id, self.login_ts
 
 
-    def Recv_data(self):
-        while True:
+    # 接收数据方法, 只在子线程里调用   StoppableThread
+    def Recv_data(self, should_stop):
+        while not should_stop():
             self.recv_message = self.WebSocket.recv()
-            time.sleep(0.1)
+            time.sleep(0.2)
 
+
+    # 发送消息方法, 返回服务器回来的数据
     def SendMsg(self, msg):
         msg = json.dumps(msg)
+        #print(msg)
         self.WebSocket.send(msg)
         while self.recv_message == '':
             time.sleep(0.1)

@@ -46,3 +46,21 @@ def recursive_func(data):
     子结果 = recursive_func(更小问题)
     return 用某种方式组合子结果
 '''
+
+
+def TransformDict(data, parent_key='', sep=':'):
+    items = []
+    if data and isinstance(data, dict):
+            for key, value in data.items():
+                if parent_key:
+                    new_key = parent_key + sep + key
+                else:
+                    new_key = key
+                if isinstance(value, dict):
+                    sub_result = TransformDict(value, new_key, sep=':')
+                    items.extend((sub_result))
+                    print('走extend增加方式,本次增加的内容是:',sub_result)
+                else:
+                    items.append((new_key, value))
+                    print('走append增加方式,本次增加的内容是:',(new_key, value) )
+    return items

@@ -1,8 +1,9 @@
 -
   Messagedata:
-    cmd: 'wife.love'
+    cmd: 'servant.upaura'
     params:
-      wifeId: '303'
+      auraId: '6'
+      servantId: '2203'
     uid: 67000351
     ts: 2040503829
     logints: 1416604224
