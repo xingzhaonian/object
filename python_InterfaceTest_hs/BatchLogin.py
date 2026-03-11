@@ -22,7 +22,7 @@ user_pid_list = ['cxk01', 'cxk01_1', 'cxk01_2', 'cxk01_3', 'cxk01_4', 'cxk01_5',
 user_pid_list_1 = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'test8', 'test9', 'test10']
 
 
-server_list = [91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111]
+server_list = [79,80]
 
 def batch_login(user_list, server_list, msg_list):
     for each_server in server_list:
@@ -52,4 +52,4 @@ def batch_login(user_list, server_list, msg_list):
     return token, uid, logints
 
 
-batch_login(user_pid_list_1, server_list, login_msg)
+batch_login(user_pid_list, server_list, login_msg)
