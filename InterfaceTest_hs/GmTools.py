@@ -159,7 +159,7 @@ if __name__ == '__main__':
       pid_list = g.creat_pid_list('test1')
 
       # 获取test账号的uid
-      uid_list = g.get_uid(pid_list, 76)
+      uid_list = g.get_uid(pid_list, 77)
 
       # 批量跳过test 账号的新手引导
       g.ContinueBeginnerTools(uid_list)

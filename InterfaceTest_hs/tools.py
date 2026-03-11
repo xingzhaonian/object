@@ -11,47 +11,66 @@ def corpsScore(attack_num=0, defense_num=0, pk_num=0, attack_kill_num=0):
     # serverCircle: PK服数量区间
     # legionBaseNum: 标准数
     # minPoint: 兵团战扣分上限
-
     '''
-    serverCircle = [5,10,20]
-    legionBaseNum = [15,25,30]
-    minPoint = [[15, 30], [25, 50], [30, 60]]
-    if pk_num <= serverCircle[0]:
-        index = 0
-    elif  pk_num > serverCircle[0] and  pk_num <= serverCircle[1] :
-        index = 1
-    elif pk_num <= serverCircle[2] or pk_num > serverCircle[2]:
-        index = 2
-
-    each_kill_score  = 2       #每击杀一个兵团得分
-    each_killed_deduct_points = 1  #每被击杀一个兵团扣分
-    attack_score = None          # 进攻方得分
-    defense_deduct_points = None    # 防守方扣分
-
-
-    # 判断是否有轮空分数
-    if defense_num < legionBaseNum[index]:
-        Wheel_space_separation = legionBaseNum[index] - defense_num
-        attack_score = Wheel_space_separation + attack_kill_num
-        if attack_kill_num == defense_num:
-            defense_deduct_points = attack_kill_num + Wheel_space_separation
-        else:
-            defense_deduct_points = attack_kill_num
+    result = []
+    if not isinstance (attack_num, list) and not isinstance(defense_num, list) and not isinstance(pk_num, list) and not isinstance(attack_kill_num, list):
+        attack_num = [attack_num]
+        defense_num = [defense_num]
+        pk_num = [pk_num]
+        attack_kill_num = [attack_kill_num]
+        attack_num_length = len(attack_num)
+        defense_num_length = len(defense_num)
+        pk_num_length = len(pk_num)
+        attack_kill_num_length = len(attack_kill_num)
     else:
-        if attack_kill_num < legionBaseNum[index]:
-            attack_score = attack_kill_num
-            defense_deduct_points = attack_kill_num
-        if attack_kill_num >= legionBaseNum[index]:
-            attack_score = max(legionBaseNum[index], min(attack_num, attack_kill_num))
-            defense_deduct_points = min(legionBaseNum[index], attack_kill_num)
-            
-    attack_score = attack_score * each_kill_score
-    defense_deduct_points = defense_deduct_points * each_killed_deduct_points
+        attack_num_length = len(attack_num)
+        defense_num_length = len(defense_num)
+        pk_num_length = len(pk_num)
+        attack_kill_num_length = len(attack_kill_num)
 
-    if defense_deduct_points > minPoint[index][0]:
-        defense_deduct_points = minPoint[index][0]
+    if attack_num_length == defense_num_length == pk_num_length == attack_kill_num_length:
+        for i in range(attack_num_length):
+            serverCircle = [5,10,20]
+            legionBaseNum = [15,25,30]
+            minPoint = [[15, 30], [25, 50], [30, 60]]
+            if pk_num[i] <= serverCircle[0]:
+                index = 0
+            elif  pk_num[i] > serverCircle[0] and  pk_num[i] <= serverCircle[1] :
+                index = 1
+            elif pk_num[i] <= serverCircle[2] or pk_num[i] > serverCircle[2]:
+                index = 2
 
-    return attack_score, defense_deduct_points
+            each_kill_score  = 2       #每击杀一个兵团得分
+            each_killed_deduct_points = 1  #每被击杀一个兵团扣分
+            attack_score = None          # 进攻方得分
+            defense_deduct_points = None    # 防守方扣分
+
+
+            # 判断是否有轮空分数
+            if defense_num[i] < legionBaseNum[index]:
+                Wheel_space_separation = legionBaseNum[index] - defense_num[i]
+                attack_score = Wheel_space_separation + attack_kill_num[i]
+                if attack_kill_num[i] == defense_num[i]:
+                    defense_deduct_points = attack_kill_num[i] + Wheel_space_separation
+                else:
+                    defense_deduct_points = attack_kill_num[i]
+            else:
+                if attack_kill_num[i] < legionBaseNum[index]:
+                    attack_score = attack_kill_num[i]
+                    defense_deduct_points = attack_kill_num[i]
+                if attack_kill_num[i] >= legionBaseNum[index]:
+                    attack_score = max(legionBaseNum[index], min(attack_num[i], attack_kill_num[i]))
+                    defense_deduct_points = min(legionBaseNum[index], attack_kill_num[i])
+                    
+            attack_score = attack_score * each_kill_score
+            defense_deduct_points = defense_deduct_points * each_killed_deduct_points
+
+            if defense_deduct_points > minPoint[index][0]:
+                defense_deduct_points = minPoint[index][0]
+            print('进攻方得分:', attack_score, '防守方扣分:', defense_deduct_points)
+            result.append((attack_score, defense_deduct_points))
+    return result
+
 
 # corpsScore 方法共4个参数
 # 1：[进攻方兵团数量] 
@@ -60,8 +79,8 @@ def corpsScore(attack_num=0, defense_num=0, pk_num=0, attack_kill_num=0):
 # 4：[攻击方击杀防守方兵团数量]
 
 
-result = corpsScore(18, 49, 2, 14)
-print(f'攻擊方得分{result[0]},   防守方扣分{result[1]}')
+result = corpsScore([5, 10, 30], [10, 15, 30], [2, 3, 4], [10, 15, 30])
+
 
 
 
@@ -114,8 +133,5 @@ def stateFight_scoutScore(servant_ability):
 
         
 
-
-def load_json(data):
-    pass
 
 
