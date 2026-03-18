@@ -11,7 +11,7 @@ class ScrollableListboxApp:
         self.root.title("文件搜索")
         self.root.geometry("650x350")
         
-        self.path = Path('D:\\')
+        self.path = Path('D:\皇上快点\数值配置')
         self.history = []  # 存储历史记录
         self.result_list = []
         
