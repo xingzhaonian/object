@@ -18,7 +18,7 @@ class ScrollableListboxApp:
         self.history = []
 
         self.result_list = []
-        self.path = Path('O:\皇上快点')
+        self.path = Path('D:\皇上快点\数值配置')
         
         
         # 创建顶部按钮框架
@@ -61,6 +61,8 @@ class ScrollableListboxApp:
         # 绑定双击事件
         self.listbox.bind("<Double-Button-1>",  lambda event:self.open_file())
         self.setup_context_menu()
+
+        self.root.iconbitmap('D:\project\python_InterfaceTest_hs\qcc3w-w972h-001.ico')
     
 
 
