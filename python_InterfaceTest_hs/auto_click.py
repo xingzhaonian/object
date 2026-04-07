@@ -76,7 +76,7 @@ def on_closing():
 
 # 创建主窗口
 root = tk.Tk()
-root.iconbitmap(resource_path('qcc3w-w972h-001.ico'))
+root.iconbitmap(resource_path('click.ico'))
 root.title("鼠标连点器")
 root.geometry("300x200")
 root.resizable(False, False)
