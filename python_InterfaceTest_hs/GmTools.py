@@ -152,6 +152,47 @@ class GmTools(object):
                   if result['ret'] == 0 and result['msg'] == '保存成功':
                         print(each_uid, '执行成功')
 
+      def increase_servant_level(self, uid):
+
+            # 批量升级门客
+            cookies = {
+            'gdf_gm_session': 'aryD7HvOgapEg9Ms4KUd5jPopszk0YcBCysWsrVt9bJhuU8%2Fe9zGmqNXwOgJpdgdbp%2B1wvad5jByR5vz%2FbNLM2YetqidKsdc95JiewiAVPaRbMts4VCHfswz%2BnY3D%2F%2BYdgNNodCkyPBvoZ6jL3Jqk4ER28Tcd%2B%2BApI6OkUEhW1%2BmR9De9Y2O0%2FviavJJQ%2BxDii4Kgbx3EQGBi1i7lUxe1T13LUPSZS1gEtp%2Bv1eKXEvaFgTt9TYpeFNR0JzxvB1F%2BSnfNFoak5Bow3QEWVy0%2BZoW4ErfGb%2FsieicEOJqyCPskFcLPzQ%2FZKccgCIHLhUY57mtEzCyaS4vQCFMtHPhvAyjLLzBZAXcjNP%2BgaUFKnjsrpqIhvcvmPMDpp%2BlablVhivIScqnMBI3uzvSkARfQ%2FZ2uzXEX%2FXKthAADNI1Qjvrwxvf85z5MMxMm7S0kPQY3JuZwkJ4J3qFXacyrzoGggB6i8cdUcYrkAHGtbefuSEQs4abTRWzynvdaeGtJqUom2gTwGUZeqkZG%2FrwFT40rHSw86%2B8ByBBAQ1T2eX2BuQcszmioZQ4ECu8zyTsjrs8XH4pYscvIp6JRofhlDr5QQ%3D%3D2b8e83637df870e7971389aa4dd4263a6b1c12ea',
+            }
+
+            headers = {
+            'Accept': '*/*',
+            'Accept-Language': 'zh-CN,zh;q=0.9',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Origin': 'http://192.168.8.83',
+            'Referer': 'http://192.168.8.83/gm/app/role/show_servantinfo?uid=69000001&name=test81000002&zid=81&gm=local',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Mobile Safari/537.36',
+            'X-Requested-With': 'XMLHttpRequest',
+            # 'Cookie':                                                   'gdf_gm_session=aryD7HvOgapEg9Ms4KUd5jPopszk0YcBCysWsrVt9bJhuU8%2Fe9zGmqNXwOgJpdgdbp%2B1wvad5jByR5vz%2FbNLM2YetqidKsdc95JiewiAVPaRbMts4VCHfswz%2BnY3D%2F%2BYdgNNodCkyPBvoZ6jL3Jqk4ER28Tcd%2B%2BApI6OkUEhW1%2BmR9De9Y2O0%2FviavJJQ%2BxDii4Kgbx3EQGBi1i7lUxe1T13LUPSZS1gEtp%2Bv1eKXEvaFgTt9TYpeFNR0JzxvB1F%2BSnfNFoak5Bow3QEWVy0%2BZoW4ErfGb%2FsieicEOJqyCPskFcLPzQ%2FZKccgCIHLhUY57mtEzCyaS4vQCFMtHPhvAyjLLzBZAXcjNP%2BgaUFKnjsrpqIhvcvmPMDpp%2BlablVhivIScqnMBI3uzvSkARfQ%2FZ2uzXEX%2FXKthAADNI1Qjvrwxvf85z5MMxMm7S0kPQY3JuZwkJ4J3qFXacyrzoGggB6i8cdUcYrkAHGtbefuSEQs4abTRWzynvdaeGtJqUom2gTwGUZeqkZG%2FrwFT40rHSw86%2B8ByBBAQ1T2eX2BuQcszmioZQ4ECu8zyTsjrs8XH4pYscvIp6JRofhlDr5QQ%3D%3D2b8e83637df870e7971389aa4dd4263a6b1c12ea',
+            }
+
+            data = {
+            'uid': '69000001',
+            'servant_id': 'all',
+            'gm': 'local',
+            'action': 'update',
+            'level': '101',
+            'pill': '',
+            'type': '1',
+            'skillExp': '',
+            'abilityExp': '',
+            'trainExp': '',
+            'abilityLv': '',
+            'talentnum': '',
+            }
+            for each_uid in uid:
+                  data['uid'] = each_uid
+                  response = requests.post('http://192.168.8.83/gm/app/role/set_servant', cookies=cookies, headers=headers, data=data, verify=False)
+                  result = response.text
+                  if '0' in result:
+                        print(each_uid, '执行成功')
+
+
 if __name__ == '__main__':
       g = GmTools()
 
@@ -159,10 +200,14 @@ if __name__ == '__main__':
       pid_list = g.creat_pid_list('test1')
 
       # 获取test账号的uid
-      uid_list = g.get_uid(pid_list, 77)
+      uid_list = g.get_uid(pid_list, 69)
 
       # 批量跳过test 账号的新手引导
-      g.ContinueBeginnerTools(uid_list)
+      #g.ContinueBeginnerTools(uid_list)
 
       # 批量清除服务器的所有活动, 一般在清理数据库后使用
       #g.ClearAllServerActivity([79000001, 80000001, 81000001])
+
+
+      # 批量升级门客
+      g.increase_servant_level(uid_list)
