@@ -8,7 +8,7 @@ import time
 import GmTools
 
 log_file_Path = 'D:\\' + 'BatchLoginResult.txt'
-
+open(log_file_Path,'w').close()
 
 login_msg = [{"cmd":"user.login","params":{"plat":"","enter":True,"packageVersion":"0","idcardinfo":{"switch":0,"normal":0,"usertype":"0","enternormal":0},"bindtype":"Android","language":"cn","serverip":"192.168.8.196","serverport":15011,"nomodel":4,"client_ip":"103.216.43.176","pid":"cxk02_3"},"uid":80000287,"ts":1760393643,"logints":1760393643,"rnum":1,"zoneid":80,"access_token":"zYwMzkzNjQzWVRJMU51c2VyLmxvZ2luYzBaVFF5TWpCaU5ESTV","clientts":1760393643}]
 
