@@ -5,7 +5,9 @@ import load_data.load_message
 import json
 import easygui
 import time
+import GmTools
 
+log_file_Path = 'D:\\' + 'BatchLoginResult.txt'
 
 
 login_msg = [{"cmd":"user.login","params":{"plat":"","enter":True,"packageVersion":"0","idcardinfo":{"switch":0,"normal":0,"usertype":"0","enternormal":0},"bindtype":"Android","language":"cn","serverip":"192.168.8.196","serverport":15011,"nomodel":4,"client_ip":"103.216.43.176","pid":"cxk02_3"},"uid":80000287,"ts":1760393643,"logints":1760393643,"rnum":1,"zoneid":80,"access_token":"zYwMzkzNjQzWVRJMU51c2VyLmxvZ2luYzBaVFF5TWpCaU5ESTV","clientts":1760393643}]
@@ -22,8 +24,13 @@ user_pid_list = ['cxk01', 'cxk01_1', 'cxk01_2', 'cxk01_3', 'cxk01_4', 'cxk01_5',
 user_pid_list_1 = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'test8', 'test9', 'test10']
 
 
-server_list = [79,80]
+# 获取test1-test100的pid列表
+g = GmTools.GmTools()
+user_pid_list_2 = g.creat_pid_list('test1')
+user_pid_list_2.extend(user_pid_list)
 
+
+server_list = [79, 80]
 def batch_login(user_list, server_list, msg_list):
     for each_server in server_list:
         for each_user in user_list:
@@ -44,7 +51,11 @@ def batch_login(user_list, server_list, msg_list):
                 return_msg = clientmain.SendMsg(each_msg)
                 return_msg = json.loads(return_msg)
                 ts = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(return_msg['ts']))
-                print(f'uid:{return_msg["uid"]}, zoneid:{return_msg["zoneid"]}, ts:{ts}, msg:{return_msg}')
+                print(return_msg['data']['userinfo'])
+                print('\n')
+                with open(log_file_Path , 'a+', encoding='utf-8') as f:
+                    f.write(str(return_msg['data']['userinfo']))
+                    f.write('\n')
             recv_data_thread.stop()
             print(f'当前线程id--->{threading.get_ident()},线程总数量--->{threading.active_count()},所有线程--->{threading.enumerate()}', '\n')
     print('======================登录完毕=============================')
@@ -52,4 +63,4 @@ def batch_login(user_list, server_list, msg_list):
     return token, uid, logints
 
 
-batch_login(user_pid_list, server_list, login_msg)
+batch_login(user_pid_list_2, server_list, login_msg)
