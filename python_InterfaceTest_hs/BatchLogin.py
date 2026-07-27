@@ -30,7 +30,7 @@ user_pid_list_2 = g.creat_pid_list('test1')
 user_pid_list_2.extend(user_pid_list)
 
 
-server_list = [79, 80]
+server_list = [61, 69, 71, 72, 78, 81, 86]
 def batch_login(user_list, server_list, msg_list):
     for each_server in server_list:
         for each_user in user_list:
@@ -60,7 +60,7 @@ def batch_login(user_list, server_list, msg_list):
             print(f'当前线程id--->{threading.get_ident()},线程总数量--->{threading.active_count()},所有线程--->{threading.enumerate()}', '\n')
     print('======================登录完毕=============================')
     recv_data_thread.stop()
-    return token, uid, logints
+    return token, uid, logints, return_msg['data']['userinfo']
 
-
-batch_login(user_pid_list_2, server_list, login_msg)
+if __name__ == '__main__':
+    batch_login(user_pid_list_2, server_list, login_msg)

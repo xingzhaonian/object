@@ -1,6 +1,9 @@
 import requests
 import json
 import ClientMain
+import time 
+from bs4 import BeautifulSoup
+
 
 
 class GmTools(object):
@@ -192,6 +195,91 @@ class GmTools(object):
                   if '0' in result:
                         print(each_uid, '执行成功')
 
+      def query_pid(self, uid):
+            # 查询pid对应的uid
+            cookies = {
+            'gdf_gm_session': 'zRPQ7Ogxju19P3tLleckrw3RPrTb0mQZ1O1QEc%2BZNhUSo0C9t5%2FrPJ1wclDn8ZlX%2BElED1y3kt2xh1nY14Yk404ksEoip8nb2Oj63lOm2of%2BA2HPSzW%2BcifgqNud46dUQ4lf2hGUEL7MgmSkTBMnn4qrEJu%2BZFMZNS3tNbb96WPQRZTGhcKFpHXOjNzxTNYKl52HPdoUoZRnfL84pUZzQCI2wiwyugpuvaMpcvOU4p8AbA3fSPY3VuFyUbiQlbG3ddW%2BE4n%2FL%2BlEpoxBHEzx52P5OkLKjaseKSMOew2bslsclBNdQAW9NurXeRQtrc14%2Bxv2jeCyyFc1B2Xgo%2BaDysEckkNYU9a1ofRCj%2BlsDvMexdmgxIMFY1jZoORUReRQR3ymicaixXb%2B2TmsUL6c85CsJrS1Jt0xB9qZBdSCwNkpfuC8l5IM4GDJuYNMQXzi2ipwXpGYQcQR0caqJkuDsVueH5LCvL%2Bxxkaj%2FOGp1ngTEiIlQa0oqFkD49%2FtR1CTeb%2BjmSHCWNqfMh7fAefMOTPSEoKgxrgowle9jRSoQq%2BXfs1t%2F19ya0kQ%2F3uQAJ6KTx%2BfZpbSWGnuMEcWvoeCVw%3D%3D285eaaa6c0aeec55e1e348c6468b2294c8552a40',
+            }
+
+            headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Language': 'zh-CN,zh;q=0.9',
+            'Connection': 'keep-alive',
+            'Referer': 'http://192.168.8.83/gm/app/role/show_userinfo?gm=local',
+            'Upgrade-Insecure-Requests': '1',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36',
+            # 'Cookie': 'gdf_gm_session=zRPQ7Ogxju19P3tLleckrw3RPrTb0mQZ1O1QEc%2BZNhUSo0C9t5%2FrPJ1wclDn8ZlX%2BElED1y3kt2xh1nY14Yk404ksEoip8nb2Oj63lOm2of%2BA2HPSzW%2BcifgqNud46dUQ4lf2hGUEL7MgmSkTBMnn4qrEJu%2BZFMZNS3tNbb96WPQRZTGhcKFpHXOjNzxTNYKl52HPdoUoZRnfL84pUZzQCI2wiwyugpuvaMpcvOU4p8AbA3fSPY3VuFyUbiQlbG3ddW%2BE4n%2FL%2BlEpoxBHEzx52P5OkLKjaseKSMOew2bslsclBNdQAW9NurXeRQtrc14%2Bxv2jeCyyFc1B2Xgo%2BaDysEckkNYU9a1ofRCj%2BlsDvMexdmgxIMFY1jZoORUReRQR3ymicaixXb%2B2TmsUL6c85CsJrS1Jt0xB9qZBdSCwNkpfuC8l5IM4GDJuYNMQXzi2ipwXpGYQcQR0caqJkuDsVueH5LCvL%2Bxxkaj%2FOGp1ngTEiIlQa0oqFkD49%2FtR1CTeb%2BjmSHCWNqfMh7fAefMOTPSEoKgxrgowle9jRSoQq%2BXfs1t%2F19ya0kQ%2F3uQAJ6KTx%2BfZpbSWGnuMEcWvoeCVw%3D%3D285eaaa6c0aeec55e1e348c6468b2294c8552a40',
+            }
+
+            params = {
+            'uid': '61000010',
+            'zid': '',
+            'gm': 'local',
+            }
+            
+            params['uid'] = uid
+            response = requests.get(
+            'http://192.168.8.83/gm/app/role/show_userinfo',
+            params=params,
+            cookies=cookies,
+            headers=headers,
+            verify=False,
+            )
+
+
+
+            soup = BeautifulSoup(response.text, 'lxml')
+
+            # 定位 id 为 "pid" 的 input 标签
+            pid_input = soup.find('input', {'id': 'pid'})
+            if pid_input:
+                  pid_value = pid_input.get('value')
+                  #print(f"提取到的 PID: {pid_value}") 
+            else:
+                  print("未找到 pid 字段")
+                  print(response.text)
+            return pid_value
+      
+
+      def add_item(self, uid_list, item_id, item_num):
+            base_headers = {
+                  "Accept": "*/*",
+                  "Accept-Language": "zh-CN,zh;q=0.9",
+                  "Connection": "keep-alive",
+                  "Origin": "http://192.168.8.83",
+                  "Referer": "http://192.168.8.83/gm/app/role/show_storage?uid=61000010&name=test61000010&zid=61&gm=local",
+                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+                  "X-Requested-With": "XMLHttpRequest",}
+            
+            cookies = {
+                  "gdf_gm_session": "XMxSY03vg%2Fdme9T8tS3MsorvfsFkfc%2F22IgEddcDmi5FFMaG4v7nKB0YrcE41muVGfSx6o8VeODp5ehB8t1YpcqArQWwN1LJ%2Ff9LouOv71RzozXKYV3eYFCrvzx7bPz8ta9u%2BsUzvrjAfJT0LKmGpJeRtnRJFXbXel1UcwBnRH8inJyyueSoeHU1g949toJ31vlMu7M1ZMMVgyTTjCVRz%2F9VxHzJOSiLf2pFA8ptVOUBe47JBf1E8k%2Bt%2FNvfLEoD6oDtckUEiWxnlRC5Wo9D78OHClUMPLWVIBhRRYirLrv9tGCJ4VhUddk7d5IUyPNzeIpAiBimPvPHbz5ru%2BI8G%2Bji9mUZlZE%2BxGGIqTCjsShl2HJbgGnbC06I%2BT4UkW9AlEJUCadfDS%2FiiNqzJWbZizaNt4X2aIsHgGQh6A26Tc%2FP2AFSF4F9SAjrTeE56O16zU1cs4ovh6QcDSXxF7M7vzXwCHaA3xcsF8vs6M0K%2BT24xvfc6MlusrLOO%2F%2Fwge972UYasEJfpWM9R2WBGjCLNMvkEgt7D9XiaD9%2F%2FjCdpB9%2FyJLbCHqijUT%2FRkKO82z4hUqSNtKnrSF6VQQblcaKoA%3D%3D3991eb1dbc5b6d4d9d7b010da104acd8ca6eb138"}
+
+            for each_uid in uid_list:
+                  payload = {
+                  "uid": "86000001",
+                  "gm": "local",
+                  "itemNum": "拥有数量",
+                  "num": "修改数量",
+                  "typename": "1",
+                  "num_1001": "1"}
+
+                  payload["uid"] = str(each_uid)
+                  del payload["num_1001"]
+                  # 物品id
+                  splice_id = "num_" + str(item_id)
+                  payload[splice_id] = item_num
+                  headers_json = base_headers.copy()
+                  headers_json["Content-Type"] = "application/json; charset=UTF-8"
+                  respone = requests.post('http://192.168.8.83/gm/app/role/update_storage/1', headers=headers_json, cookies=cookies, json=payload, verify=False, timeout=10)
+                  #print(respone.text)
+                  if '0' in respone.text:
+                        print(each_uid, '执行成功')
+                  del payload[splice_id]
+
+
+      
+
+
 
 if __name__ == '__main__':
       g = GmTools()
@@ -200,7 +288,7 @@ if __name__ == '__main__':
       pid_list = g.creat_pid_list('test1')
 
       # 获取test账号的uid
-      uid_list = g.get_uid(pid_list, 69)
+      uid_list = g.get_uid(pid_list, 78)
 
       # 批量跳过test 账号的新手引导
       #g.ContinueBeginnerTools(uid_list)
@@ -210,4 +298,11 @@ if __name__ == '__main__':
 
 
       # 批量升级门客
-      g.increase_servant_level(uid_list)
+      #g.increase_servant_level(uid_list)
+
+      # 批量添加道具
+      g.add_item([61000010,81000001, 78000002], 1006, 1)
+
+      # 查询pid
+      #g.query_pid(79000120)
+
