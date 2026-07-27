@@ -196,7 +196,7 @@ class GmTools(object):
                         print(each_uid, '执行成功')
 
       def query_pid(self, uid):
-            # 查询pid对应的uid
+            # 查询uid对应的pid
             cookies = {
             'gdf_gm_session': 'zRPQ7Ogxju19P3tLleckrw3RPrTb0mQZ1O1QEc%2BZNhUSo0C9t5%2FrPJ1wclDn8ZlX%2BElED1y3kt2xh1nY14Yk404ksEoip8nb2Oj63lOm2of%2BA2HPSzW%2BcifgqNud46dUQ4lf2hGUEL7MgmSkTBMnn4qrEJu%2BZFMZNS3tNbb96WPQRZTGhcKFpHXOjNzxTNYKl52HPdoUoZRnfL84pUZzQCI2wiwyugpuvaMpcvOU4p8AbA3fSPY3VuFyUbiQlbG3ddW%2BE4n%2FL%2BlEpoxBHEzx52P5OkLKjaseKSMOew2bslsclBNdQAW9NurXeRQtrc14%2Bxv2jeCyyFc1B2Xgo%2BaDysEckkNYU9a1ofRCj%2BlsDvMexdmgxIMFY1jZoORUReRQR3ymicaixXb%2B2TmsUL6c85CsJrS1Jt0xB9qZBdSCwNkpfuC8l5IM4GDJuYNMQXzi2ipwXpGYQcQR0caqJkuDsVueH5LCvL%2Bxxkaj%2FOGp1ngTEiIlQa0oqFkD49%2FtR1CTeb%2BjmSHCWNqfMh7fAefMOTPSEoKgxrgowle9jRSoQq%2BXfs1t%2F19ya0kQ%2F3uQAJ6KTx%2BfZpbSWGnuMEcWvoeCVw%3D%3D285eaaa6c0aeec55e1e348c6468b2294c8552a40',
             }
@@ -241,7 +241,22 @@ class GmTools(object):
             return pid_value
       
 
-      def add_item(self, uid_list, item_id, item_num):
+      def add_item(self, uid, item_id, item_num):
+
+            if not isinstance(uid, list):
+                  uid_list = []
+                  uid_list.append(uid)
+            else:
+                  uid_list = []
+                  uid_list.extend(uid)
+            if not isinstance(item_id, list):
+                  item_id_list = []
+                  item_id_list.append(item_id)
+            else:
+                  item_id_list = []
+                  item_id_list.extend(item_id)
+
+
             base_headers = {
                   "Accept": "*/*",
                   "Accept-Language": "zh-CN,zh;q=0.9",
@@ -255,26 +270,27 @@ class GmTools(object):
                   "gdf_gm_session": "XMxSY03vg%2Fdme9T8tS3MsorvfsFkfc%2F22IgEddcDmi5FFMaG4v7nKB0YrcE41muVGfSx6o8VeODp5ehB8t1YpcqArQWwN1LJ%2Ff9LouOv71RzozXKYV3eYFCrvzx7bPz8ta9u%2BsUzvrjAfJT0LKmGpJeRtnRJFXbXel1UcwBnRH8inJyyueSoeHU1g949toJ31vlMu7M1ZMMVgyTTjCVRz%2F9VxHzJOSiLf2pFA8ptVOUBe47JBf1E8k%2Bt%2FNvfLEoD6oDtckUEiWxnlRC5Wo9D78OHClUMPLWVIBhRRYirLrv9tGCJ4VhUddk7d5IUyPNzeIpAiBimPvPHbz5ru%2BI8G%2Bji9mUZlZE%2BxGGIqTCjsShl2HJbgGnbC06I%2BT4UkW9AlEJUCadfDS%2FiiNqzJWbZizaNt4X2aIsHgGQh6A26Tc%2FP2AFSF4F9SAjrTeE56O16zU1cs4ovh6QcDSXxF7M7vzXwCHaA3xcsF8vs6M0K%2BT24xvfc6MlusrLOO%2F%2Fwge972UYasEJfpWM9R2WBGjCLNMvkEgt7D9XiaD9%2F%2FjCdpB9%2FyJLbCHqijUT%2FRkKO82z4hUqSNtKnrSF6VQQblcaKoA%3D%3D3991eb1dbc5b6d4d9d7b010da104acd8ca6eb138"}
 
             for each_uid in uid_list:
-                  payload = {
-                  "uid": "86000001",
-                  "gm": "local",
-                  "itemNum": "拥有数量",
-                  "num": "修改数量",
-                  "typename": "1",
-                  "num_1001": "1"}
+                  for each_item in item_id_list:
+                        payload = {
+                        "uid": "86000001",
+                        "gm": "local",
+                        "itemNum": "拥有数量",
+                        "num": "修改数量",
+                        "typename": "1",
+                        "num_1001": "1"}
 
-                  payload["uid"] = str(each_uid)
-                  del payload["num_1001"]
-                  # 物品id
-                  splice_id = "num_" + str(item_id)
-                  payload[splice_id] = item_num
-                  headers_json = base_headers.copy()
-                  headers_json["Content-Type"] = "application/json; charset=UTF-8"
-                  respone = requests.post('http://192.168.8.83/gm/app/role/update_storage/1', headers=headers_json, cookies=cookies, json=payload, verify=False, timeout=10)
-                  #print(respone.text)
-                  if '0' in respone.text:
-                        print(each_uid, '执行成功')
-                  del payload[splice_id]
+                        payload["uid"] = str(each_uid)
+                        del payload["num_1001"]
+                        # 物品id
+                        splice_id = "num_" + str(each_item)
+                        payload[splice_id] = item_num
+                        headers_json = base_headers.copy()
+                        headers_json["Content-Type"] = "application/json; charset=UTF-8"
+                        respone = requests.post('http://192.168.8.83/gm/app/role/update_storage/1', headers=headers_json, cookies=cookies, json=payload, verify=False, timeout=10)
+                        #print(respone.text)
+                        if '0' in respone.text:
+                              print(each_uid, '执行成功')
+                        del payload[splice_id]
 
 
       
@@ -300,8 +316,8 @@ if __name__ == '__main__':
       # 批量升级门客
       #g.increase_servant_level(uid_list)
 
-      # 批量添加道具
-      g.add_item([61000010,81000001, 78000002], 1006, 1)
+      # 批量添加道具, 参数1: uid,  参数2: item id,  参数3: item 数量;   如果要给批量门客加批量道具, uid 和 item id 用列表形式传参
+      g.add_item([81000011, 78000096, 61000018], [1001, 1002, 1003, 1004, 1005, 1006, 1007], 153)
 
       # 查询pid
       #g.query_pid(79000120)
